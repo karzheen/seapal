@@ -1,0 +1,182 @@
+.home {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px;
+  height: 1000px;
+
+  justify-items: center;
+}
+
+.collectionsec {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 50px;
+  padding-left: 50px;
+}
+.collection {
+  font-size: 40px;
+  font-family: kalnia, playfair;
+  margin: 0;
+}
+.the {
+  font-size: 30px;
+  font-family: kalnia, playfair;
+  margin: 0;
+}
+.year {
+  font-size: 90px;
+  font-weight: 550;
+  color: transparent;
+  -webkit-text-stroke: 1.3px #000000;
+  font-family: kalnia, playfair;
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+.pic1 {
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  padding-bottom: 15px;
+}
+
+.pic2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+.pic3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pic4 {
+  grid-column: 2 span;
+  grid-row: 2 span;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -100px;
+}
+
+.pic5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pic6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pic7 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.qoute {
+  position: relative; /* CRITICAL - this makes the absolute positioning work */
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 200px;
+  padding: 20px; /* Optional: gives some space around text */
+}
+
+.qoutesub {
+  font-style: italic;
+  color: #717171;
+  /* Remove duplicate font-style: italic; */
+  position: relative; /* Optional: helps with text layering */
+  z-index: 1;
+}
+
+.name {
+  position: relative;
+  z-index: 1;
+}
+
+.qoute::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 75%;
+
+  transform: translate(-50%, -50%);
+  width: 250px; /* Specific width */
+  height: 250px; /* Specific height */
+  background-image: url("src/img/flower.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: 0;
+}
+.line-behind {
+  position: relative;
+  font-size: 1px;
+}
+
+.line-behind::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: #717171;
+  z-index: -1;
+}
+
+/*THE ANATOMY OF THE STROKE*/
+.anatomy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.anatomytitle {
+  position: relative; /* CRITICAL: needed for absolute positioning */
+  display: flex; /* makes align-items work */
+  align-items: center;
+  justify-content: center; /* optional: centers the image horizontally */
+  min-height: 200px; /* give it some height, or let content determine it */
+}
+
+.anatomytitle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 90%;
+  background-image: url("src/img/anatomyrec.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.anatomytitle img {
+  display: block;
+  height: auto;
+  position: relative; /* ensures image stays above the pseudo-element */
+  z-index: 1;
+}
+.anatomycontent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 1000px;
+}
+.anatomyqoute {
+  font-size: 30px;
+  color: #717171;
+}
