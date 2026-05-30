@@ -10,9 +10,6 @@ import Footer from "./component/footer";
 function Layout({ children }) {
   return (
     <div className="layout">
-      <div className="sidebar">
-        <img className="imgsidebar" src="src/img/rectangle.png" />
-      </div>
       <Navbar />
 
       {children}

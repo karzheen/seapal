@@ -17,7 +17,9 @@ export default function Home() {
 
   return (
     <div>
-      
+      <div className="sidebar">
+        <img className="imgsidebar" src="src/img/rectangle.png" />
+      </div>
       {/*home*/}
       <div className="home">
         <section className="pic1"> {picsarr[0]}</section>
