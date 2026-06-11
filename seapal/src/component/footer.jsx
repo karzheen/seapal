@@ -1,3 +1,3 @@
 export default function Footer() {
-  return <img src="src/img/Group.png" />;
+  return <img src="src/img/frame.svg" />;
 }
