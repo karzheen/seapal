@@ -1,22 +1,28 @@
 import { useState } from "react";
 import "./filtersidebar.css";
+
 export default function Filter() {
   const [openSection, setOpenSection] = useState(null);
+  const [showmore, setshowmore] = useState(false);
+  
+  // Independent open/close toggles for custom fields
+  const [customSizeOpen, setCustomSizeOpen] = useState(false);
+  const [customPriceOpen, setCustomPriceOpen] = useState(false);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
-  const [showmore, setshowmore] = useState(false);
+
   return (
     <div className="filtersidebar">
-      {/* MAIN ITEM 1 */}
+      {/* MAIN ITEM 1 - SORT */}
       <div className="line-topbuttom">
         <button onClick={() => toggleSection("sort")} className="listcolumn">
           SORT
           <img
             className="chevron"
             src={
-              openSection == "sort"
+              openSection === "sort"
                 ? "/src/img/chevron-up.svg"
                 : "/src/img/chevron-down.svg"
             }
@@ -25,7 +31,6 @@ export default function Filter() {
         </button>
         {openSection === "sort" && (
           <div className="dropdown">
-            /*the div inside the div is wrong fix that*/
             <label>
               <input type="radio" name="sort" />
               Date listed: New to Old
@@ -41,14 +46,15 @@ export default function Filter() {
           </div>
         )}
       </div>
+
+      {/* MAIN ITEM 2 - SUBJECT */}
       <div className="line-under">
-        {" "}
         <button onClick={() => toggleSection("subject")} className="listcolumn">
           SUBJECT
           <img
             className="chevron"
             src={
-              openSection == "subject"
+              openSection === "subject"
                 ? "/src/img/chevron-up.svg"
                 : "/src/img/chevron-down.svg"
             }
@@ -67,7 +73,7 @@ export default function Filter() {
             </label>
 
             {showmore ? (
-              <div className="dropdown">
+              <>
                 <label>
                   <input type="checkbox" name="subject" />
                   Abstract
@@ -124,24 +130,33 @@ export default function Filter() {
                   <input type="checkbox" name="subject" />
                   Pop Culture/Celebrity
                 </label>
-                <button onClick={() => setshowmore(!showmore)}>
+                <button 
+                  onClick={() => setshowmore(!showmore)} 
+                  className="show-more-btn"
+                >
                   SHOW LESS
                 </button>
-              </div>
+              </>
             ) : (
-              <button onClick={() => setshowmore(!showmore)}>SHOW MORE</button>
+              <button 
+                onClick={() => setshowmore(!showmore)} 
+                className="show-more-btn"
+              >
+                SHOW MORE
+              </button>
             )}
           </div>
         )}
       </div>
+
+      {/* MAIN ITEM 3 - SIZE */}
       <div className="line-under">
-        {" "}
         <button onClick={() => toggleSection("size")} className="listcolumn">
           SIZE
           <img
             className="chevron"
             src={
-              openSection == "size"
+              openSection === "size"
                 ? "/src/img/chevron-up.svg"
                 : "/src/img/chevron-down.svg"
             }
@@ -152,7 +167,7 @@ export default function Filter() {
           <div className="dropdown">
             <label>
               <input type="checkbox" name="size" />
-              Small({"<"}50 cm)
+              Small (&lt;50 cm)
             </label>
             <label>
               <input type="checkbox" name="size" />
@@ -164,18 +179,56 @@ export default function Filter() {
             </label>
             <label>
               <input type="checkbox" name="size" />
-              Oversized ({">"}150 cm)
+              Oversized (&gt;150 cm)
             </label>
+            
+            <button 
+              onClick={() => setCustomSizeOpen(!customSizeOpen)} 
+              className="show-more-btn"
+              style={{ marginTop: "12px", marginBottom: "8px" }}
+            >
+              {customSizeOpen ? "REMOVE CUSTOM SIZE" : "SELECT CUSTOM SIZE"}
+            </button>
+
+            {customSizeOpen && (
+              <div className="custom-size-container">
+                <div className="custom-size-row">
+                  <div className="custom-size-block">
+                    <span className="custom-size-label">Width (cm)</span>
+                    <div className="input-with-separator">
+                      <input type="text" placeholder="Min" className="custom-input" />
+                      <span className="dash-separator">—</span>
+                      <input type="text" placeholder="Max" className="custom-input" />
+                    </div>
+                  </div>
+                  <button className="ok-btn">OK</button>
+                </div>
+
+                <div className="custom-size-row" style={{ marginTop: "12px" }}>
+                  <div className="custom-size-block">
+                    <span className="custom-size-label">Height (cm)</span>
+                    <div className="input-with-separator">
+                      <input type="text" placeholder="Min" className="custom-input" />
+                      <span className="dash-separator">—</span>
+                      <input type="text" placeholder="Max" className="custom-input" />
+                    </div>
+                  </div>
+                  <div style={{ width: "45px" }}></div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
+
+      {/* MAIN ITEM 4 - PRICE */}
       <div className="line-under">
         <button onClick={() => toggleSection("price")} className="listcolumn">
           PRICE
           <img
             className="chevron"
             src={
-              openSection == "price"
+              openSection === "price"
                 ? "/src/img/chevron-up.svg"
                 : "/src/img/chevron-down.svg"
             }
@@ -183,9 +236,56 @@ export default function Filter() {
           />
         </button>
         {openSection === "price" && (
-          <div className="dropdown">Price options...</div>
+          <div className="dropdown"> 
+            <label>
+              <input type="radio" name="price" />
+              Under $500
+            </label>
+            <label>
+              <input type="radio" name="price" />
+              $500 - $1,000
+            </label>
+            <label>
+              <input type="radio" name="price" />
+              $1,000 - $2,000
+            </label>
+            <label>
+              <input type="radio" name="price" />
+              $2,000 - $5,000
+            </label>
+            <label>
+              <input type="radio" name="price" />
+              $5,000 - $10,000
+            </label>
+
+            <button 
+              onClick={() => setCustomPriceOpen(!customPriceOpen)} 
+              className="show-more-btn"
+              style={{ marginTop: "12px", marginBottom: "8px" }}
+            >
+              {customPriceOpen ? "REMOVE CUSTOM PRICE" : "SELECT CUSTOM PRICE"}
+            </button>
+
+            {customPriceOpen && (
+              <div className="custom-size-container">
+                <div className="custom-size-row">
+                  <div className="custom-size-block">
+                    <span className="custom-size-label">Price</span>
+                    <div className="input-with-separator">
+                      <input type="text" placeholder="$ Min" className="custom-input" />
+                      <span className="dash-separator">—</span>
+                      <input type="text" placeholder="$ Max" className="custom-input" />
+                    </div>
+                  </div>
+                  <button className="ok-btn">OK</button>
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </div>
+
+      {/* MAIN ITEM 5 - ORIENTATION */}
       <div className="line-under">
         <button
           onClick={() => toggleSection("orientation")}
@@ -195,18 +295,30 @@ export default function Filter() {
           <img
             className="chevron"
             src={
-              openSection == "orientation"
+              openSection === "orientation"
                 ? "/src/img/chevron-up.svg"
                 : "/src/img/chevron-down.svg"
             }
             alt="dropdown"
           />
-          {openSection === "orientation" && (
-            <div className="dropdown">Orientation options...</div>
-          )}
         </button>
+        {openSection === "orientation" && (
+          <div className="dropdown">
+            <label>
+              <input type="checkbox" name="orientation" />
+              Horizontal
+            </label>
+            <label>
+              <input type="checkbox" name="orientation" />
+              Vertical
+            </label>
+            <label>
+              <input type="checkbox" name="orientation" />
+              Square
+            </label>
+          </div>
+        )}
       </div>
     </div>
   );
 }
-/* we don't need a button for the menu*/

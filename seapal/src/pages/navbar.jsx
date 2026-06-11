@@ -21,13 +21,9 @@ export default function Navbar() {
         <Link to="/about" className="Link">
           About
         </Link>
-        <Link to="/contact" className="Link">
-          Contact
-        </Link>
-        <Link to="/inquire" className="inquire">
-          Inquire
-        </Link>
       </div>
     </nav>
+
+    
   );
 }

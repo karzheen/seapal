@@ -1,51 +1,246 @@
 .filtersidebar {
   width: 250px;
   padding: 20px;
-  font-family: spectral, playfair;
+  font-family: spectral, playfair, serif;
   color: #373737;
   display: flex;
   flex-direction: column;
-  background-color: red;
 }
+
 .chevron {
   width: 16px;
   height: 16px;
 }
 
-.line-under {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 0;
-  border-bottom: 1px solid #717171;
-}
+/* Force everything in the block to stack vertically */
+.line-under, 
 .line-topbuttom {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 8px 0;
+}
+
+.line-under {
+  border-bottom: 1px solid #717171;
+}
+
+.line-topbuttom {
   border-top: 1px solid #717171;
   border-bottom: 1px solid #717171;
 }
+
 .listcolumn {
   all: unset;
   border: none;
   background-color: inherit;
   height: 50px;
   cursor: pointer;
-  width: 240px;
-  text-align: left;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
 }
+
+/* Stack labels cleanly inside the dropdown */
 .dropdown {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
   align-items: flex-start;
-  background-color: white;
+  gap: 8px;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+/* Custom list items formatting */
+.dropdown label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: spectral, playfair, serif;
+  color: #373737;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 0;
+  width: 100%;
+}
+
+/* Remove default browser styling and create custom gray inputs */
+.dropdown input[type="radio"],
+.dropdown input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d3d3d3;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* --- RADIO BUTTONS (Double-ring layout) --- */
+.dropdown input[type="radio"] {
+  border-radius: 50%;
+}
+
+.dropdown input[type="radio"]:checked {
+  border-color: #000000;
+}
+
+.dropdown input[type="radio"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.1s ease-in-out;
+  background-color: #000000;
+}
+
+.dropdown input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+/* --- CHECKBOXES (Solid block with white classic checkmark) --- */
+.dropdown input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  margin: 0;
+  width: 18px; /* Slightly larger to fit the checkmark perfectly */
+  height: 18px;
+  border: 1px solid #d3d3d3;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  border-radius: 0px; /* Completely square corners */
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dropdown input[type="checkbox"]:checked {
+  border-color: #000000;
+  background-color: #000000; /* Solid black fill */
+}
+
+.dropdown input[type="checkbox"]::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  transform: scale(0);
+  transition: transform 0.1s ease-in-out;
+  /* Percent-encoded SVG data URI to ensure cross-browser rendering */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.dropdown input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+
+/* --- SHOW MORE / LESS LINK BUTTON --- */
+.show-more-btn {
+  all: unset;
+  font-family: spectral, playfair, serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: #373737;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+.show-more-btn:hover {
+  opacity: 0.8;
+}
+/* --- CUSTOM SIZE ROW FORM PANEL --- */
+.custom-size-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.custom-size-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.custom-size-block {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.custom-size-label {
+  font-family: spectral, playfair, serif;
+  font-size: 12px;
+  color: #717171;
+  margin-bottom: 6px;
+}
+
+.input-with-separator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.custom-input {
+  width: 60px;
+  height: 32px;
+  border: 1px solid #d3d3d3;
+  background-color: transparent;
+  padding: 0 8px;
+  font-family: spectral, playfair, serif;
+  font-size: 14px;
+  color: #373737;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Gray placeholder styling text alignment */
+.custom-input::placeholder {
+  color: #bcbcbc;
+}
+
+/* Dark border highlight matching your image when active/focused */
+.custom-input:focus {
+  border-color: #000000;
+}
+
+.dash-separator {
+  font-size: 14px;
+  color: #717171;
+}
+
+/* Sharp, black submission square layout link */
+.ok-btn {
+  all: unset;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: spectral, playfair, serif;
+  font-size: 14px;
+  height: 32px;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+}
+
+.ok-btn:hover {
+  background-color: #000000;
 }

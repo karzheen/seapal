@@ -30,7 +30,7 @@ export default function Home() {
             <div className="the">THE</div>
           </div>
           <div className="line-behind">
-            <div className="year">2026</div>
+            <div className="year">SAND</div>
           </div>
           <div className="line-behind">
             <div className="collection">COLLECTION</div>
