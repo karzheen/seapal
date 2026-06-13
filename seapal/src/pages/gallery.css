@@ -1,0 +1,157 @@
+/* Overall Page Padding Container wrapper */
+.gallery-page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  background-color: #ebe7e1;
+  font-family: playfair, serif;
+}
+
+/* Typography styles matching screenshot design values */
+.gallery-main-title {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 0 0 16px 0;
+  color: #373737;
+}
+
+.gallery-description {
+  font-size: 16px;
+  margin: 0 0 4px 0;
+  color: #373737;
+}
+
+.gallery-sub-detail {
+  font-size: 14px;
+  color: #717171;
+  margin: 0 0 40px 0;
+}
+
+/* --- HORIZONTAL TOOLBAR RIBBON (ON TOP OF THE GRID DISPLAY) --- */
+.gallery-toolbar-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* The standalone filter button dimensions */
+.filterbutton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  background-color: #d4ccbf;
+  color: #373737;
+  border: 1px solid #717171;
+  font-family: spectral, playfair, serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.filterbutton img {
+  height: 14px;
+  width: auto;
+  display: block;
+}
+
+/* Mockup search box styling on the far right */
+.search-bar-mock {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 250px; /* Aligns perfectly with your button or sidebar width */
+  height: 44px; /* Matches the exact structural height of your filters button */
+
+  /* Background box container styling matching your image */
+  background-color: #ebe7e1;
+  border: 1px solid #c4beb6;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-icon img {
+  height: 18px; /* Perfectly scales your search magnifying glass vector icon */
+  width: auto;
+  display: block;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: spectral, playfair, serif;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  width: 100%;
+  color: #373737;
+  padding: 0;
+  margin: 0;
+}
+
+/* Gray styling text matching your screenshot design values */
+.search-input::placeholder {
+  color: #717171;
+  opacity: 1; /* Ensures crisp rendering across browsers */
+}
+
+/* --- SPLIT LAYOUT MANAGEMENT STRUCTURES --- */
+.gallery-split-layout {
+  display: grid;
+  gap: 40px;
+  width: 100%;
+  align-items: flex-start;
+  transition: grid-template-columns 0.2s ease-in-out;
+}
+
+/* State A: Filters are visible -> Sidebar on Left (250px) + Grid on Right (3 Columns) */
+.gallery-split-layout.filters-shown {
+  grid-template-columns: 250px 1fr;
+}
+.gallery-split-layout.filters-shown .artwork-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* State B: Filters are hidden -> Sidebar space collapses to 0px + Grid scales out to 4 Columns wide */
+.gallery-split-layout.filters-hidden {
+  grid-template-columns: 1fr;
+}
+.gallery-split-layout.filters-hidden .artwork-grid {
+  grid-template-columns: repeat(
+    4,
+    1fr
+  ); /* Expands beautifully to match your layout update! */
+}
+
+/* SIDEBAR & DISPLAY COMPONENTS WRAPPERS */
+.sidebar-track {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.artwork-grid {
+  display: grid;
+  gap: 50px 30px;
+  width: 100%;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #717171;
+  padding: 40px 0;
+}

@@ -1,0 +1,12 @@
+/* index.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F4F1EA; /* The warm background tone from the image */
+  font-family: spectral, playfair, serif;
+  color: #373737;
+}
+
+#root {
+  width: 100%;
+}

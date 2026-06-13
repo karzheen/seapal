@@ -1,16 +1,41 @@
 import { useState } from "react";
 import "./filtersidebar.css";
 
-export default function Filter() {
+export default function Filter({ activeFilters, setActiveFilters }) {
   const [openSection, setOpenSection] = useState(null);
   const [showmore, setshowmore] = useState(false);
-  
+
   // Independent open/close toggles for custom fields
   const [customSizeOpen, setCustomSizeOpen] = useState(false);
   const [customPriceOpen, setCustomPriceOpen] = useState(false);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
+  };
+
+  // Radio button change trigger handler (Sort & Price choices)
+  const handleRadioChange = (filterKey, value) => {
+    setActiveFilters((prev) => ({
+      ...prev,
+      [filterKey]: value,
+    }));
+  };
+
+  // Multi-select checkbox toggle helper (Subjects, Sizes, Orientations)
+  const handleCheckboxChange = (filterKey, value) => {
+    setActiveFilters((prev) => {
+      const currentList = prev[filterKey];
+      const isAlreadyChecked = currentList.includes(value);
+
+      const updatedList = isAlreadyChecked
+        ? currentList.filter((item) => item !== value)
+        : [...currentList, value];
+
+      return {
+        ...prev,
+        [filterKey]: updatedList,
+      };
+    });
   };
 
   return (
@@ -32,15 +57,30 @@ export default function Filter() {
         {openSection === "sort" && (
           <div className="dropdown">
             <label>
-              <input type="radio" name="sort" />
+              <input
+                type="radio"
+                name="sort"
+                checked={activeFilters.sort === "newest"}
+                onChange={() => handleRadioChange("sort", "newest")}
+              />
               Date listed: New to Old
             </label>
             <label>
-              <input type="radio" name="sort" />
+              <input
+                type="radio"
+                name="sort"
+                checked={activeFilters.sort === "lowToHigh"}
+                onChange={() => handleRadioChange("sort", "lowToHigh")}
+              />
               Price: Low to High
             </label>
             <label>
-              <input type="radio" name="sort" />
+              <input
+                type="radio"
+                name="sort"
+                checked={activeFilters.sort === "highToLow"}
+                onChange={() => handleRadioChange("sort", "highToLow")}
+              />
               Price: High to Low
             </label>
           </div>
@@ -64,82 +104,59 @@ export default function Filter() {
         {openSection === "subject" && (
           <div className="dropdown">
             <label>
-              <input type="checkbox" name="subject" />
+              <input
+                type="checkbox"
+                checked={activeFilters.subjects.includes("Animal")}
+                onChange={() => handleCheckboxChange("subjects", "Animal")}
+              />
               Animal
             </label>
             <label>
-              <input type="checkbox" name="subject" />
+              <input
+                type="checkbox"
+                checked={activeFilters.subjects.includes("Landscape")}
+                onChange={() => handleCheckboxChange("subjects", "Landscape")}
+              />
               Landscape
             </label>
 
             {showmore ? (
               <>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Abstract
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Nature
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Floral
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Beach
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Politics
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Seascape
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Water
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Still Life
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Calligraphy
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Food & Drink
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Graffiti
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Language
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Music
-                </label>
-                <label>
-                  <input type="checkbox" name="subject" />
-                  Pop Culture/Celebrity
-                </label>
-                <button 
-                  onClick={() => setshowmore(!showmore)} 
+                {[
+                  "Abstract",
+                  "Nature",
+                  "Floral",
+                  "Beach",
+                  "Politics",
+                  "Seascape",
+                  "Water",
+                  "Still Life",
+                  "Calligraphy",
+                  "Food & Drink",
+                  "Graffiti",
+                  "Language",
+                  "Music",
+                  "Pop Culture/Celebrity",
+                ].map((sub) => (
+                  <label key={sub}>
+                    <input
+                      type="checkbox"
+                      checked={activeFilters.subjects.includes(sub)}
+                      onChange={() => handleCheckboxChange("subjects", sub)}
+                    />
+                    {sub}
+                  </label>
+                ))}
+                <button
+                  onClick={() => setshowmore(!showmore)}
                   className="show-more-btn"
                 >
                   SHOW LESS
                 </button>
               </>
             ) : (
-              <button 
-                onClick={() => setshowmore(!showmore)} 
+              <button
+                onClick={() => setshowmore(!showmore)}
                 className="show-more-btn"
               >
                 SHOW MORE
@@ -166,24 +183,46 @@ export default function Filter() {
         {openSection === "size" && (
           <div className="dropdown">
             <label>
-              <input type="checkbox" name="size" />
+              <input
+                type="checkbox"
+                checked={activeFilters.sizes.includes("Small (<50 cm)")}
+                onChange={() => handleCheckboxChange("sizes", "Small (<50 cm)")}
+              />
               Small (&lt;50 cm)
             </label>
             <label>
-              <input type="checkbox" name="size" />
+              <input
+                type="checkbox"
+                checked={activeFilters.sizes.includes("Medium (50 - 100 cm)")}
+                onChange={() =>
+                  handleCheckboxChange("sizes", "Medium (50 - 100 cm)")
+                }
+              />
               Medium (50 - 100 cm)
             </label>
             <label>
-              <input type="checkbox" name="size" />
+              <input
+                type="checkbox"
+                checked={activeFilters.sizes.includes("Large (100 - 150 cm)")}
+                onChange={() =>
+                  handleCheckboxChange("sizes", "Large (100 - 150 cm)")
+                }
+              />
               Large (100 - 150 cm)
             </label>
             <label>
-              <input type="checkbox" name="size" />
+              <input
+                type="checkbox"
+                checked={activeFilters.sizes.includes("Oversized (>150 cm)")}
+                onChange={() =>
+                  handleCheckboxChange("sizes", "Oversized (>150 cm)")
+                }
+              />
               Oversized (&gt;150 cm)
             </label>
-            
-            <button 
-              onClick={() => setCustomSizeOpen(!customSizeOpen)} 
+
+            <button
+              onClick={() => setCustomSizeOpen(!customSizeOpen)}
               className="show-more-btn"
               style={{ marginTop: "12px", marginBottom: "8px" }}
             >
@@ -196,9 +235,17 @@ export default function Filter() {
                   <div className="custom-size-block">
                     <span className="custom-size-label">Width (cm)</span>
                     <div className="input-with-separator">
-                      <input type="text" placeholder="Min" className="custom-input" />
+                      <input
+                        type="text"
+                        placeholder="Min"
+                        className="custom-input"
+                      />
                       <span className="dash-separator">—</span>
-                      <input type="text" placeholder="Max" className="custom-input" />
+                      <input
+                        type="text"
+                        placeholder="Max"
+                        className="custom-input"
+                      />
                     </div>
                   </div>
                   <button className="ok-btn">OK</button>
@@ -208,9 +255,17 @@ export default function Filter() {
                   <div className="custom-size-block">
                     <span className="custom-size-label">Height (cm)</span>
                     <div className="input-with-separator">
-                      <input type="text" placeholder="Min" className="custom-input" />
+                      <input
+                        type="text"
+                        placeholder="Min"
+                        className="custom-input"
+                      />
                       <span className="dash-separator">—</span>
-                      <input type="text" placeholder="Max" className="custom-input" />
+                      <input
+                        type="text"
+                        placeholder="Max"
+                        className="custom-input"
+                      />
                     </div>
                   </div>
                   <div style={{ width: "45px" }}></div>
@@ -220,7 +275,6 @@ export default function Filter() {
           </div>
         )}
       </div>
-
       {/* MAIN ITEM 4 - PRICE */}
       <div className="line-under">
         <button onClick={() => toggleSection("price")} className="listcolumn">
@@ -236,7 +290,7 @@ export default function Filter() {
           />
         </button>
         {openSection === "price" && (
-          <div className="dropdown"> 
+          <div className="dropdown">
             <label>
               <input type="radio" name="price" />
               Under $500
@@ -258,8 +312,8 @@ export default function Filter() {
               $5,000 - $10,000
             </label>
 
-            <button 
-              onClick={() => setCustomPriceOpen(!customPriceOpen)} 
+            <button
+              onClick={() => setCustomPriceOpen(!customPriceOpen)}
               className="show-more-btn"
               style={{ marginTop: "12px", marginBottom: "8px" }}
             >
@@ -272,9 +326,17 @@ export default function Filter() {
                   <div className="custom-size-block">
                     <span className="custom-size-label">Price</span>
                     <div className="input-with-separator">
-                      <input type="text" placeholder="$ Min" className="custom-input" />
+                      <input
+                        type="text"
+                        placeholder="$ Min"
+                        className="custom-input"
+                      />
                       <span className="dash-separator">—</span>
-                      <input type="text" placeholder="$ Max" className="custom-input" />
+                      <input
+                        type="text"
+                        placeholder="$ Max"
+                        className="custom-input"
+                      />
                     </div>
                   </div>
                   <button className="ok-btn">OK</button>

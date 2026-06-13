@@ -1,6 +1,5 @@
 .filtersidebar {
   width: 250px;
-  padding: 20px;
   font-family: spectral, playfair, serif;
   color: #373737;
   display: flex;
@@ -13,7 +12,7 @@
 }
 
 /* Force everything in the block to stack vertically */
-.line-under, 
+.line-under,
 .line-topbuttom {
   display: flex;
   flex-direction: column;
@@ -79,9 +78,11 @@
   display: grid;
   place-content: center;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
-
+/*the input type checkbox CHANGEEEEE ITTTT*/
 /* --- RADIO BUTTONS (Double-ring layout) --- */
 .dropdown input[type="radio"] {
   border-radius: 50%;
@@ -118,7 +119,9 @@
   place-content: center;
   cursor: pointer;
   border-radius: 0px; /* Completely square corners */
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .dropdown input[type="checkbox"]:checked {
@@ -142,7 +145,6 @@
 .dropdown input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
-
 
 /* --- SHOW MORE / LESS LINK BUTTON --- */
 .show-more-btn {

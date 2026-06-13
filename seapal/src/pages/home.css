@@ -3,9 +3,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: -10px;
-  height: 1000px;
   justify-items: center;
-  width: 90%;
   height: 900px;
   margin-left: 100px;
   margin-top: 0;
@@ -121,21 +119,6 @@
   background-repeat: no-repeat;
   opacity: 0.4;
   z-index: 0;
-}
-.line-behind {
-  position: relative;
-  font-size: 1px;
-}
-
-.line-behind::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 0.5px;
-  background: #717171;
-  z-index: -1;
 }
 
 /*THE ANATOMY OF THE STROKE*/

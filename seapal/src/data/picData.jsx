@@ -6,6 +6,11 @@ const pics = [
     padding: "18.03px",
     width: "262.48px",
     heigh: "199.25px",
+    // Filterable parameters
+    subject: "Landscape",
+    size: "Medium (50 - 100 cm)",
+    price: 450,
+    date: "2026-05-15",
   },
   {
     id: 2,
@@ -14,6 +19,11 @@ const pics = [
     padding: "18.03px",
     width: "198.33px",
     heigh: "293.89px",
+    // Filterable parameters
+    subject: "Animal",
+    size: "Small (<50 cm)",
+    price: 650,
+    date: "2026-06-01",
   },
   {
     id: 3,
@@ -22,6 +32,11 @@ const pics = [
     padding: "18.03px",
     width: "174.72px",
     heigh: "219.01px",
+    // Filterable parameters
+    subject: "Abstract",
+    size: "Small (<50 cm)",
+    price: 1200,
+    date: "2026-04-20",
   },
   {
     id: 4,
@@ -30,6 +45,11 @@ const pics = [
     padding: "18.03px",
     width: "425.9px",
     heigh: "323.09px",
+    // Filterable parameters
+    subject: "Landscape",
+    size: "Oversized (>150 cm)",
+    price: 1600,
+    date: "2026-06-10",
   },
   {
     id: 5,
@@ -38,6 +58,11 @@ const pics = [
     padding: "18.03px",
     width: "272.54px",
     heigh: "206.83px",
+    // Filterable parameters
+    subject: "Nature",
+    size: "Medium (50 - 100 cm)",
+    price: 350,
+    date: "2026-03-11",
   },
   {
     id: 6,
@@ -46,6 +71,11 @@ const pics = [
     padding: "18.03px",
     width: "232px",
     heigh: "176px",
+    // Filterable parameters
+    subject: "Landscape",
+    size: "Medium (50 - 100 cm)",
+    price: 850,
+    date: "2026-05-28",
   },
   {
     id: 7,
@@ -54,6 +84,12 @@ const pics = [
     padding: "18.03px",
     width: "287.87px",
     heigh: "193.28px",
+    // Filterable parameters
+    subject: "Floral",
+    size: "Large (100 - 150 cm)",
+    price: 490,
+    date: "2026-01-15",
   },
 ];
+
 export default pics;
