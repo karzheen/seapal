@@ -1,29 +1,37 @@
-import { Link } from "react-router-dom";
+// Import NavLink instead of Link
+import { NavLink } from "react-router-dom"; 
 import "./navbar.css";
 import { useState } from "react";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  
   return (
     <nav className="navbar">
       <section className="logo">
-        {/*logo*/}
-        <img src="logo.svg" />
-        <img src="name.svg" />
+        <img src="logo.svg" alt="logo" />
+        <img src="name.svg" alt="brand name" />
       </section>
 
       <div className="links">
-        <Link to="/" className="Link">
+        <NavLink to="/" className="Link">
           Home
-        </Link>
-        <Link to="/gallery" className="Link">
+        </NavLink>
+        <NavLink to="/gallery" className="Link">
           Gallery
-        </Link>
-        <Link to="/about" className="Link">
+        </NavLink>
+        <NavLink to="/about" className="Link">
           About
-        </Link>
+        </NavLink>
+        
+        {/* FIX: Use standard anchor elements for external social media routes */}
+        <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
+          <img src="src/img/instagram.svg" alt="instagram icon" />  
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
+          <img src="src/img/facebook.svg" alt="facebook icon" />
+        </a>
       </div>
     </nav>
-
-    
   );
 }

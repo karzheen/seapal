@@ -8,6 +8,14 @@ export default function Filter({ activeFilters, setActiveFilters }) {
   // Independent open/close toggles for custom fields
   const [customSizeOpen, setCustomSizeOpen] = useState(false);
   const [customPriceOpen, setCustomPriceOpen] = useState(false);
+const [localMinPrice, setLocalMinPrice] = useState(activeFilters.minPrice || "");
+const [localMaxPrice, setLocalMaxPrice] = useState(activeFilters.maxPrice || "");
+
+  // FIX: Added the missing state definitions so the component doesn't crash
+  const [localWidthMin, setLocalWidthMin] = useState(activeFilters.minWidth || "");
+  const [localWidthMax, setLocalWidthMax] = useState(activeFilters.maxWidth || "");
+  const [localHeightMin, setLocalHeightMin] = useState(activeFilters.minHeight || "");
+  const [localHeightMax, setLocalHeightMax] = useState(activeFilters.maxHeight || "");
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
@@ -194,9 +202,7 @@ export default function Filter({ activeFilters, setActiveFilters }) {
               <input
                 type="checkbox"
                 checked={activeFilters.sizes.includes("Medium (50 - 100 cm)")}
-                onChange={() =>
-                  handleCheckboxChange("sizes", "Medium (50 - 100 cm)")
-                }
+                onChange={() => handleCheckboxChange("sizes", "Medium (50 - 100 cm)")}
               />
               Medium (50 - 100 cm)
             </label>
@@ -204,9 +210,7 @@ export default function Filter({ activeFilters, setActiveFilters }) {
               <input
                 type="checkbox"
                 checked={activeFilters.sizes.includes("Large (100 - 150 cm)")}
-                onChange={() =>
-                  handleCheckboxChange("sizes", "Large (100 - 150 cm)")
-                }
+                onChange={() => handleCheckboxChange("sizes", "Large (100 - 150 cm)")}
               />
               Large (100 - 150 cm)
             </label>
@@ -214,15 +218,28 @@ export default function Filter({ activeFilters, setActiveFilters }) {
               <input
                 type="checkbox"
                 checked={activeFilters.sizes.includes("Oversized (>150 cm)")}
-                onChange={() =>
-                  handleCheckboxChange("sizes", "Oversized (>150 cm)")
-                }
+                onChange={() => handleCheckboxChange("sizes", "Oversized (>150 cm)")}
               />
               Oversized (&gt;150 cm)
             </label>
 
             <button
-              onClick={() => setCustomSizeOpen(!customSizeOpen)}
+              onClick={() => {
+                if (customSizeOpen) {
+                  setLocalWidthMin("");
+                  setLocalWidthMax("");
+                  setLocalHeightMin("");
+                  setLocalHeightMax("");
+                  setActiveFilters((prev) => ({
+                    ...prev,
+                    minWidth: "",
+                    maxWidth: "",
+                    minHeight: "",
+                    maxHeight: "",
+                  }));
+                }
+                setCustomSizeOpen(!customSizeOpen);
+              }}
               className="show-more-btn"
               style={{ marginTop: "12px", marginBottom: "8px" }}
             >
@@ -236,116 +253,214 @@ export default function Filter({ activeFilters, setActiveFilters }) {
                     <span className="custom-size-label">Width (cm)</span>
                     <div className="input-with-separator">
                       <input
-                        type="text"
+                        type="number"
                         placeholder="Min"
                         className="custom-input"
+                        value={localWidthMin}
+                        onChange={(e) => setLocalWidthMin(e.target.value)}
                       />
                       <span className="dash-separator">—</span>
                       <input
-                        type="text"
+                        type="number"
                         placeholder="Max"
                         className="custom-input"
+                        value={localWidthMax}
+                        onChange={(e) => setLocalWidthMax(e.target.value)}
                       />
                     </div>
                   </div>
-                  <button className="ok-btn">OK</button>
+                  <button
+                    className="ok-btn"
+                    onClick={() => {
+                      setActiveFilters((prev) => ({
+                        ...prev,
+                        minWidth: localWidthMin,
+                        maxWidth: localWidthMax,
+                        minHeight: localHeightMin,
+                        maxHeight: localHeightMax,
+                      }));
+                    }}
+                  >
+                    OK
+                  </button>
                 </div>
 
                 <div className="custom-size-row" style={{ marginTop: "12px" }}>
                   <div className="custom-size-block">
                     <span className="custom-size-label">Height (cm)</span>
                     <div className="input-with-separator">
-                      <input
-                        type="text"
-                        placeholder="Min"
-                        className="custom-input"
-                      />
-                      <span className="dash-separator">—</span>
-                      <input
-                        type="text"
-                        placeholder="Max"
-                        className="custom-input"
-                      />
-                    </div>
-                  </div>
-                  <div style={{ width: "45px" }}></div>
-                </div>
+                <input
+                  type="number"
+                  placeholder="Min"
+                  className="custom-input"
+                  value={localHeightMin}
+                  onChange={(e) => setLocalHeightMin(e.target.value)}
+                />
+                <span className="dash-separator">—</span>
+                <input
+                  type="number"
+                  placeholder="Max"
+                  className="custom-input"
+                  value={localHeightMax}
+                  onChange={(e) => setLocalHeightMax(e.target.value)}
+                />
               </div>
-            )}
+            </div>
+            {/* Separator block matching structural alignment metrics */}
+            <div style={{ width: "45px" }}></div>
           </div>
-        )}
-      </div>
-      {/* MAIN ITEM 4 - PRICE */}
-      <div className="line-under">
-        <button onClick={() => toggleSection("price")} className="listcolumn">
-          PRICE
-          <img
-            className="chevron"
-            src={
-              openSection === "price"
-                ? "/src/img/chevron-up.svg"
-                : "/src/img/chevron-down.svg"
-            }
-            alt="dropdown"
-          />
-        </button>
-        {openSection === "price" && (
-          <div className="dropdown">
-            <label>
-              <input type="radio" name="price" />
-              Under $500
-            </label>
-            <label>
-              <input type="radio" name="price" />
-              $500 - $1,000
-            </label>
-            <label>
-              <input type="radio" name="price" />
-              $1,000 - $2,000
-            </label>
-            <label>
-              <input type="radio" name="price" />
-              $2,000 - $5,000
-            </label>
-            <label>
-              <input type="radio" name="price" />
-              $5,000 - $10,000
-            </label>
+        </div>
+      )}
+    </div>
+  )}
+</div>
 
-            <button
-              onClick={() => setCustomPriceOpen(!customPriceOpen)}
-              className="show-more-btn"
-              style={{ marginTop: "12px", marginBottom: "8px" }}
+    {/* MAIN ITEM 4 - PRICE */}
+<div className="line-under">
+  <button onClick={() => toggleSection("price")} className="listcolumn">
+    PRICE
+    <img
+      className="chevron"
+      src={
+        openSection === "price"
+          ? "/src/img/chevron-up.svg"
+          : "/src/img/chevron-down.svg"
+      }
+      alt="dropdown"
+    />
+  </button>
+  {openSection === "price" && (
+    <div className="dropdown">
+      <label>
+        <input 
+          type="radio" 
+          name="price" 
+          checked={activeFilters.priceRange === "under500"}
+          onChange={() => {
+            // Clears custom prices if a preset category is clicked
+            setLocalMinPrice("");
+            setLocalMaxPrice("");
+            setActiveFilters(prev => ({ ...prev, priceRange: "under500", minPrice: "", maxPrice: "" }));
+          }}
+        />
+        Under $500
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="price" 
+          checked={activeFilters.priceRange === "500to1000"}
+          onChange={() => {
+            setLocalMinPrice("");
+            setLocalMaxPrice("");
+            setActiveFilters(prev => ({ ...prev, priceRange: "500to1000", minPrice: "", maxPrice: "" }));
+          }}
+        />
+        $500 - $1,000
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="price" 
+          checked={activeFilters.priceRange === "1000to2000"}
+          onChange={() => {
+            setLocalMinPrice("");
+            setLocalMaxPrice("");
+            setActiveFilters(prev => ({ ...prev, priceRange: "1000to2000", minPrice: "", maxPrice: "" }));
+          }}
+        />
+        $1,000 - $2,000
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="price" 
+          checked={activeFilters.priceRange === "2000to5000"}
+          onChange={() => {
+            setLocalMinPrice("");
+            setLocalMaxPrice("");
+            setActiveFilters(prev => ({ ...prev, priceRange: "2000to5000", minPrice: "", maxPrice: "" }));
+          }}
+        />
+        $2,000 - $5,000
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="price" 
+          checked={activeFilters.priceRange === "5000to10000"}
+          onChange={() => {
+            setLocalMinPrice("");
+            setLocalMaxPrice("");
+            setActiveFilters(prev => ({ ...prev, priceRange: "5000to10000", minPrice: "", maxPrice: "" }));
+          }}
+        />
+        $5,000 - $10,000
+      </label>
+
+      <button
+        onClick={() => {
+          if (customPriceOpen) {
+            // Reset local states and global states on click to clear out hidden calculations
+            setLocalMinPrice("");
+            setLocalMaxPrice("");
+            setActiveFilters((prev) => ({
+              ...prev,
+              minPrice: "",
+              maxPrice: "",
+            }));
+          }
+          setCustomPriceOpen(!customPriceOpen);
+        }}
+        className="show-more-btn"
+        style={{ marginTop: "12px", marginBottom: "8px" }}
+      >
+        {customPriceOpen ? "REMOVE CUSTOM PRICE" : "SELECT CUSTOM PRICE"}
+      </button>
+
+      {customPriceOpen && (
+        <div className="custom-size-container">
+          <div className="custom-size-row">
+            <div className="custom-size-block">
+              <span className="custom-size-label">Price</span>
+              <div className="input-with-separator">
+                <input
+                  type="number"
+                  placeholder="$ Min"
+                  className="custom-input"
+                  value={localMinPrice}
+                  onChange={(e) => setLocalMinPrice(e.target.value)}
+                />
+                <span className="dash-separator">—</span>
+                <input
+                  type="number"
+                  placeholder="$ Max"
+                  className="custom-input"
+                  value={localMaxPrice}
+                  onChange={(e) => setLocalMaxPrice(e.target.value)}
+                />
+              </div>
+            </div>
+            <button 
+              className="ok-btn"
+              onClick={() => {
+                setActiveFilters((prev) => ({
+                  ...prev,
+                  priceRange: null, // Clear preset radios when applying custom prices
+                  minPrice: localMinPrice,
+                  maxPrice: localMaxPrice,
+                }));
+              }}
             >
-              {customPriceOpen ? "REMOVE CUSTOM PRICE" : "SELECT CUSTOM PRICE"}
+              OK
             </button>
-
-            {customPriceOpen && (
-              <div className="custom-size-container">
-                <div className="custom-size-row">
-                  <div className="custom-size-block">
-                    <span className="custom-size-label">Price</span>
-                    <div className="input-with-separator">
-                      <input
-                        type="text"
-                        placeholder="$ Min"
-                        className="custom-input"
-                      />
-                      <span className="dash-separator">—</span>
-                      <input
-                        type="text"
-                        placeholder="$ Max"
-                        className="custom-input"
-                      />
-                    </div>
-                  </div>
-                  <button className="ok-btn">OK</button>
-                </div>
-              </div>
-            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
+  )}
+</div>
+
 
       {/* MAIN ITEM 5 - ORIENTATION */}
       <div className="line-under">

@@ -66,10 +66,8 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  width: 250px; /* Aligns perfectly with your button or sidebar width */
-  height: 44px; /* Matches the exact structural height of your filters button */
-
-  /* Background box container styling matching your image */
+  width: 250px;
+  height: 44px;
   background-color: #ebe7e1;
   border: 1px solid #c4beb6;
   padding: 0 16px;
@@ -84,7 +82,7 @@
 }
 
 .search-icon img {
-  height: 18px; /* Perfectly scales your search magnifying glass vector icon */
+  height: 18px;
   width: auto;
   display: block;
 }
@@ -102,10 +100,9 @@
   margin: 0;
 }
 
-/* Gray styling text matching your screenshot design values */
 .search-input::placeholder {
   color: #717171;
-  opacity: 1; /* Ensures crisp rendering across browsers */
+  opacity: 1;
 }
 
 /* --- SPLIT LAYOUT MANAGEMENT STRUCTURES --- */
@@ -114,44 +111,127 @@
   gap: 40px;
   width: 100%;
   align-items: flex-start;
-  transition: grid-template-columns 0.2s ease-in-out;
 }
 
-/* State A: Filters are visible -> Sidebar on Left (250px) + Grid on Right (3 Columns) */
+/* State A: Filters are visible -> Force exactly 3 Column Masonry */
 .gallery-split-layout.filters-shown {
   grid-template-columns: 250px 1fr;
 }
 .gallery-split-layout.filters-shown .artwork-grid {
-  grid-template-columns: repeat(3, 1fr);
+  column-count: 3;
 }
 
-/* State B: Filters are hidden -> Sidebar space collapses to 0px + Grid scales out to 4 Columns wide */
+/* State B: Filters are hidden -> Force exactly 4 Column Masonry */
 .gallery-split-layout.filters-hidden {
   grid-template-columns: 1fr;
 }
 .gallery-split-layout.filters-hidden .artwork-grid {
-  grid-template-columns: repeat(
-    4,
-    1fr
-  ); /* Expands beautifully to match your layout update! */
+  column-count: 4;
 }
 
-/* SIDEBAR & DISPLAY COMPONENTS WRAPPERS */
-.sidebar-track {
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-}
-
+/* --- THE ROW-FREE MASONRY MATRIX CONTAINER --- */
 .artwork-grid {
-  display: grid;
-  gap: 50px 30px;
+  display: block !important; /* Removes grid/flex layout rows completely */
+  column-gap: 30px; /* Horizontal space between tracks */
   width: 100%;
 }
 
+/* --- TARGET ENCAPSULATED CARDS INSIDE THE COLUMN TRACKS --- */
+.artwork-grid .artwork-card {
+  display: inline-block; /* Forces items to stack inside columns nicely */
+  width: 100% !important; /* Forces cards to expand to the full track size */
+  margin-bottom: 50px; /* Clean vertical spacing between elements */
+  break-inside: avoid; /* Prevents card modules from splitting between columns */
+  box-sizing: border-box;
+}
+
+/* Fluid responsive rendering configurations for images */
+.artwork-grid .artwork-card img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
 .no-results {
-  grid-column: 1 / -1;
   text-align: center;
   color: #717171;
   padding: 40px 0;
+  column-span: all; /* Spans full horizontal width if empty */
+}
+/* --- HORIZONTAL RIBBON INTERNAL FLEXBOX RESTRUCTURING --- */
+.gallery-toolbar-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+/* Middle active chip track block */
+.active-chips-track-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1; /* Occupies all left-over middle spacing channels */
+  overflow-x: auto; /* Adds clean side-scrolling if user selects many tags */
+  padding: 4px 0;
+  scrollbar-width: none; /* Hides horizontal bars on modern browsers */
+}
+
+.active-chips-track-container::-webkit-scrollbar {
+  display: none; /* Hides native scroll bars on Safari/Chrome */
+}
+
+/* Clear all inline text link typography rules */
+.clear-all-inline-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: spectral, playfair, serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: #373737;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* The Individual Filter Tag Chips matching your image layout design */
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 16px;
+  background-color: #d4ccbf; /* Muted background matching your filter button */
+  border: 1px solid transparent;
+  color: #373737;
+  font-family: spectral, playfair, serif;
+  font-size: 13px;
+  white-space: nowrap; /* Prevents text from breaking lines inside chip box nodes */
+  flex-shrink: 0;
+}
+
+/* Close interaction target element indicator element node */
+.close-chip-x {
+  font-size: 16px;
+  font-weight: 300;
+  cursor: pointer;
+  line-height: 1;
+  color: #717171;
+  user-select: none;
+  padding: 2px;
+}
+
+.close-chip-x:hover {
+  color: #373737;
+}
+
+/* Prevent search wrapper from collapsing inside the dynamic flexbox toolbar */
+.search-bar-mock {
+  flex-shrink: 0;
 }

@@ -1,139 +1,223 @@
-.home {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: -10px;
-  justify-items: center;
-  height: 900px;
-  margin-left: 100px;
-  margin-top: 0;
-}
-.imgsidebar {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.collectionsec {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 50px;
-  padding-left: 50px;
-}
-.collection {
-  font-size: 40px;
-  font-family: kalnia, playfair;
-  margin: 0;
-}
-.the {
-  font-size: 30px;
-  font-family: kalnia, playfair;
-  margin: 0;
-}
-.year {
-  font-size: 90px;
-  font-weight: 550;
-  color: transparent;
-  -webkit-text-stroke: 1.3px #000000;
-  font-family: kalnia, playfair;
-  margin-top: -20px;
-  margin-bottom: -20px;
+/* Core Page Reset */
+.home-page-wrapper-main {
+  background-color: #ebe7e1;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
 }
 
+/* --- THE MAIN GRID MATRIX (5 Columns × 4 Rows) --- */
+.home {
+  display: grid;
+  /* 5 distinct tracking tracks to prevent compression or sizing issues */
+  grid-template-columns: 1.1fr 1fr 1fr 1.1fr ;
+  grid-template-rows: auto auto auto auto; 
+  gap: 40px 30px; 
+  width: 100%;
+  padding-left: 100px; /* Precise layout spacing away from left sidebar line */
+  padding-right: 60px; 
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+/* --- EXACT GRID PLACEMENT POSITION COORDINATES --- */
 .pic1 {
+  grid-column: 1;
+  grid-row: 1 / span 2;
   display: flex;
-  justify-content: end;
-  align-items: flex-end;
-  padding-bottom: 15px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 40px;
 }
 
 .pic2 {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding-top: 50px;
+  align-items: flex-start;
 }
+
+/* --- THE SAND COLLECTION HEADER SECTION BLOCK --- */
+.collectionsec {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; /* Keeps text links aligned perfectly on the left */
+  padding-left: 10px;
+  margin-bottom: 20px; /* Injects breathing space before elements beneath start layout tracking */
+}
+
 .pic3 {
+  grid-column: 4;
+  grid-row: 1 / span 2;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.pic4 {
-  grid-column: 2 span;
-  grid-row: 2 span;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -100px;
+  justify-content: flex-end;
+  align-items: flex-start;
+   margin-right: 40%; 
 }
 
 .pic5 {
+  grid-column: 3;
+  grid-row: 2;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
-.pic6 {
+
+.pic4 {
+  grid-column: 1 / span 2; /* Spans across columns to mirror wide bottom placement */
+  grid-row: 3 / span 2;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  
+  /* FIX: Safely indents the item to the right without breaking grid calculations */
+  margin-left: 20%; 
 }
+
 .pic7 {
+  grid-column: 3;
+  grid-row: 3 / span 2;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
+
+.pic6 {
+  grid-column: 4;
+  grid-row: 2 / span 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
+}
+
+/* --- THE COUPLING QUOTE CONTAINER OVER THE FLOWER --- */
 .qoute {
-  position: relative; /* CRITICAL - this makes the absolute positioning work */
+  grid-column: 4 / span 2;
+  grid-row: 4;
+  position: relative; 
   display: flex;
   flex-direction: column;
-  height: 200px;
-  width: 200px;
-  padding: 20px; /* Optional: gives some space around text */
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0px 40px 20px; 
+  box-sizing: border-box;
+  min-height: 250px;
+  width: 100%;
 }
 
 .qoutesub {
   font-style: italic;
-  color: #717171;
-  /* Remove duplicate font-style: italic; */
-  position: relative; /* Optional: helps with text layering */
-  z-index: 1;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555555;
+  /* CRITICAL STACK ENGINE: Keeps text floating layered on top of drawing background */
+  position: relative;
+  z-index: 5; 
+  max-width: 250px; 
+  margin: 0 0 12px 0;
 }
 
 .name {
+  font-size: 13px;
+  color: #555555;
+  font-family: playfair, serif;
+  /* CRITICAL STACK ENGINE: Keeps signature layered on top of drawing background */
   position: relative;
-  z-index: 1;
+  z-index: 5;
+  margin: 0;
 }
 
+/* --- THE GOLDEN FLOWER GRAPHIC OVERLAY POSITION --- */
 .qoute::before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 75%;
-
-  transform: translate(-50%, -50%);
-  width: 250px; /* Specific width */
-  height: 250px; /* Specific height */
+  top: 50%; 
+  left: 18%; /* Centers graphic elements directly underneath the quote layer lines */
+  transform: translate(-30%, -50%); 
+  
+  width: 260px;
+  height: 260px;
+  
   background-image: url("src/img/flower.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.4;
-  z-index: 0;
+  
+  z-index: 1; /* Drop underneath text layout stack layers */
+  opacity: 0.45; 
+  pointer-events: none;
 }
 
-/*THE ANATOMY OF THE STROKE*/
+/* --- THE SAND COLLECTION TYPOGRAPHY CARDS --- */
+.the {
+  font-size: 20px;
+  font-family: playfair, serif;
+  letter-spacing: 2px;
+  color: #1d1d1d;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.year {
+  font-size: 68px;
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1px #1d1d1d;
+  font-family: kalnia, playfair, serif;
+  line-height: 1;
+  margin: 2px 0; /* Brings texts elements closer together vertically */
+  letter-spacing: 1px;
+}
+
+.collection {
+  font-size: 34px;
+  font-family: playfair, serif;
+  letter-spacing: 1px;
+  color: #1d1d1d;
+  margin: 0 0 16px 0; /* Creates exact tight margins right above the button */
+  text-transform: uppercase;
+}
+
+/* THE SEE ALL CHARCOAL BLOCK ACTION BUTTON */
+.see-all-btn {
+  background-color: #246C5D; /* Solid dark charcoal matching layout */
+  color: #F7EBE1;
+  border: none;
+  font-family: playfair, serif;
+  font-size: 13px;
+  padding: 10px 24px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.see-all-btn:hover {
+  background-color: #004433; /* Shifts to active dark green on mouse hover link */
+}
+
+/* --- THE ANATOMY SECTION BLOCK BREAKERS --- */
 .anatomy {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 100px 0;
+  width: 100%;
 }
+
 .anatomytitle {
-  position: relative; /* CRITICAL: needed for absolute positioning */
-  display: flex; /* makes align-items work */
+  position: relative;
+  display: flex;
   align-items: center;
-  justify-content: center; /* optional: centers the image horizontally */
-  min-height: 200px; /* give it some height, or let content determine it */
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 60px;
 }
 
 .anatomytitle::before {
@@ -142,31 +226,111 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 90%;
+  width: 600px;
+  height: 120px;
   background-image: url("src/img/anatomyrec.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
 
 .anatomytitle img {
-  display: block;
-  height: auto;
-  position: relative; /* ensures image stays above the pseudo-element */
-  z-index: 1;
+  height: 48px;
+  width: auto;
+  position: relative;
+  z-index: 2;
 }
+
 .anatomycontent {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  gap: 25px;
-  width: 1000px;
+  align-items: flex-start;
+  gap: 80px;
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
+
+.anatomy-text-block {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .anatomyqoute {
-  font-size: 30px;
+  font-size: 22px;
+  line-height: 1.6;
   color: #717171;
+  font-family: playfair, serif;
+  font-style: italic;
+  margin-top: 30px;
+  max-width: 500px;
+}
+
+.behind-canvas-section {
+  width: 100%;
+  display: block;
+}
+
+.behind-canvas-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- RESPONSIVE MEDIA BREAKPOINTS ENGINE --- */
+@media (max-width: 1100px) {
+  .home {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    padding-left: 60px;
+    padding-right: 40px;
+    gap: 40px;
+  }
+  .pic1, .pic2, .pic3, .pic4, .pic5, .pic6, .pic7, .collectionsec, .qoute {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  .collectionsec {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .qoute::before {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .anatomycontent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    grid-template-columns: 1fr;
+    padding-left: 40px;
+    padding-right: 20px;
+  }
+  .collectionsec {
+    grid-column: 1;
+  }
+  .year {
+    font-size: 54px;
+  }
+  .collection {
+    font-size: 26px;
+  }
 }

@@ -4,9 +4,8 @@ const pics = [
     src: "src/img/scenary.png",
     alt: "scenary",
     padding: "18.03px",
-    width: "262.48px",
-    heigh: "199.25px",
-    // Filterable parameters
+    width: 262.48,  // Changed string to a pure number
+    height: 199.25, // Changed string to a pure number
     subject: "Landscape",
     size: "Medium (50 - 100 cm)",
     price: 450,
@@ -17,9 +16,8 @@ const pics = [
     src: "src/img/girl.png",
     alt: "girl",
     padding: "18.03px",
-    width: "198.33px",
-    heigh: "293.89px",
-    // Filterable parameters
+    width: 198.33,
+    height: 293.89,
     subject: "Animal",
     size: "Small (<50 cm)",
     price: 650,
@@ -30,9 +28,8 @@ const pics = [
     src: "src/img/churchcil.png",
     alt: "church",
     padding: "18.03px",
-    width: "174.72px",
-    heigh: "219.01px",
-    // Filterable parameters
+    width: 174.72,
+    height: 219.01,
     subject: "Abstract",
     size: "Small (<50 cm)",
     price: 1200,
@@ -43,9 +40,8 @@ const pics = [
     src: "src/img/scenary.png",
     alt: "scenary",
     padding: "18.03px",
-    width: "425.9px",
-    heigh: "323.09px",
-    // Filterable parameters
+    width: 425.9,
+    height: 323.09,
     subject: "Landscape",
     size: "Oversized (>150 cm)",
     price: 1600,
@@ -56,9 +52,8 @@ const pics = [
     src: "src/img/scenary.png",
     alt: "scenary",
     padding: "18.03px",
-    width: "272.54px",
-    heigh: "206.83px",
-    // Filterable parameters
+    width: 272.54,
+    height: 206.83,
     subject: "Nature",
     size: "Medium (50 - 100 cm)",
     price: 350,
@@ -69,9 +64,8 @@ const pics = [
     src: "src/img/scenary.png",
     alt: "scenary",
     padding: "18.03px",
-    width: "232px",
-    heigh: "176px",
-    // Filterable parameters
+    width: 232,
+    height: 176,
     subject: "Landscape",
     size: "Medium (50 - 100 cm)",
     price: 850,
@@ -82,9 +76,8 @@ const pics = [
     src: "src/img/pink.png",
     alt: "flower",
     padding: "18.03px",
-    width: "287.87px",
-    heigh: "193.28px",
-    // Filterable parameters
+    width: 287.87,
+    height: 193.28,
     subject: "Floral",
     size: "Large (100 - 150 cm)",
     price: 490,

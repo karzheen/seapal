@@ -8,86 +8,82 @@
   margin: 0px;
   font-family: playfair;
   flex-wrap: wrap;
+  padding: 24px 40px; /* Slight padding increase to balance out larger fonts */
 }
+
 .logo {
   width: 30%;
-  margin-left: 5%;
   display: flex;
   align-items: center;
+  gap: 15px; 
 }
+
+.logo img {
+  height: 44px; /* Scaled up slightly to stay balanced with the bolder text */
+  width: auto;
+}
+
 .links {
   margin-left: auto;
   display: flex;
-  width: 40%;
-  justify-content: space-between;
-  margin-right: 10%;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px; /* Increased the gap slightly so bold items don't feel crowded */
 }
+
 .Link {
   text-decoration: none;
   color: #686868;
+  transition: color 0.2s ease;
+  font-size: 18px; /* Increased font size from 15px to 18px */
+  font-weight: 600; /* Added clean bold structural weight */
 }
+
 .Link:hover {
   color: #1d1d1d;
 }
-.inquire {
-  text-decoration: none;
-  color: #f7ebe1;
-  background-color: black;
-  width: 100px;
-  height: 30px;
+
+/* --- THE ACTIVE GREEN LINK TRIGGER --- */
+.Link.active {
+  color: #004433 !important; 
+  font-weight: 700; /* Extra emphasis weight when page state link is active */
+}
+
+/* --- SOCIAL ICON STRUCTURAL LINKS --- */
+.social-icon-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
-}
-.inquire:hover {
-  color: #1d1d1d;
-  background-color: #f7ebe1;
-  border: solid black 1px;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
+.social-icon-link:hover {
+  opacity: 1; 
+}
+
+.social-icon-link img {
+  height: 22px; /* Increased social asset scale to match 18px bold typography */
+  width: auto;
+  display: block;
+}
+
+/* Tablet Layout Constraints */
 @media (max-width: 768px) {
-  .desktop-links {
-    gap: 20px;
+  .links {
+    gap: 24px;
   }
-
   .Link {
-    font-size: 14px;
-  }
-
-  .inquire {
-    width: 85px;
-    height: 28px;
-    font-size: 12px;
-  }
-
-  .logo img {
-    height: 35px;
-  }
-}
-
-/* Mobile - show hamburger, hide desktop links */
-@media (max-width: 600px) {
-  .desktop-links {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .logo img {
-    height: 30px;
-  }
-
-  .mobile-links .Link {
     font-size: 16px;
   }
+  .logo img {
+    height: 38px;
+  }
+}
 
-  .mobile-links .inquire {
-    width: 100px;
-    height: 35px;
-    font-size: 14px;
+/* Mobile View Constraints */
+@media (max-width: 600px) {
+  .logo img {
+    height: 32px;
   }
 }
