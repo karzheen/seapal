@@ -4,17 +4,20 @@
   width: 100%;
   position: relative;
   overflow-x: hidden;
+  /* Adds room for the left accent stripe */
+  padding-left: 30px; 
+  box-sizing: border-box;
 }
 
-/* --- THE MAIN GRID MATRIX (5 Columns × 4 Rows) --- */
+
+/* --- THE MAIN GRID MATRIX --- */
 .home {
   display: grid;
-  /* 5 distinct tracking tracks to prevent compression or sizing issues */
-  grid-template-columns: 1.1fr 1fr 1fr 1.1fr ;
+  grid-template-columns: 1.1fr 1fr 1fr 1fr ;
   grid-template-rows: auto auto auto auto; 
   gap: 40px 30px; 
   width: 100%;
-  padding-left: 100px; /* Precise layout spacing away from left sidebar line */
+  padding-left: 40px; 
   padding-right: 60px; 
   padding-top: 40px;
   box-sizing: border-box;
@@ -38,16 +41,15 @@
   align-items: flex-start;
 }
 
-/* --- THE SAND COLLECTION HEADER SECTION BLOCK --- */
 .collectionsec {
   grid-column: 3;
   grid-row: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start; /* Keeps text links aligned perfectly on the left */
+  align-items: flex-start; 
   padding-left: 10px;
-  margin-bottom: 20px; /* Injects breathing space before elements beneath start layout tracking */
+  margin-bottom: 20px; 
 }
 
 .pic3 {
@@ -56,7 +58,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-   margin-right: 40%; 
+  margin-right: 40%; 
 }
 
 .pic5 {
@@ -68,14 +70,11 @@
 }
 
 .pic4 {
-  grid-column: 1 / span 2; /* Spans across columns to mirror wide bottom placement */
+  grid-column: 1 / span 2; 
   grid-row: 3 / span 2;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-
-  
-  /* FIX: Safely indents the item to the right without breaking grid calculations */
   margin-left: 20%; 
 }
 
@@ -96,7 +95,6 @@
   padding-top: 80px;
 }
 
-/* --- THE COUPLING QUOTE CONTAINER OVER THE FLOWER --- */
 .qoute {
   grid-column: 4 / span 2;
   grid-row: 4;
@@ -116,7 +114,6 @@
   font-size: 15px;
   line-height: 1.7;
   color: #555555;
-  /* CRITICAL STACK ENGINE: Keeps text floating layered on top of drawing background */
   position: relative;
   z-index: 5; 
   max-width: 250px; 
@@ -127,37 +124,31 @@
   font-size: 13px;
   color: #555555;
   font-family: playfair, serif;
-  /* CRITICAL STACK ENGINE: Keeps signature layered on top of drawing background */
   position: relative;
   z-index: 5;
   margin: 0;
 }
 
-/* --- THE GOLDEN FLOWER GRAPHIC OVERLAY POSITION --- */
 .qoute::before {
   content: "";
   position: absolute;
   top: 50%; 
-  left: 18%; /* Centers graphic elements directly underneath the quote layer lines */
+  left: 18%; 
   transform: translate(-30%, -50%); 
-  
   width: 260px;
   height: 260px;
-  
   background-image: url("src/img/flower.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  
-  z-index: 1; /* Drop underneath text layout stack layers */
+  z-index: 1; 
   opacity: 0.45; 
   pointer-events: none;
 }
 
-/* --- THE SAND COLLECTION TYPOGRAPHY CARDS --- */
 .the {
   font-size: 20px;
-  font-family: playfair, serif;
+  font-family: kalnia,playfair, serif;
   letter-spacing: 2px;
   color: #1d1d1d;
   margin: 0;
@@ -171,22 +162,21 @@
   -webkit-text-stroke: 1px #1d1d1d;
   font-family: kalnia, playfair, serif;
   line-height: 1;
-  margin: 2px 0; /* Brings texts elements closer together vertically */
+  margin: 2px 0; 
   letter-spacing: 1px;
 }
 
 .collection {
   font-size: 34px;
-  font-family: playfair, serif;
+  font-family: kalnia,playfair, serif;
   letter-spacing: 1px;
   color: #1d1d1d;
-  margin: 0 0 16px 0; /* Creates exact tight margins right above the button */
+  margin: 0 0 16px 0; 
   text-transform: uppercase;
 }
 
-/* THE SEE ALL CHARCOAL BLOCK ACTION BUTTON */
 .see-all-btn {
-  background-color: #246C5D; /* Solid dark charcoal matching layout */
+  background-color: #246C5D; 
   color: #F7EBE1;
   border: none;
   font-family: playfair, serif;
@@ -198,7 +188,7 @@
 }
 
 .see-all-btn:hover {
-  background-color: #004433; /* Shifts to active dark green on mouse hover link */
+  background-color: #004433; 
 }
 
 /* --- THE ANATOMY SECTION BLOCK BREAKERS --- */
@@ -217,7 +207,16 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 60px;
+  max-width: 750px; 
+  margin: 0 auto 60px auto;
+  box-sizing: border-box;
+}
+
+.anatomytitle img {
+  height: 50px;
+  width: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .anatomytitle::before {
@@ -226,54 +225,70 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 120px;
-  background-image: url("src/img/anatomyrec.png");
-  background-size: contain;
+  width: 110%;
+  height: 150%;
+  background-image: url("/src/img/anatomyrec.png");
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
   pointer-events: none;
 }
-
-.anatomytitle img {
-  height: 48px;
-  width: auto;
-  position: relative;
-  z-index: 2;
-}
-
 .anatomycontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px; 
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.anatomy-upperpart {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  gap: 80px;
-  max-width: 1100px;
-  width: 100%;
-  padding: 0 40px;
-  box-sizing: border-box;
+  gap: 20px;
+}
+.anatomy-main-heading {
+  font-size: 100px;
+  /* FIXED: Changed from 400 to 800 for an ultra-bold, thick appearance */
+  font-weight: 500; 
+  font-family:kalnia, serif;
+  letter-spacing: 1px;
+  color: #1d1d1d;
+  text-transform: uppercase;
+  
+  /* OPTIONAL: Brings the huge text blocks closer together vertically */
+  line-height: 0.8; 
+}
+.poetic-text {
+  /* Layout & Dimensions */
+  width: 422px;
+  height: 250px;
+  -webkit-text-stroke: 1px #1d1d1d;
+  /* Typography */
+  font-family: Playfair, Georgia, serif;
+  font-size: 36px;
+  font-weight: 300; /* 300 represents 'Light' */
+  line-height: 1.22; /* 122% */
+  letter-spacing: 0%;
+  text-align: left;
+  
+  /* Color / Fill */
+  color: #83746c;
+  margin-top: 20px;
 }
 
-.anatomy-text-block {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
 
-.anatomyqoute {
-  font-size: 22px;
-  line-height: 1.6;
-  color: #717171;
-  font-family: playfair, serif;
-  font-style: italic;
-  margin-top: 30px;
-  max-width: 500px;
-}
 
+/* --- LOWER FOOTER BANNER BLOCKS --- */
 .behind-canvas-section {
   width: 100%;
   display: block;
+  padding: 40px 60px;
+  box-sizing: border-box;
 }
 
 .behind-canvas-section img {
@@ -287,8 +302,8 @@
   .home {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    padding-left: 60px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     gap: 40px;
   }
   .pic1, .pic2, .pic3, .pic4, .pic5, .pic6, .pic7, .collectionsec, .qoute {
@@ -311,17 +326,27 @@
     transform: translate(-50%, -50%);
   }
   .anatomycontent {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
-    text-align: center;
+    text-align: left;
     gap: 40px;
+    padding: 0 20px;
+  }
+  .anatomycontent > img {
+    width: 100%;
   }
 }
 
 @media (max-width: 600px) {
+  .home-page-wrapper-main {
+    padding-left: 16px; /* Scales down side accent on smaller screens */
+  }
+  .home-page-wrapper-main::before {
+    width: 12px;
+  }
   .home {
     grid-template-columns: 1fr;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-right: 20px;
   }
   .collectionsec {
@@ -332,5 +357,8 @@
   }
   .collection {
     font-size: 26px;
+  }
+  .anatomy-text-block .collection {
+    font-size: 56px;
   }
 }

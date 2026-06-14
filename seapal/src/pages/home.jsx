@@ -1,7 +1,6 @@
 import "./home.css";
-import Picture from "../component/pictures";
 import pics from "../data/picData";
-
+import Picture from "../component/pictures";
 export default function Home() {
   const picsarr = pics.map((pic) => (
     <Picture
@@ -16,11 +15,6 @@ export default function Home() {
 
   return (
     <div className="home-page-wrapper-main">
-      {/* 1. FIXED LEFT ACCENT SIDEBAR STRIPE */}
-      <div className="sidebar">
-        <img className="imgsidebar" src="src/img/rectangle.png" alt="sidebar line accent" />
-      </div>
-
       {/* 2. THE ASYMMETRIC MASONRY GRID HERO BOARD */}
       <div className="home">
         <section className="pic1">{picsarr[0]}</section>
@@ -52,24 +46,31 @@ export default function Home() {
       </div>
 
       {/* 3. THE ANATOMY OF THE STROKE SECTION BLOCK */}
-      <div className="anatomy">
-        <section className="anatomytitle">
-          <img src="src/img/THEANATOMY.svg" alt="The Anatomy Title" />
-        </section>
-        <div className="anatomycontent">
-          <img src="src/img/black.svg" alt="black vector brush stroke" />
-          <section className="anatomy-text-block">
-            <div className="collection">BONE</div>
-            <div className="collection">TIDES</div>
-            <div className="collection">COLOR</div>
-            <div className="anatomyqoute">
-              I translate the weight of the ocean and the fragility of the
-              flower into the language of the human face.
-            </div>
-            <img src="src/img/yellow.svg" alt="yellow sweep stroke asset" style={{ marginTop: "40px", alignSelf: "flex-start", width: "240px", height: "auto" }} />
-          </section>
-        </div>
+<div className="anatomy">
+  <section className="anatomytitle">
+    <img src="/src/img/The Anatomy of The Stroke.svg" alt="The Anatomy of The Stroke Title" />
+  </section>
+  
+  <div className="anatomycontent">
+    <section className="anatomy-upperpart">
+      <div>
+        <div className="anatomy-main-heading">BONE</div>
+      <div className="anatomy-main-heading">TIDES</div>
+      <div className="anatomy-main-heading">COLOR</div>
+      <div className="poetic-text">
+        I translate the weight of the ocean and the fragility of the
+        flower into the language of the human face.
       </div>
+      </div>
+      
+      
+      <img src="/src/img/yellow.svg" alt="yellow sweep stroke asset"  />
+    </section>
+
+    <img src="/src/img/horse.svg" alt="horse illustration"  />
+  </div>
+</div>
+
 
       {/* 4. BEHIND THE CANVAS FOOTER CARDS BANNER */}
       <div className="behind-canvas-section">
