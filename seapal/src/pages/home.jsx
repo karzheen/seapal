@@ -1,6 +1,7 @@
 import "./home.css";
 import pics from "../data/picData";
 import Picture from "../component/pictures";
+import Artwork from "../component/artwork";
 export default function Home() {
   const picsarr = pics.map((pic) => (
     <Picture
@@ -62,20 +63,45 @@ export default function Home() {
         flower into the language of the human face.
       </div>
       </div>
-      
-      
       <img src="/src/img/yellow.svg" alt="yellow sweep stroke asset"  />
     </section>
-
     <img src="/src/img/horse.svg" alt="horse illustration"  />
   </div>
 </div>
 
 
       {/* 4. BEHIND THE CANVAS FOOTER CARDS BANNER */}
-      <div className="behind-canvas-section">
-        <img src="src/img/behind.svg" alt="Behind the canvas illustration board overview asset" />
-      </div>
+      <section className="behind-canvas-section">
+        <span className="anatomytitle">        
+          <img src="src/img/behind.svg" alt="Behind the canvas illustration board overview asset" />
+</span>
+<div className="behind-canvas-content">
+  <span>
+    <div>Seapal Nadhim  </div>
+      <p>I am a painter based in Erbil. My practice is centered on the intersection of the maritime environment, botanical studies, and the self-portrait. I work primarily in heavy oils on raw linen, documenting the physical transitions of the sea and the garden. This site serves as a live inventory of my current collection and studio archive.</p>
+  
+  </span>
+  <img src="src/img/seapalbehind.svg"  />
+</div>
+      </section>
+     {/* 5. GALLERY SECTION */}
+<section className="gallery-section">
+  <span className="gallerytitle">        
+    <img src="src/img/Gallery.svg" alt="Behind the canvas illustration board overview asset" />
+  </span>
+
+  <div className="gallery-grid">
+    {/* .slice(0, 4) ensures only the first 4 elements are rendered */}
+    {pics.slice(0, 4).map((pic) => <Artwork key={pic.id} {...pic} />)}
+  </div>
+  <button className="gallery-see-more-btn" onClick={() => window.location.href='/gallery'}>
+            See More
+          </button>
+</section>
+
+
     </div>
+
+    
   );
 }

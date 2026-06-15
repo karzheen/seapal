@@ -282,19 +282,109 @@
 }
 
 
+.behind-canvas-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;           /* Adds padding around the container */
+  font-family: kalnia,playfair;
+padding-bottom: 5%;}
 
-/* --- LOWER FOOTER BANNER BLOCKS --- */
-.behind-canvas-section {
+.behind-canvas-content span {
+  max-width: 700px;         /* Limits text width for optimal reading */
+}
+
+.behind-canvas-content div {
+  font-size: 50px;          /* Large typography for the header */
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 24px;      /* Spacing below the title */
+}
+
+.behind-canvas-content p {
+  font-size: 25px;          /* Body copy text sizing */
+  line-height: 1.5;         /* Comfortable line spacing */
+  color: #333333;
+  font-family: spectral,kalnia,playfair;
+}
+
+.behind-canvas-content img {
+  width: 300px;             /* Sets explicit layout width for the image */
+  height: auto;             /* Maintains aspect ratio */
+  object-fit: cover;
+}
+/* --- THE GALLERY SECTION BLOCK BREAKERS --- */
+.gallerytitle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  display: block;
-  padding: 40px 60px;
+  max-width: 750px; 
+  margin: 0 auto 60px auto;
   box-sizing: border-box;
 }
 
-.behind-canvas-section img {
+.gallerytitle img {
+  height: 50px;
+  width: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.gallerytitle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 150%;
+  background-image: url("/src/img/galleryrec.svg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
+}
+.gallery-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
   width: 100%;
-  height: auto;
-  display: block;
+}
+/* Flex layout keeps cards aligned to the baseline of uneven image heights */
+.gallery-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* --- SEE MORE BUTTON STYLING --- */
+
+.gallery-see-more-btn {
+  display: inline-block;
+  margin: 50px auto 0 auto;
+  padding: 12px 36px;
+  background-color: #1a1a1a;              /* Solid dark background matching the image */
+  color: #e5dfd9;                         /* Off-white text color to contrast */
+  font-family: "Playfair Display", serif; /* Matching typography font */
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.gallery-see-more-btn:hover {
+  background-color: #333333;              /* Subtle dark gray hover feedback */
 }
 
 /* --- RESPONSIVE MEDIA BREAKPOINTS ENGINE --- */

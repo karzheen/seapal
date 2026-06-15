@@ -1,3 +1,8 @@
+import "./footer.css";  
 export default function Footer() {
-  return <img src="src/img/frame.svg" />;
+  return (
+    <footer className="footer">
+      <img src="src/img/Frame.svg"/>
+    </footer>
+  );
 }
