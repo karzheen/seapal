@@ -3,12 +3,11 @@ body {
   font-family: playfair, serif;
   margin: 0;
   min-height: 100vh;
-  margin-top: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   
+  /* REMOVED: align-items center from body so layout spans full page width natively */
+  width: 100%;
 }
 
 .layout {
@@ -16,21 +15,45 @@ body {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  
+  /* FORCES MASTER SITE CONTAINER TO BLEED 100% FULL SCREEN WALL-TO-WALL */
+  width: 100%;               
+  max-width: 100%;           /* Changed from 1440px to 100% */
+  margin: 0;                 /* Reset margins */
+  box-sizing: border-box;
 }
 
 .innerlayout {
   display: flex;
   flex-direction: row;
   flex: 1;
-  margin-left: 50px; /* Offset for the fixed sidebar */
+  width: 100%;
+  box-sizing: border-box;
+  
+  /* SAFE CONTAINER ARCHITECTURE locks the internal content workspace centrally */
+  max-width: 1440px;         /* Content boundary threshold cap placed safely inside */
+  margin: 0 auto;            /* Centers content inside the 100% full width screen track */
+  
+  /* Uniform side breathing space gutters padding boxes */
+  padding-left: 50px;        
+  padding-right: 50px;       
 }
 
 footer {
   margin-top: auto;
+  width: 100%;               
 }
 
 footer img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* Responsive constraints adjustments for smaller hand-held devices */
+@media (max-width: 768px) {
+  .innerlayout {
+    padding-left: 20px;       /* Switched from margin to balanced padding offsets */
+    padding-right: 20px;
+  }
 }

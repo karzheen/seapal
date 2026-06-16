@@ -1,0 +1,149 @@
+/* ==========================================================================
+   RECOMMENDATIONS INDEPENDENT STRUCTURE
+   ========================================================================== */
+.recommendations-row-block {
+  margin: 80px auto 40px auto;
+  padding: 0 24px;
+  font-family: 'Spectral', Georgia, serif; /* UPDATED to match your typography layout */
+  width: 90%;
+  box-sizing: border-box;
+  clear: both; 
+  overflow: hidden; 
+}
+
+.rec-header-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.rec-row-title {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #111111;
+  margin: 0;
+}
+
+.rec-arrow-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.rec-arrow-btn {
+  background-color: #f7f5f0; 
+  border: none;
+  border-radius: 50%;
+  width: 36px;                 /* Scaled slightly for a better visual footprint */
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  padding: 0;                  /* Clear standard browser spacing defaults */
+  box-shadow: none;            /* Stripped depth effects for a clean, flat aesthetic */
+  transition: background-color 0.2s ease;
+}
+
+.rec-arrow-btn:hover {
+  background-color: #e0ded9;
+}
+
+/* --- NORMALIZES VECTOR DIMENSIONS INSIDE SLIDER BUTTONS --- */
+.rec-arrow-btn img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;        /* Prevents clipping click handlers */
+}
+
+/* ==========================================================================
+   UPDATED: INTERACTIVE HORIZONTAL SLIDING FRAMEWORK
+   ========================================================================== */
+.rec-items-three-grid {
+  display: flex;                 
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rec-product-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc((100% - 48px) / 3); 
+  box-sizing: border-box;
+  animation: slideCardIn 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes slideCardIn {
+  from {
+    opacity: 0.6;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.rec-image-box {
+  width: 100%;
+  aspect-ratio: 4 / 3; 
+  background-color: #dbd5c9; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  padding: 16px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  overflow: hidden;        
+}
+
+.rec-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+}
+
+.rec-product-info {
+  text-align: left;
+}
+
+.rec-product-price {
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin: 0 0 4px 0;
+  color: #111111;
+}
+
+.rec-product-title {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 0 4px 0;
+  color: #2b2b2b;
+  text-transform: capitalize;
+}
+
+.rec-product-dims {
+  font-size: 0.8rem;
+  color: #777777;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .rec-items-three-grid {
+    flex-direction: column; 
+    gap: 32px;
+  }
+  
+  .rec-product-card {
+    flex: 0 0 100%;        
+    animation: none;       
+  }
+}

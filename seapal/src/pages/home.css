@@ -1,25 +1,25 @@
 /* Core Page Reset */
 .home-page-wrapper-main {
-  background-color: #ebe7e1;
-  width: 100%;
+  /* KEPT AT 90% AS REQUESTED */
+  width: 90%; 
+  
+  /* CRITICAL CENTER CONFIGURATION: Splits the leftover 10% evenly on left and right */
+  margin: 0 auto;
+  
   position: relative;
   overflow-x: hidden;
-  /* Adds room for the left accent stripe */
-  padding-left: 30px; 
   box-sizing: border-box;
 }
-
 
 /* --- THE MAIN GRID MATRIX --- */
 .home {
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr 1fr ;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto auto auto auto; 
-  gap: 40px 30px; 
-  width: 100%;
-  padding-left: 40px; 
-  padding-right: 60px; 
-  padding-top: 40px;
+  width: 100%; /* Expands to fill the 90% parent container fully */
+  gap: 40px; /* Added consistent gap between grid items for better spacing */
+  /* Retain balanced inner padding */
+  padding: 40px; 
   box-sizing: border-box;
 }
 
@@ -190,13 +190,12 @@
 .see-all-btn:hover {
   background-color: #004433; 
 }
-
 /* --- THE ANATOMY SECTION BLOCK BREAKERS --- */
 .anatomy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;    /* Keeps parent block centered */
   padding: 100px 0;
   width: 100%;
 }
@@ -208,7 +207,7 @@
   justify-content: center;
   width: 100%;
   max-width: 750px; 
-  margin: 0 auto 60px auto;
+  margin: 0 auto 60px auto; /* Centered layout box margins */
   box-sizing: border-box;
 }
 
@@ -234,85 +233,113 @@
   z-index: 1;
   pointer-events: none;
 }
+
 .anatomycontent {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;  /* UPDATED: Centers contents along main axis */
+  align-items: center;       /* UPDATED: Centers columns horizontally */
   width: 100%;
-  max-width: 1200px; 
+  
   margin: 0 auto;
   box-sizing: border-box;
+  padding: 0 40px;           /* Balanced padding for safety boundaries */
 }
+
 .anatomy-upperpart {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
+  justify-content: center;  /* Keeps inner rows locked to center line */
+  align-items: center;       /* UPDATED: Aligns headings vertically centered */
+  gap: 40px;                 /* Increased spacing clearance gap */
+  width: 100%;
+  margin-bottom: 60px;
 }
+
 .anatomy-main-heading {
   font-size: 100px;
-  /* FIXED: Changed from 400 to 800 for an ultra-bold, thick appearance */
   font-weight: 500; 
-  font-family:kalnia, serif;
+  font-family: kalnia, serif;
   letter-spacing: 1px;
   color: #1d1d1d;
   text-transform: uppercase;
-  
-  /* OPTIONAL: Brings the huge text blocks closer together vertically */
   line-height: 0.8; 
+  text-align: center;        /* UPDATED: Centers typography blocks */
 }
+
 .poetic-text {
-  /* Layout & Dimensions */
   width: 422px;
-  height: 250px;
   -webkit-text-stroke: 1px #1d1d1d;
-  /* Typography */
   font-family: Playfair, Georgia, serif;
   font-size: 36px;
-  font-weight: 300; /* 300 represents 'Light' */
-  line-height: 1.22; /* 122% */
+  font-weight: 300; 
+  line-height: 1.22; 
   letter-spacing: 0%;
-  text-align: left;
-  
-  /* Color / Fill */
+  text-align: left;         /* Kept left for aesthetic paragraph formatting */
   color: #83746c;
-  margin-top: 20px;
 }
-
-
 .behind-canvas-content {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-start;           /* Adds padding around the container */
-  font-family: kalnia,playfair;
-padding-bottom: 5%;}
+  
+  /* FIXED: Changed from space-between to center to pull elements close */
+  justify-content: center;   
+  align-items: center;       
+  font-family: kalnia, playfair;
+  padding: 40px 0;              
+  width: 100%;
+  
+  /* NEW ACTIONABLE GAP ELEMENT: Adjust this pixel value to change the spacing */
+  gap: 100px;                 /* Sets an explicit, tight space between text and image */
+  
+  margin: 0 auto;               
+  box-sizing: border-box;
+}
 
 .behind-canvas-content span {
-  max-width: 700px;         /* Limits text width for optimal reading */
+  /* REMOVED flex: 1 to prevent text box from expanding endlessly */
+  width: 100%;
+  max-width: 700px;             
+  text-align: left;          
 }
 
 .behind-canvas-content div {
-  font-size: 50px;          /* Large typography for the header */
+  font-size: 50px;          
   font-weight: 500;
   color: #1a1a1a;
-  margin-bottom: 24px;      /* Spacing below the title */
+  margin-bottom: 24px;      
 }
 
 .behind-canvas-content p {
-  font-size: 25px;          /* Body copy text sizing */
-  line-height: 1.5;         /* Comfortable line spacing */
+  font-size: 25px;          
+  line-height: 1.5;         
   color: #333333;
-  font-family: spectral,kalnia,playfair;
+  font-family: spectral, kalnia, playfair;
 }
 
 .behind-canvas-content img {
-  width: 300px;             /* Sets explicit layout width for the image */
-  height: auto;             /* Maintains aspect ratio */
+  width: 300px;             
+  height: auto;             
   object-fit: cover;
+  flex-shrink: 0;               
 }
+
+
+/* Tablet screen response overrides layout breaks */
+@media (max-width: 900px) {
+  .behind-canvas-content {
+    flex-direction: column;    /* Flattens into a neat vertical row stream flow on tablets */
+    gap: 40px;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .behind-canvas-content span {
+    text-align: center;
+  }
+}
+
+
 /* --- THE GALLERY SECTION BLOCK BREAKERS --- */
 .gallerytitle {
   position: relative;
@@ -347,34 +374,39 @@ padding-bottom: 5%;}
   z-index: 1;
   pointer-events: none;
 }
+
 .gallery-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 100px 0;
+  align-items: center;      /* Centers cards row container ribbon track */
   width: 100%;
 }
+
 /* Flex layout keeps cards aligned to the baseline of uneven image heights */
 .gallery-grid {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: center;  /* Centers horizontal display cards track */
+  align-items: center;
   gap: 30px;
   width: 100%;
-  max-width: 1200px;
+ 
   margin: 0 auto;
+  padding: 0 40px;           /* Added balanced side padding boundaries */
+  box-sizing: border-box;
 }
-/* --- SEE MORE BUTTON STYLING --- */
 
+/* --- SEE MORE BUTTON STYLING --- */
 .gallery-see-more-btn {
-  display: inline-block;
+  display: flex;             /* UPDATED: Flex configuration helper centers inner texts accurately */
+  justify-content: center;
+  align-items: center;
   margin: 50px auto 0 auto;
   padding: 12px 36px;
-  background-color: #1a1a1a;              /* Solid dark background matching the image */
-  color: #e5dfd9;                         /* Off-white text color to contrast */
-  font-family: "Playfair Display", serif; /* Matching typography font */
+  background-color: #1a1a1a;              
+  color: #e5dfd9;                         
+  font-family: "Playfair Display", serif; 
   font-size: 14px;
   text-decoration: none;
   text-align: center;
@@ -384,7 +416,7 @@ padding-bottom: 5%;}
 }
 
 .gallery-see-more-btn:hover {
-  background-color: #333333;              /* Subtle dark gray hover feedback */
+  background-color: #333333;              
 }
 
 /* --- RESPONSIVE MEDIA BREAKPOINTS ENGINE --- */
@@ -415,24 +447,42 @@ padding-bottom: 5%;}
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  
+  /* Drop splitting components rows down into neat singular stacked column streams */
   .anatomycontent {
     flex-direction: column-reverse;
     align-items: center;
-    text-align: left;
+    text-align: center;     /* UPDATED: Forces global text center flow on tablets */
     gap: 40px;
     padding: 0 20px;
   }
+  .anatomy-upperpart {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .behind-canvas-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+  .behind-canvas-content span {
+    text-align: center;     /* UPDATED: Centers copy blocks text on mobile drop downs */
+  }
+  .gallery-grid {
+    flex-direction: column; /* Flattens gallery row into stacked streams on mobile viewports */
+    align-items: center;
+  }
   .anatomycontent > img {
     width: 100%;
+    max-width: 500px;        /* Added boundary safeguard limits for scaling mobile views */
   }
 }
 
 @media (max-width: 600px) {
   .home-page-wrapper-main {
-    padding-left: 16px; /* Scales down side accent on smaller screens */
-  }
-  .home-page-wrapper-main::before {
-    width: 12px;
+    padding-left: 0px;       /* UPDATED: Clears unilateral side offsets on mobile view */
   }
   .home {
     grid-template-columns: 1fr;
@@ -450,5 +500,10 @@ padding-bottom: 5%;}
   }
   .anatomy-text-block .collection {
     font-size: 56px;
+  }
+  .poetic-text {
+    width: 100%;            /* Lets the poetic textbox breathe fully across mobile screens */
+    max-width: 340px;
+    text-align: center;     /* UPDATED: Polishes center line flow for phone screen typography */
   }
 }

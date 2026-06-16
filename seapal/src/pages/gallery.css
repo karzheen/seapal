@@ -1,6 +1,6 @@
 /* Overall Page Padding Container wrapper */
 .gallery-page-wrapper {
-  max-width: 1400px;
+  width: 90%;
   margin: 0 auto;
   padding: 60px 40px;
   background-color: #ebe7e1;

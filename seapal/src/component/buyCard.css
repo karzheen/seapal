@@ -1,0 +1,268 @@
+/* ==========================================================================
+   1. FIXED BACKDROP OVERLAY
+   ========================================================================== */
+.whatsapp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.45); /* Soft, dimensional blurred dimming layer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;   
+  font-family: 'Spectral', Georgia, Cambria, serif; /* Clean serif layout font */
+}
+
+/* ==========================================================================
+   2. MAIN MODAL CONTAINER POPUP
+   ========================================================================== */
+.whatsapp-checkout-card {
+  background-color: #f5f3ef;             /* Organic light stone tint surface layer */
+  width: 100%;
+  max-width: 480px;                      /* Card width configuration matches the mockup */
+  padding: 32px;
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Spectral', Georgia, Cambria, serif; /* Synchronized to standard project typography */
+  color: #2b2b2b;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Close Top Right X anchor */
+.close-checkout-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #666666;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.2s ease;
+}
+
+.close-checkout-btn:hover {
+  color: #111111;
+}
+
+/* ==========================================================================
+   3. ARTWORK DISPLAY INFRASTRUCTURE ROW
+   ========================================================================== */
+.checkout-product-summary {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #dcd9d2;      /* Delicate clean layout hairline accent lines */
+}
+
+.checkout-thumb-box {
+  width: 80px;
+  height: 80px;
+  background-color: #e2dfd8;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkout-product-meta {
+  text-align: left;
+}
+
+.checkout-artwork-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0 0 4px 0;
+  color: #111111;
+  text-transform: capitalize;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+.checkout-artwork-dims {
+  font-size: 0.9rem;
+  color: #777777;
+  margin: 0;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+/* ==========================================================================
+   4. PRICE CALCULATOR FIELDS LEDGER
+   ========================================================================== */
+.checkout-price-ledger {
+  padding: 20px 0;
+  border-bottom: 1px solid #dcd9d2;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+.ledger-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #555555;
+}
+
+.total-row {
+  margin-top: 14px;
+  margin-bottom: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #111111;
+}
+
+/* ==========================================================================
+   5. TEXT CTA INSTRUCTIONS CONTENT
+   ========================================================================== */
+.whatsapp-cta-instructions {
+  text-align: left;
+  padding: 24px 0 16px 0;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+.cta-main-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #111111;
+}
+
+.cta-sub-detail {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0 0 16px 0;
+}
+
+.cta-response-time {
+  font-size: 0.85rem;
+  color: #888888;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   6. GREEN BRANDED WHATSAPP CALL TO ACTIONS ROW BUTTON
+   ========================================================================== */
+.whatsapp-redirect-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background-color: #3ca24b;              /* Official rich WhatsApp green color token */
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  border-radius: 2px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  outline: none;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+.whatsapp-redirect-btn:hover {
+  background-color: #348e41;              /* Polished darken feedback hue response */
+}
+
+.whatsapp-redirect-btn:active {
+  transform: scale(0.99);                 /* Tactile physical click depth downscale tracking */
+}
+
+.whatsapp-inline-svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+   7. ACCORDION SUMMARY QR DRAWER STYLING
+   ========================================================================== */
+.whatsapp-qr-accordion {
+  margin-top: 16px;
+  width: 100%;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+.qr-toggle-header {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #333333;
+  cursor: pointer;
+  padding: 8px 0;
+  font-family: inherit;
+  outline: none;
+  position: relative;
+}
+
+.qr-header-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qr-quad-icon {
+  font-size: 14px;
+  display: inline-block;
+}
+
+.qr-arrow-indicator {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate carets dynamically upon active header open states */
+.qr-toggle-header.expanded .qr-arrow-indicator {
+  transform: rotate(180deg);
+}
+
+.qr-dropdown-content-drawer {
+  padding-top: 12px;
+  display: flex;
+  justify-content: center;
+  animation: expandDrawer 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.qr-code-vector-placeholder {
+  background-color: #ffffff;
+  padding: 12px;
+  border: 1px solid #e0ded9;
+  border-radius: 4px;
+}
+
+/* Mock grid asset mirroring structural block parameters from image view window */
+.mock-qr-graphic {
+  width: 130px;
+  height: 130px;
+  background-image: linear-gradient(45deg, #111 25%, transparent 25%), 
+                    linear-gradient(-45deg, #111 25%, transparent 25%), 
+                    linear-gradient(45deg, transparent 75%, #111 75%), 
+                    linear-gradient(-45deg, transparent 75%, #111 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  opacity: 0.15;
+}
+
+@keyframes expandDrawer {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

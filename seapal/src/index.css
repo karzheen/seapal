@@ -5,6 +5,7 @@ body {
   background-color: #F4F1EA; /* The warm background tone from the image */
   font-family: spectral, playfair, serif;
   color: #373737;
+  width: 100%;
 }
 
 #root {

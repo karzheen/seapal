@@ -1,0 +1,349 @@
+/* ==========================================================================
+   1. MASTER MAIN CONTAINER SPLIT
+   ========================================================================== */
+.detail-page-container {
+  display: grid;
+  grid-template-columns: 1fr 450px; /* Restored ideal text-sidebar ratio from previous steps */
+  gap: 80px;      
+  width: 90%;                  
+  margin: 0 auto;
+  padding: 60px 24px;
+  align-items: flex-start;          
+  box-sizing: border-box;
+  font-family: 'Spectral', Georgia, serif;
+}
+
+/* ==========================================================================
+   2. LEFT SIDE: STICKY MEDIA CONTAINER TRACK
+   ========================================================================== */
+.detail-media-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  position: sticky;                 
+  top: 102px;                       
+  height: max-content;              
+}
+
+/* Centralized viewport containing image + floating outside buttons */
+.main-image-viewport {
+  position: relative;
+  display: flex;
+  justify-content: center; 
+  align-items: center;            
+  width: 100%;
+  max-width: 550px;               
+  
+  /* CRITICAL: Creates padding zones to host buttons safely on the outside */
+  padding: 0 64px; 
+  box-sizing: border-box;
+}
+
+.main-image-viewport img {
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  display: block;
+}
+
+/* ==========================================================================
+   3. REUSABLE SLIDERS INTERACTIVE HOVER ARROWS (FIXED ALL CONNECTIONS)
+   ========================================================================== */
+.nav-arrow {
+  /* FIXED: Restored precision absolute alignment anchors relative to viewport */
+  position: absolute; 
+  top: 50%;
+  transform: translateY(-50%);
+  
+  background-color: #ffffff;   
+  border: none;                
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06); 
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  outline: none;               
+  padding: 0;
+  flex-shrink: 0;                 
+}
+
+.nav-arrow:hover {
+  background-color: #f5f5f5;   
+  transform: translateY(-50%) scale(1.04); /* Balanced hover sizing engine */
+}
+
+/* FIXED: Normalizes your CaretLeft and caretright SVG file bounds completely */
+.nav-arrow img {
+  width: 16px;         
+  height: 16px;        
+  object-fit: contain; 
+  display: block;      
+  pointer-events: none; 
+}
+
+/* FIXED: Anchors navigation items symmetrically clear of the artwork */
+.left-arrow { 
+  left: 0; 
+}
+
+.right-arrow { 
+  right: 0; 
+}
+
+/* ==========================================================================
+   4. THUMBNAIL BOTTOM PREVIEW STRIP
+   ========================================================================== */
+.thumbnail-preview-strip {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  font-family: 'Spectral', serif;
+}
+
+.thumb-item {
+  width: 100px;
+  height: 100px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: #fbfbfb;
+  box-sizing: border-box;
+  padding: 2px;
+  transition: border-color 0.2s ease;
+  font-family: 'Spectral', serif;
+}
+
+.thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb-item.active {
+  border-color: #111111;
+}
+
+.thumb-item:hover {
+  border-color: #888888;
+}
+
+/* ==========================================================================
+   5. RIGHT SIDE: CARD INFORMATION CONTAINER
+   ========================================================================== */
+.detail-card {
+  font-family: 'Spectral', Georgia, serif; 
+  color: #2b2b2b;
+  width: 100%;
+}
+
+.artwork-title {
+  font-size: 1.85rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 6px 0;
+  color: #111111;
+  font-family: 'Spectral', serif;
+}
+
+.title-year {
+  font-family: 'Spectral', serif;
+  font-weight: 300;
+}
+
+.artist-name {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #444444;
+  margin: 0 0 32px 0;
+}
+
+.primary-specs {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555555;
+  margin-bottom: 35px;
+}
+
+.primary-specs p {
+  margin: 4px 0;
+}
+
+.ready-to-hang {
+  font-size: 0.85rem;
+  color: #666666;
+  margin-top: 8px !important;
+}
+
+/* ==========================================================================
+   6. PURCHASE GATEWAY ACTIONS AREA
+   ========================================================================== */
+.purchase-section {
+  margin-bottom: 24px;
+}
+
+.artwork-price {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: #111111;
+  letter-spacing: -0.5px;
+}
+
+.buy-button {
+  width: 100%;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  padding: 16px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buy-button:hover {
+  background-color: #333333;
+}
+
+.trust-badges {
+  margin: 20px 0 45px 0;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+}
+
+.trust-badges p {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   7. ACCORDION NATIVE SUMMARY LAYOUTS
+   ========================================================================== */
+.accordion-section {
+  border-top: 1px solid #d3d3d3;
+  padding: 18px 0;
+}
+
+.accordion-section:last-of-type {
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.accordion-section summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #111111;
+  cursor: pointer;
+}
+
+.accordion-section summary::-webkit-details-marker {
+  display: none; 
+}
+
+.accordion-section summary::after {
+  content: none !important; /* Strips old text caret indicator permanently */
+}
+
+.accordion-chevron-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none; 
+}
+
+.accordion-content {
+  padding-top: 18px;
+  font-size: 0.95rem;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.read-more {
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 6px;
+  color: #666666;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  row-gap: 12px;
+  margin-top: 24px;
+}
+
+.meta-label {
+  color: #777777;
+}
+
+.meta-value {
+  color: #111111;
+}
+
+.underline-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   8. NOT FOUND FALLBACK MOCK VIEWS
+   ========================================================================== */
+.artwork-not-found {
+  padding: 80px 24px;
+  text-align: center;
+  font-family: 'Spectral', serif;
+}
+
+.artwork-not-found button {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   9. DEVICE SCREEN RESPONSIVE FALLBACKS
+   ========================================================================== */
+@media (max-width: 960px) {
+  .detail-page-container {
+    grid-template-columns: 1fr; 
+    gap: 48px;
+    padding: 40px 20px;
+  }
+  
+  .detail-media-column {
+    position: relative;
+    top: 0;
+  }
+
+  /* FIXED: Updates mobile viewport spacing safely so absolute coordinate anchors match perfectly */
+  .main-image-viewport {
+    max-width: 100%;
+    padding: 0 54px; 
+  }
+  
+  .left-arrow { left: 0; }
+  .right-arrow { right: 0; }
+}
