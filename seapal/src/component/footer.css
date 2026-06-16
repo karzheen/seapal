@@ -1,27 +1,45 @@
-/* --- NATURAL INLINE SECTION FLOW --- */
-
-.footer {
+/* Parent container holds the coordinate space */
+.footer-container {
+  position: relative;
   width: 100%;
-  box-sizing: border-box;
-  font-family: "Playfair Display", "Playfair", serif;
-  padding-top: 40px;                 /* Spacing directly below the preceding section */
+  display: inline-block;
 }
 
-/* Aligning layout columns horizontally across the page view */
-.footer-links-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
+/* Background image stretches to fill the container */
+.footer-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Overlay sits perfectly on top of the image */
+.footer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 4% 8%; /* Adjust padding based on your layout needs */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #5c4d43; /* Matches the dark beige text color */
+  font-family: serif;
+}
+
+/* Multi-column layout for top text */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .footer-column h3 {
-  font-size: 16px;
-  font-weight: 500;
-  color: #4a4a4a;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin-bottom: 15px;
+  text-transform: capitalize;
 }
 
 .footer-column ul {
@@ -30,40 +48,44 @@
   margin: 0;
 }
 
-.footer-column ul li {
-  margin-bottom: 12px;
+.footer-column li {
+  margin-bottom: 8px;
 }
 
-.footer-column ul li a {
+.footer-column a {
+  color: inherit;
   text-decoration: none;
-  color: #2b2b2b;
-  font-size: 15px;
-  transition: opacity 0.2s ease;
+  opacity: 0.8;
 }
 
-.footer-column ul li a:hover {
-  opacity: 0.6;
+.footer-column a:hover {
+  opacity: 1;
 }
 
-.footer-email {
-  font-size: 15px;
-  color: #2b2b2b;
-  margin: 0 0 10px 0;
+/* Styling for the contact details and social icons */
+.contact-column p {
+  margin: 0 0 8px 0;
 }
 
-.footer-status {
-  font-size: 14px;
-  color: #777777;
-  margin: 0 0 15px 0;
-}
-
-.footer-socials {
+.social-icons {
   display: flex;
-  gap: 15px;
+  gap: 12px;
+  margin-top: 15px;
 }
 
-.footer-socials a {
-  color: #2b2b2b;
-  font-size: 18px;
-  text-decoration: none;
+.social-icons img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Copyright alignment at the very bottom */
+.footer-bottom {
+  text-align: center;
+  width: 100%;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  margin: 0;
+  opacity: 0.7;
 }
