@@ -1,31 +1,27 @@
-/* ==========================================================================
-   1. FIXED BACKDROP OVERLAY
-   ========================================================================== */
+/* 1. FIXED BACKDROP OVERLAY*/
 .whatsapp-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.45); /* Soft, dimensional blurred dimming layer */
+  background-color: rgba(0, 0, 0, 0.45); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;   
-  font-family: 'Spectral', Georgia, Cambria, serif; /* Clean serif layout font */
+  font-family: 'Spectral', Georgia, Cambria, serif; 
 }
 
-/* ==========================================================================
-   2. MAIN MODAL CONTAINER POPUP
-   ========================================================================== */
+/*  2. MAIN MODAL CONTAINER POPUP*/
 .whatsapp-checkout-card {
-  background-color: #f5f3ef;             /* Organic light stone tint surface layer */
+  background-color: #f5f3ef;             
   width: 100%;
-  max-width: 480px;                      /* Card width configuration matches the mockup */
+  max-width: 480px;                      
   padding: 32px;
   position: relative;
   box-sizing: border-box;
-  font-family: 'Spectral', Georgia, Cambria, serif; /* Synchronized to standard project typography */
+  font-family: 'Spectral', Georgia, Cambria, serif; 
   color: #2b2b2b;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
 }
@@ -49,20 +45,18 @@
   color: #111111;
 }
 
-/* ==========================================================================
-   3. ARTWORK DISPLAY INFRASTRUCTURE ROW
-   ========================================================================== */
+/* 3. ARTWORK DISPLAY INFRASTRUCTURE ROW */
 .checkout-product-summary {
   display: flex;
   gap: 20px;
   align-items: center;
   padding-bottom: 24px;
-  border-bottom: 1px solid #dcd9d2;      /* Delicate clean layout hairline accent lines */
+  border-bottom: 1px solid #dcd9d2;      
 }
 
 .checkout-thumb-box {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 150px;
   background-color: #e2dfd8;
   overflow: hidden;
   display: flex;
@@ -89,41 +83,42 @@
   font-family: 'Spectral', Georgia, serif;
 }
 
+/* MODIFIED: Size layout set to Inter font-family */
 .checkout-artwork-dims {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #777777;
   margin: 0;
-  font-family: 'Spectral', Georgia, serif;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
 }
 
-/* ==========================================================================
-   4. PRICE CALCULATOR FIELDS LEDGER
-   ========================================================================== */
+/*4. PRICE CALCULATOR FIELDS LEDGER */
 .checkout-price-ledger {
   padding: 20px 0;
   border-bottom: 1px solid #dcd9d2;
-  font-family: 'Spectral', Georgia, serif;
 }
 
+/* MODIFIED: Generic ledger value labels set to Inter font-family */
 .ledger-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-bottom: 10px;
   color: #555555;
+  font-family: 'Inter', sans-serif;
 }
 
+/* MODIFIED: Total price text values explicitly set to Inter font-family */
 .total-row {
   margin-top: 14px;
   margin-bottom: 0;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #111111;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ==========================================================================
-   5. TEXT CTA INSTRUCTIONS CONTENT
-   ========================================================================== */
+/* 5. TEXT CTA INSTRUCTIONS CONTENT */
 .whatsapp-cta-instructions {
   text-align: left;
   padding: 24px 0 16px 0;
@@ -152,9 +147,8 @@
   gap: 6px;
 }
 
-/* ==========================================================================
-   6. GREEN BRANDED WHATSAPP CALL TO ACTIONS ROW BUTTON
-   ========================================================================== */
+
+/* 6. GREEN BRANDED WHATSAPP CALL TO ACTIONS ROW BUTTON */
 .whatsapp-redirect-btn {
   display: flex;
   justify-content: center;
@@ -188,9 +182,7 @@
   height: 20px;
 }
 
-/* ==========================================================================
-   7. ACCORDION SUMMARY QR DRAWER STYLING
-   ========================================================================== */
+/*7. ACCORDION SUMMARY QR DRAWER STYLING */
 .whatsapp-qr-accordion {
   margin-top: 16px;
   width: 100%;
@@ -265,4 +257,30 @@
 @keyframes expandDrawer {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
+}
+/* Align image thumb to the top-left, stretch text column container to fill remaining layout width */
+.checkout-product-summary {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; /* Keeps image aligned up top */
+  padding-bottom: 24px;
+}
+
+/* New inner wrapper containing meta details and price calculation side-by-side with thumbnail */
+.checkout-product-info {
+  flex-grow: 1;
+}
+
+/* Removes top padding from ledger block since it sits inside the flex content flow now */
+.checkout-price-ledger {
+  padding: 0;
+  border-bottom: none; /* Removed lower boundary rule */
+}
+
+/* Match layout tracking rules for dimensions styling */
+.checkout-artwork-dims {
+  font-size: 0.85rem;
+  color: #777777;
+  margin: 0 0 16px 0; /* Creates breathing space above calculation data spreadsheet fields */
+  font-family: 'Inter', sans-serif;
 }
