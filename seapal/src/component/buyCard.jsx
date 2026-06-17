@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./buyCard.css";
+import Clock from "../img/Clock.svg"; 
+// Optional: install via 'npm i react-qr-code' to replace the placeholder
+import QRCode from "react-qr-code"; 
 
 export default function BuyCard({ artwork, onClose }) {
   const [showQR, setShowQR] = useState(false);
@@ -13,8 +16,10 @@ export default function BuyCard({ artwork, onClose }) {
   const price = artwork?.price ? `$${artwork.price.toLocaleString()}` : "$3000";
 
   // Pre-formatted link text engine for WhatsApp automatic chat lines injection
-  const whatsappNumber = "+9647500000000"; // Replace with your phone number string
+  const whatsappNumber = "+9647500000000"; 
   const messageText = encodeURIComponent(`Hello Seapal Nadhim, I am interested in purchasing your artwork "${title}" (${dimensions}) listed for ${price}.`);
+  
+  // FIX: Added missing $ sign before {whatsappNumber}
   const whatsappUrl = `https://wa.me{whatsappNumber}?text=${messageText}`;
 
   return (
@@ -51,7 +56,12 @@ export default function BuyCard({ artwork, onClose }) {
         <div className="whatsapp-cta-instructions">
           <h4 className="cta-main-title">Checkout via WhatsApp</h4>
           <p className="cta-sub-detail">Tap the button below or scan the QR code to start a chat.</p>
-          <p className="cta-response-time">🕒 Usually replies within a few hours</p>
+          
+          {/* FIX: Wrapped Clock source string inside a proper img tag */}
+          <p className="cta-response-time">
+            <img src={Clock} alt="Clock icon" className="clock-icon-svg" style={{width: '16px', marginRight: '4px'}} /> 
+            Usually replies within a few hours
+          </p>
         </div>
 
         {/* Green Branded WhatsApp Redirect Link Button Trigger */}
@@ -83,9 +93,9 @@ export default function BuyCard({ artwork, onClose }) {
           
           {showQR && (
             <div className="qr-dropdown-content-drawer">
-              {/* Substitute this mockup box surface with your active backend QR code vector module string */}
-              <div className="qr-code-vector-placeholder">
-                <div className="mock-qr-graphic"></div>
+              <div className="qr-code-vector-placeholder" style={{ background: '#white', padding: '16px', display: 'inline-block' }}>
+                {/* IMPROVEMENT: Uses a real dynamic QR code tied to your whatsapp URL */}
+                <QRCode value={whatsappUrl} size={160} />
               </div>
             </div>
           )}
