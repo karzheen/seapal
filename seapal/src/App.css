@@ -5,8 +5,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
-  /* REMOVED: align-items center from body so layout spans full page width natively */
   width: 100%;
 }
 
@@ -15,12 +13,13 @@ body {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  
-  /* FORCES MASTER SITE CONTAINER TO BLEED 100% FULL SCREEN WALL-TO-WALL */
   width: 100%;               
-  max-width: 100%;           /* Changed from 1440px to 100% */
-  margin: 0;                 /* Reset margins */
+  max-width: 100%;           
+  margin: 0;                 
   box-sizing: border-box;
+  
+  /* FIX: Explicitly remove any left padding so elements hit the screen edge */
+  padding-left: 0 !important; 
 }
 
 .innerlayout {
@@ -29,12 +28,8 @@ body {
   flex: 1;
   width: 100%;
   box-sizing: border-box;
-  
-  /* SAFE CONTAINER ARCHITECTURE locks the internal content workspace centrally */
-  max-width: 1440px;         /* Content boundary threshold cap placed safely inside */
-  margin: 0 auto;            /* Centers content inside the 100% full width screen track */
-  
-  /* Uniform side breathing space gutters padding boxes */
+  max-width: 1440px;         
+  margin: 0 auto;            
   padding-left: 50px;        
   padding-right: 50px;       
 }
@@ -50,10 +45,29 @@ footer img {
   display: block;
 }
 
-/* Responsive constraints adjustments for smaller hand-held devices */
+/* ==========================================================================
+   VERTICAL SIDE BRANDING LINE (FIXED EDGE SNAPPING)
+   ========================================================================== */
+.side-rec-line {
+  position: absolute;          
+  top: 0;                      /* Anchored to the exact top window boundary */
+  left: 0;                     /* Snaps directly to the leftmost pixel of the viewport */
+  width: 20px;                 
+  height: 100%;                /* Tracks the total scroll height of the document layout */
+  
+  /* Background repeat tiles the image flawlessly down the page */
+  background-image: url("./img/siderec.svg");
+  background-repeat: repeat-y;
+  background-position: top left;
+  background-size: 20px auto;
+  
+  z-index: 9999;               /* Sits on top of the navbar and content items */
+  pointer-events: none;        
+}
+
 @media (max-width: 768px) {
   .innerlayout {
-    padding-left: 20px;       /* Switched from margin to balanced padding offsets */
+    padding-left: 20px;       
     padding-right: 20px;
   }
 }

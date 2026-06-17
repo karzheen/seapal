@@ -1,13 +1,29 @@
-/* index.css */
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #F4F1EA; /* The warm background tone from the image */
-  font-family: spectral, playfair, serif;
-  color: #373737;
+/* index.css / App.css */
+
+/* 1. Ensure the layout container stretches with content */
+.layout {
+  position: relative;
+  min-height: 100vh;
   width: 100%;
+  padding-left: 20px;
+  box-sizing: border-box;
 }
 
-#root {
-  width: 100%;
+/* 2. Style the line to repeat seamlessly over the entire page height */
+.side-rec-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 100%;             /* Stretches to the exact bottom of the page */
+  
+  /* FIX: Treats the SVG as a background tile so it repeats infinitely downwards */
+  background-image: url("./img/siderec.svg");
+  background-repeat: repeat-y;
+  background-position: top left;
+  background-size: 20px auto;
+
+  /* Sits on top of the navbar, content, and footer elements */
+  z-index: 9999;
+  pointer-events: none;     /* Keeps links behind it clickable */
 }

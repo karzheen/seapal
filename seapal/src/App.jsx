@@ -1,21 +1,29 @@
 import "./App.css";
 import Navbar from "./pages/navbar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom"; // Added useLocation
 import Home from "./pages/home";
 import Gallery from "./pages/gallery";
 import DetailCard from "./component/detailCard";
-/* FIX: Changed path structure from absolute "src/img/..." to relative "./img/..." */
 import siderec from "./img/siderec.svg";
 import Footer from "./component/footer";
 
 function Layout({ children }) {
+  const location = useLocation();
+  
+  // Checks if the current active route is strictly the Home path
+  const isHomePage = location.pathname === "/";
+
   return (
     <div className="layout">
+      {/* Conditionally displays the side recording line only on the home page */}
+      {isHomePage && (
+        <img src={siderec} alt="Decorative side line" className="side-rec-line" />
+      )}
+
       <Navbar />
 
       {children}
 
-      {/* FIXED: Added explicit ID hook anchor */}
       <footer id="site-footer"> 
         <Footer />
       </footer>
