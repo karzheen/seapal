@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer-container">
       {/* Fixed: References Frame.svg directly from the public/img subfolder */}
-      <img src="/img/Frame.svg" alt="Footer Background" className="footer-bg" />
+      <img src="/seapal/Frame.svg" alt="Footer Background" className="footer-bg" />
 
       {/* Overlay Content */}
       <div className="footer-overlay">
@@ -33,10 +33,10 @@ export default function Footer() {
             <div className="social-icons">
               {/* Fixed: References social svgs directly from public/img */}
               <a href="https://instagram.com" target="_blank" rel="noreferrer">
-                <img src="/img/instagram.svg" alt="Instagram" />
+                <img src="/seapal/instagram.svg" alt="Instagram" />
               </a>
               <a href="https://facebook.com" target="_blank" rel="noreferrer">
-                <img src="/img/facebook.svg" alt="Facebook" />
+                <img src="/seapal/facebook.svg" alt="Facebook" />
               </a>
             </div>
           </div>
