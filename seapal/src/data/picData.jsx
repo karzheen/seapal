@@ -1,8 +1,8 @@
 const pics = [
   {
     id: 1,
-    src: "/src/img/scenary.png",
-    images: ["/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png"],
+    src: "/seapal/scenary.png",
+    images: ["/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
     alt: "scenary",
     padding: "18.03px",
     width: 262.48,  
@@ -26,8 +26,8 @@ const pics = [
   },
   {
     id: 2,
-    src: "/src/img/girl.png",
-    images: ["/src/img/girl.png", "/src/img/girl.png", "/src/img/girl.png", "/src/img/girl.png", "/src/img/girl.png"],
+    src: "/seapal/girl.png",
+    images: ["/seapal/girl.png", "/seapal/girl.png", "/seapal/girl.png", "/seapal/girl.png", "/seapal/girl.png"],
     alt: "girl",
     padding: "18.03px",
     width: 198.33,
@@ -51,8 +51,8 @@ const pics = [
   },
   {
     id: 3,
-    src: "/src/img/churchcil.png",
-    images: ["/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png"],
+    src: "/seapal/churchcil.png",
+    images: ["/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
     alt: "church",
     padding: "18.03px",
     width: 174.72,
@@ -76,8 +76,8 @@ const pics = [
   },
   {
     id: 4,
-    src: "/src/img/scenary.png",
-    images: ["/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png"],
+    src: "/seapal/scenary.png",
+    images: ["/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png"],
     alt: "scenary",
     padding: "18.03px",
     width: 425.9,
@@ -101,8 +101,8 @@ const pics = [
   },
   {
     id: 5,
-    src: "/src/img/scenary.png",
-    images: ["/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png"],
+    src: "/seapal/scenary.png",
+    images: ["/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png"],
     alt: "scenary",
     padding: "18.03px",
     width: 272.54,
@@ -126,8 +126,8 @@ const pics = [
   },
   {
     id: 6,
-    src: "/src/img/scenary.png",
-    images: ["/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png", "/src/img/scenary.png"],
+    src: "/seapal/scenary.png",
+    images: ["/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png", "/seapal/scenary.png"],
     alt: "scenary",
     padding: "18.03px",
     width: 232,
@@ -151,8 +151,8 @@ const pics = [
   },
   {
     id: 7,
-    src: "/src/img/pink.png",
-    images: ["/src/img/pink.png", "/src/img/pink.png", "/src/img/pink.png", "/src/img/pink.png", "/src/img/pink.png"],
+    src: "/seapal/pink.png",
+    images: ["/seapal/pink.png", "/seapal/pink.png", "/seapal/pink.png", "/seapal/pink.png", "/seapal/pink.png"],
     alt: "flower",
     padding: "18.03px",
     width: 287.87,
