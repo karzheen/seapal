@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./detailCard.css";
 import { useParams, useNavigate } from "react-router-dom";
 import pics from "../data/picData"; 
-import Truck from "../img/Truck.svg";
-import Return from "../img/return.svg";
+import Truck from "public/img/Truck.svg";
+import Return from "public/img/return.svg";
 import Suggestion from "./suggetion.jsx"; 
-import LeftArrow from "../img/CaretLeft.svg";
-import RightArrow  from "../img/CaretRight.svg";
-import ChevronUp from "../img/chevron-up.svg";
-import ChevronDown from "../img/chevron-down.svg";
+import LeftArrow from "public/img/CaretLeft.svg";
+import RightArrow  from "public/img/CaretRight.svg";
+import ChevronUp from "public/img/chevron-up.svg";
+import ChevronDown from "public/img/chevron-down.svg";
 import BuyCard from "./buyCard";
 export default function DetailCard({ artwork: propsArtwork }) {
   const { id } = useParams();
@@ -80,14 +80,14 @@ export default function DetailCard({ artwork: propsArtwork }) {
           <div className="main-image-viewport">
             {/* CAROUSEL CONTROLS */}
             <button className="nav-arrow left-arrow" onClick={handlePrevImage}>
-              <img src={LeftArrow} alt="Previous Image" />
+              <img src="/img/CaretLeft.svg" alt="Previous Image" />
             </button>
             <img 
               src={activeImage || artwork.src} 
               alt={artwork.alt || "Artwork Display"} 
             />
             <button className="nav-arrow right-arrow" onClick={handleNextImage}>
-              <img src={RightArrow} alt="Next Image" />
+              <img src="/img/CaretRight.svg" alt="Next Image" />
             </button>
           </div>
 
@@ -130,11 +130,11 @@ export default function DetailCard({ artwork: propsArtwork }) {
 
           <div className="trust-badges">
             <p>
-              <img src={Truck} alt="Shipping Icon" className="badge-svg-icon" /> 
+              <img src="/img/Truck.svg" alt="Shipping Icon" className="badge-svg-icon" /> 
               Shipping Included
             </p>
             <p>
-              <img src={Return} alt="Return Icon" className="badge-svg-icon" /> 
+              <img src="/img/Return.svg" alt="Return Icon" className="badge-svg-icon" /> 
               14-Day Free Returns
             </p>
           </div>
@@ -148,7 +148,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
             <summary>
               About the artwork
               <img 
-                src={accordionOpen.about ? ChevronUp : ChevronDown} 
+                src={accordionOpen.about ? "/img/chevron-up.svg" : "/img/chevron-down.svg"} 
                 alt="Toggle indicator arrow" 
                 className="accordion-chevron-icon" 
               />
@@ -175,7 +175,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
             <summary>
               Details & Dimensions
               <img 
-                src={accordionOpen.details ? ChevronUp : ChevronDown} 
+                src={accordionOpen.details ? "/img/chevron-up.svg" : "/img/chevron-down.svg"} 
                 alt="Toggle indicator arrow" 
                 className="accordion-chevron-icon" 
               />
@@ -207,7 +207,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
             <summary>
               Shipping & Returns
               <img 
-                src={accordionOpen.shipping ? ChevronUp : ChevronDown} 
+                src={accordionOpen.shipping ? "/img/chevron-up.svg" : "/img/chevron-down.svg"} 
                 alt="Toggle indicator arrow" 
                 className="accordion-chevron-icon" 
               />
