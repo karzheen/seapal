@@ -57,10 +57,10 @@ export default function Suggestion({ currentArtwork }) {
         <div className="rec-arrow-controls">
           {/* Fixed: Absolute public paths string variables for slider icons */}
           <button className="rec-arrow-btn" onClick={handlePrev}>
-            <img src="/img/CaretLeft.svg" alt="Previous" />
+            <img src="/seapal/CaretLeft.svg" alt="Previous" />
           </button>
           <button className="rec-arrow-btn" onClick={handleNext}>
-            <img src="/img/CaretRight.svg" alt="Next" />
+            <img src="/seapal/CaretRight.svg" alt="Next" />
           </button>
         </div>
       </div>

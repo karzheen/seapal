@@ -9,14 +9,17 @@ import Footer from "./component/footer";
 function Layout({ children }) {
   const location = useLocation();
   
-  // FIXED: Strict checking ensures this is ONLY true when the root homepage view is active
+  // FIXED: Explicitly excludes subfolder routes to guarantee the side line disables on sub-pages
   const isHomePage = 
-    location.pathname === "/" || 
-    location.pathname === "/seapal" || 
-    location.pathname === "/seapal/";
+    (location.pathname === "/" || 
+     location.pathname === "/seapal" || 
+     location.pathname === "/seapal/") &&
+    !location.pathname.includes("/detail") &&
+    !location.pathname.includes("/gallery");
 
   return (
-    <div className="layout">
+    /* Adds a custom class to the main layout wrapper only on Home, allowing your App.css to toggle the background tile cleanly */
+    <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}>
       {/* Conditionally displays the side recording container ONLY on the active home route */}
       {isHomePage && (
         <div className="side-rec-line"></div>

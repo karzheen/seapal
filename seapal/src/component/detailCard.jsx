@@ -129,7 +129,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
               Shipping Included
             </p>
             <p>
-              <img src="/seapal/Return.svg" alt="Return Icon" className="badge-svg-icon" /> 
+              <img src="/seapal/return.svg" alt="Return Icon" className="badge-svg-icon" /> 
               14-Day Free Returns
             </p>
           </div>

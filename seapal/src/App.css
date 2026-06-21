@@ -8,6 +8,7 @@ body {
   width: 100%;
 }
 
+/* Neutral baseline for all site sub-pages */
 .layout {
   display: flex;
   flex-direction: column;
@@ -18,12 +19,20 @@ body {
   margin: 0;                 
   box-sizing: border-box;
   padding-left: 0 !important; 
-  
-  /* FIXED: The tiling vertical edge pattern now applies cleanly directly to the page wrapper */
+}
+
+/* FIXED: The tiling pattern ONLY activates when the home page route wrapper is loaded */
+.home-layout-active {
+  padding-left: 25px !important; /* Offsets home layout content slightly so it clears the line */
   background-image: url("/seapal/siderec.svg");
   background-repeat: repeat-y;
   background-position: top left;
   background-size: 20px auto;
+}
+
+/* Keeps sub-pages sitting completely flush against the viewport screen boundaries */
+.sub-page-layout-active {
+  padding-left: 0 !important;
 }
 
 .innerlayout {
