@@ -29,7 +29,7 @@ export default function Navbar() {
           <img src="instagram.svg" alt="instagram icon" />  
         </a>
         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="facebook.svg" alt="facebook icon" />
+            <img src="logo.svg" alt="logo" />
         </a>
       </div>
     </nav>
