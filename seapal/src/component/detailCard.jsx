@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./detailCard.css";
 import { useParams, useNavigate } from "react-router-dom";
 import pics from "../data/picData"; 
-import Truck from "../img/truck.svg";
+import Truck from "../img/Truck.svg";
 import Return from "../img/return.svg";
 import Suggestion from "./suggetion.jsx"; 
 import LeftArrow from "../img/CaretLeft.svg";
