@@ -38,7 +38,10 @@ export default function App() {
   return (
     <Layout>
       <Routes>
+        {/* These two routes ensure Home opens instantly on both your computer and GitHub Pages */}
         <Route path="/" element={<Home />} />
+        <Route path="/seapal" element={<Home />} />
+        
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/detail/:id" element={<DetailCard />} />
       </Routes>
