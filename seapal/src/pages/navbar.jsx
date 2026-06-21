@@ -26,10 +26,10 @@ export default function Navbar() {
         
         {/* FIX: Use standard anchor elements for external social media routes */}
         <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="/img/instagram.svg" alt="instagram icon" />  
+          <img src="instagram.svg" alt="instagram icon" />  
         </a>
         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="src/img/facebook.svg" alt="facebook icon" />
+          <img src="facebook.svg" alt="facebook icon" />
         </a>
       </div>
     </nav>
