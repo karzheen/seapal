@@ -9,8 +9,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <section className="logo">
-        <img src="logo.svg" alt="logo" />
-        <img src="name.svg" alt="brand name" />
+        {/* Fixed: Added /img/ prefix to resolve the branding vectors correctly */}
+        <img src="/img/logo.svg" alt="logo" />
+        <img src="/img/name.svg" alt="brand name" />
       </section>
 
       <div className="links">
@@ -26,10 +27,10 @@ export default function Navbar() {
         
         {/* FIX: Use standard anchor elements for external social media routes */}
         <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="src/img/instagram.svg" alt="instagram icon" />  
+          <img src="/img/instagram.svg" alt="instagram icon" />  
         </a>
         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="src/img/facebook.svg" alt="facebook icon" />
+          <img src="/img/facebook.svg" alt="facebook icon" />
         </a>
       </div>
     </nav>
