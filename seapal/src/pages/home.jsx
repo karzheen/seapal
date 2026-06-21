@@ -81,7 +81,7 @@ export default function Home() {
       <p>I am a painter based in Erbil. My practice is centered on the intersection of the maritime environment, botanical studies, and the self-portrait. I work primarily in heavy oils on raw linen, documenting the physical transitions of the sea and the garden. This site serves as a live inventory of my current collection and studio archive.</p>
   
   </span>
-  <img src="/seapal/seapalbehind.svg"  />
+  <img src="/seapal/seapalbehindcanvas.svg"  />
 </div>
       </section>
      {/* 5. GALLERY SECTION */}
