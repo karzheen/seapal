@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "./pages/navbar";
-import { Routes, Route, useLocation } from "react-router-dom"; // Added useLocation
+import { Routes, Route, useLocation } from "react-router-dom"; 
 import Home from "./pages/home";
 import Gallery from "./pages/gallery";
 import DetailCard from "./component/detailCard";
@@ -10,8 +10,11 @@ import Footer from "./component/footer";
 function Layout({ children }) {
   const location = useLocation();
   
-  // Checks if the current active route is strictly the Home path
-  const isHomePage = location.pathname === "/";
+  // Checks if the active path is the local root, or the GitHub Pages subfolder root
+  const isHomePage = 
+    location.pathname === "/" || 
+    location.pathname === "/seapal" || 
+    location.pathname === "/seapal/";
 
   return (
     <div className="layout">
