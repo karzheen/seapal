@@ -9,9 +9,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <section className="logo">
-        {/* Fixed: Prefixed with Vite BASE_URL to find logo.svg and name.svg directly inside the public folder root */}
-        <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="logo" />
-        <img src={`${import.meta.env.BASE_URL}name.svg`} alt="brand name" />
+        {/* Fixed: Hardcoded the subfolder root path to guarantee resolution */}
+        <img src="/seapal/logo.svg" alt="logo" />
+        <img src="/seapal/name.svg" alt="brand name" />
       </section>
 
       <div className="links">
@@ -25,12 +25,12 @@ export default function Navbar() {
           About
         </NavLink>
         
-        {/* FIX: Prefixed with Vite BASE_URL to find social icons directly inside the public folder root */}
+        {/* Fixed: Hardcoded the subfolder root path to clear the social icon 404 errors */}
         <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src={`${import.meta.env.BASE_URL}instagram.svg`} alt="instagram icon" />  
+          <img src="/seapal/instagram.svg" alt="instagram icon" />  
         </a>
         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src={`${import.meta.env.BASE_URL}facebook.svg`} alt="facebook icon" />
+          <img src="/seapal/facebook.svg" alt="facebook icon" />
         </a>
       </div>
     </nav>
