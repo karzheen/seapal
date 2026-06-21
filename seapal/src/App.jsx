@@ -4,7 +4,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import Gallery from "./pages/gallery";
 import DetailCard from "./component/detailCard";
-import siderec from "./img/siderec.svg";
 import Footer from "./component/footer";
 
 function Layout({ children }) {
@@ -18,9 +17,9 @@ function Layout({ children }) {
 
   return (
     <div className="layout">
-      {/* Conditionally displays the side recording line only on the home page */}
+      {/* References siderec.svg straight from the public folder as a string path */}
       {isHomePage && (
-        <img src={siderec} alt="Decorative side line" className="side-rec-line" />
+        <img src="/siderec.svg" alt="Decorative side line" className="side-rec-line" />
       )}
 
       <Navbar />
@@ -38,7 +37,6 @@ export default function App() {
   return (
     <Layout>
       <Routes>
-        {/* These two routes ensure Home opens instantly on both your computer and GitHub Pages */}
         <Route path="/" element={<Home />} />
         <Route path="/seapal" element={<Home />} />
         
