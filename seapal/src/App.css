@@ -56,7 +56,7 @@ footer img {
   height: 100%;                /* Tracks the total scroll height of the document layout */
   
   /* Background repeat tiles the image flawlessly down the page */
-  background-image: url("seapal/siderec.svg");
+  background-image: url("/seapal/siderec.svg");
   background-repeat: repeat-y;
   background-position: top left;
   background-size: 20px auto;
