@@ -2,7 +2,7 @@ const pics = [
   {
     id: 1,
     src: "/src/img/scenary.png",
-    images: ["/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png"],
+    images: ["/src/img/churchcil.png", "public/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png", "/src/img/churchcil.png"],
     alt: "scenary",
     padding: "18.03px",
     width: 262.48,  
