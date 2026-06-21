@@ -20,7 +20,7 @@ body {
   padding-left: 0 !important; 
   
   /* FIXED: The tiling vertical edge pattern now applies cleanly directly to the page wrapper */
-  background-image: url("/seapal/flower.svg");
+  background-image: url("/seapal/siderec.svg");
   background-repeat: repeat-y;
   background-position: top left;
   background-size: 20px auto;
