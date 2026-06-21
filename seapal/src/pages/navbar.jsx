@@ -9,8 +9,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <section className="logo">
-        <img src="logo.svg" alt="logo" />
-        <img src="name.svg" alt="brand name" />
+        {/* Fixed: Prefixed with Vite BASE_URL to find logo.svg and name.svg directly inside the public folder root */}
+        <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="logo" />
+        <img src={`${import.meta.env.BASE_URL}name.svg`} alt="brand name" />
       </section>
 
       <div className="links">
@@ -24,12 +25,12 @@ export default function Navbar() {
           About
         </NavLink>
         
-        {/* FIX: Use standard anchor elements for external social media routes */}
+        {/* FIX: Prefixed with Vite BASE_URL to find social icons directly inside the public folder root */}
         <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="instagram.svg" alt="instagram icon" />  
+          <img src={`${import.meta.env.BASE_URL}instagram.svg`} alt="instagram icon" />  
         </a>
         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
-            <img src="logo.svg" alt="logo" />
+          <img src={`${import.meta.env.BASE_URL}facebook.svg`} alt="facebook icon" />
         </a>
       </div>
     </nav>
