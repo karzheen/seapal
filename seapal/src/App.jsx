@@ -17,9 +17,9 @@ function Layout({ children }) {
 
   return (
     <div className="layout">
-      {/* References siderec.svg straight from the public folder as a string path */}
+      {/* Fixed: References siderec.svg directly from the public/img subfolder */}
       {isHomePage && (
-        <img src="/siderec.svg" alt="Decorative side line" className="side-rec-line" />
+        <img src="/img/siderec.svg" alt="Decorative side line" className="side-rec-line" />
       )}
 
       <Navbar />
