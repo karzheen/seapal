@@ -77,7 +77,7 @@ export default function BuyCard({ artwork, onClose }) {
           <p className="cta-response-time">
             {/* Fixed: Absolute public path string for Clock icon */}
             <img
-              src="/img/Clock.svg"
+              src="/seapal/Clock.svg"
               alt="Clock icon"
               className="clock-icon-svg"
               style={{ width: "14px" }}
@@ -119,7 +119,7 @@ export default function BuyCard({ artwork, onClose }) {
               <span className="qr-quad-icon">
                 {/* Fixed: Absolute public path string for QR Code icon */}
                 <img
-                  src="/img/QrCode.svg"
+                  src="/seapal/QrCode.svg"
                   alt="QR Code icon"
                   className="qr-code-icon-svg"
                   style={{ width: "14px" }}

@@ -75,14 +75,14 @@ export default function DetailCard({ artwork: propsArtwork }) {
           <div className="main-image-viewport">
             {/* CAROUSEL CONTROLS */}
             <button className="nav-arrow left-arrow" onClick={handlePrevImage}>
-              <img src="/img/CaretLeft.svg" alt="Previous Image" />
+              <img src="/seapal/CaretLeft.svg" alt="Previous Image" />
             </button>
             <img 
               src={activeImage || artwork.src} 
               alt={artwork.alt || "Artwork Display"} 
             />
             <button className="nav-arrow right-arrow" onClick={handleNextImage}>
-              <img src="/img/CaretRight.svg" alt="Next Image" />
+              <img src="/seapal/CaretRight.svg" alt="Next Image" />
             </button>
           </div>
 
@@ -125,11 +125,11 @@ export default function DetailCard({ artwork: propsArtwork }) {
 
           <div className="trust-badges">
             <p>
-              <img src="/img/Truck.svg" alt="Shipping Icon" className="badge-svg-icon" /> 
+              <img src="/seapal/Truck.svg" alt="Shipping Icon" className="badge-svg-icon" /> 
               Shipping Included
             </p>
             <p>
-              <img src="/img/Return.svg" alt="Return Icon" className="badge-svg-icon" /> 
+              <img src="/seapal/Return.svg" alt="Return Icon" className="badge-svg-icon" /> 
               14-Day Free Returns
             </p>
           </div>
@@ -143,7 +143,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
             <summary>
               About the artwork
               <img 
-                src={accordionOpen.about ? "/img/chevron-up.svg" : "/img/chevron-down.svg"} 
+                src={accordionOpen.about ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} 
                 alt="Toggle indicator arrow" 
                 className="accordion-chevron-icon" 
               />
@@ -170,7 +170,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
             <summary>
               Details & Dimensions
               <img 
-                src={accordionOpen.details ? "/img/chevron-up.svg" : "/img/chevron-down.svg"} 
+                src={accordionOpen.details ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} 
                 alt="Toggle indicator arrow" 
                 className="accordion-chevron-icon" 
               />
@@ -202,7 +202,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
             <summary>
               Shipping & Returns
               <img 
-                src={accordionOpen.shipping ? "/img/chevron-up.svg" : "/img/chevron-down.svg"} 
+                src={accordionOpen.shipping ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} 
                 alt="Toggle indicator arrow" 
                 className="accordion-chevron-icon" 
               />

@@ -108,7 +108,7 @@ export default function Gallery() {
       {/* --- REWRITTEN HORIZONTAL TOOLBAR RIBBON --- */}
       <div className="gallery-toolbar-ribbon">
         <button className="filterbutton" onClick={() => setshowfilters(!showfilters)}>
-          <img src="src/img/SlidersHorizontal.svg" alt="filter icon" />
+          <img src="/seapal/SlidersHorizontal.svg" alt="filter icon" />
           {showfilters ? `HIDE FILTERS ${activeCount > 0 ? `(${activeCount})` : ""}` : "FILTERS"}
         </button>
 
@@ -153,7 +153,7 @@ export default function Gallery() {
         </div>
 
         <div className="search-bar-mock">
-          <span className="search-icon"><img src="src/img/search.svg" alt="search" /></span>
+          <span className="search-icon"><img src="/seapal/search.svg" alt="search" /></span>
           <input 
             type="text" 
             placeholder="Search" 
