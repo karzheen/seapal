@@ -9,7 +9,7 @@ import LeftArrow from "../img/CaretLeft.svg";
 import RightArrow  from "../img/CaretRight.svg";
 import ChevronUp from "../img/Chevron-up.svg";
 import ChevronDown from "../img/Chevron-down.svg";
-import BuyCard from "./BuyCard";
+import buyCard from "./BuyCard";
 export default function DetailCard({ artwork: propsArtwork }) {
   const { id } = useParams();
   const navigate = useNavigate();
