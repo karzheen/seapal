@@ -2,14 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./detailCard.css";
 import { useParams, useNavigate } from "react-router-dom";
 import pics from "../data/picData"; 
-import Truck from "public/img/Truck.svg";
-import Return from "public/img/return.svg";
 import Suggestion from "./suggetion.jsx"; 
-import LeftArrow from "public/img/CaretLeft.svg";
-import RightArrow  from "public/img/CaretRight.svg";
-import ChevronUp from "public/img/chevron-up.svg";
-import ChevronDown from "public/img/chevron-down.svg";
 import BuyCard from "./buyCard";
+
 export default function DetailCard({ artwork: propsArtwork }) {
   const { id } = useParams();
   const navigate = useNavigate();
