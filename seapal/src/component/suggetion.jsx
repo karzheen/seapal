@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pics from "../data/picData";
 import "./suggestion.css";
-import LeftArrow from "../img/CaretLeft.svg";
-import RightArrow from "../img/CaretRight.svg";
 
 export default function Suggestion({ currentArtwork }) {
   const navigate = useNavigate();
@@ -57,12 +55,12 @@ export default function Suggestion({ currentArtwork }) {
         <h2 className="rec-row-title">You might also like</h2>
         
         <div className="rec-arrow-controls">
-          {/* UPDATED TO RENDER VECTOR IMAGE COMPONENTS */}
+          {/* Fixed: Absolute public paths string variables for slider icons */}
           <button className="rec-arrow-btn" onClick={handlePrev}>
-            <img src={LeftArrow} alt="Previous" />
+            <img src="/img/CaretLeft.svg" alt="Previous" />
           </button>
           <button className="rec-arrow-btn" onClick={handleNext}>
-            <img src={RightArrow} alt="Next" />
+            <img src="/img/CaretRight.svg" alt="Next" />
           </button>
         </div>
       </div>
