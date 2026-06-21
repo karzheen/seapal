@@ -18,7 +18,7 @@
   height: 100%;             /* Stretches to the exact bottom of the page */
   
   /* FIX: Treats the SVG as a background tile so it repeats infinitely downwards */
-  background-image: url("./img/siderec.svg");
+  background-image: url("/seapal/siderec.svg");
   background-repeat: repeat-y;
   background-position: top left;
   background-size: 20px auto;
