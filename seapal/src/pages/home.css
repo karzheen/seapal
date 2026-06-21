@@ -285,7 +285,7 @@
   /* FIXED: Changed from space-between to center to pull elements close */
   justify-content: center;   
   align-items: center;       
-  font-family: kalnia, playfair;
+  font-family: spectral, playfair;
   padding: 40px 0;              
   width: 100%;
   

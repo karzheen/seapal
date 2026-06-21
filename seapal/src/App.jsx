@@ -9,7 +9,7 @@ import Footer from "./component/footer";
 function Layout({ children }) {
   const location = useLocation();
   
-  // Checks if the active path is the local root, or the GitHub Pages subfolder root
+  // FIXED: Strict checking ensures this is ONLY true when the root homepage view is active
   const isHomePage = 
     location.pathname === "/" || 
     location.pathname === "/seapal" || 
@@ -17,7 +17,7 @@ function Layout({ children }) {
 
   return (
     <div className="layout">
-      {/* Fixed: Renders a clean empty layout container to host your CSS background-image tile */}
+      {/* Conditionally displays the side recording container ONLY on the active home route */}
       {isHomePage && (
         <div className="side-rec-line"></div>
       )}
