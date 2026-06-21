@@ -19,7 +19,7 @@ function Layout({ children }) {
     <div className="layout">
       {/* Fixed: References siderec.svg directly from the public root using Vite BASE_URL */}
       {isHomePage && (
-        <img src={`${import.meta.env.BASE_URL}siderec.svg`} alt="Decorative side line" className="side-rec-line" />
+        <img src="/seapal/siderec.svg" alt="Decorative side line" className="side-rec-line" />
       )}
 
       <Navbar />
