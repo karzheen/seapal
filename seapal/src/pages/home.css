@@ -198,6 +198,7 @@
   align-items: center;    /* Keeps parent block centered */
   padding: 100px 0;
   width: 100%;
+  font-family: playfair, serif;
 }
 
 .anatomytitle {
@@ -285,7 +286,7 @@
   /* FIXED: Changed from space-between to center to pull elements close */
   justify-content: center;   
   align-items: center;       
-  font-family: spectral, playfair;
+  font-family: spectral;
   padding: 40px 0;              
   width: 100%;
   
@@ -307,7 +308,8 @@
   font-size: 50px;          
   font-weight: 500;
   color: #1a1a1a;
-  margin-bottom: 24px;      
+  margin-bottom: 24px;  
+  font-family: spectral, kalnia, playfair;    
 }
 
 .behind-canvas-content p {

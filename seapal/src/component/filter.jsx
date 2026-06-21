@@ -56,8 +56,8 @@ const [localMaxPrice, setLocalMaxPrice] = useState(activeFilters.maxPrice || "")
             className="chevron"
             src={
               openSection === "sort"
-                ? "/src/img/chevron-up.svg"
-                : "/src/img/chevron-down.svg"
+                ? "/seapal/chevron-up.svg"
+                : "/seapal/chevron-down.svg"
             }
             alt="dropdown"
           />
@@ -103,8 +103,8 @@ const [localMaxPrice, setLocalMaxPrice] = useState(activeFilters.maxPrice || "")
             className="chevron"
             src={
               openSection === "subject"
-                ? "/src/img/chevron-up.svg"
-                : "/src/img/chevron-down.svg"
+                ? "/seapal/chevron-up.svg"
+                : "/seapal/chevron-down.svg"
             }
             alt="dropdown"
           />
@@ -182,8 +182,8 @@ const [localMaxPrice, setLocalMaxPrice] = useState(activeFilters.maxPrice || "")
             className="chevron"
             src={
               openSection === "size"
-                ? "/src/img/chevron-up.svg"
-                : "/src/img/chevron-down.svg"
+                ? "/seapal/chevron-up.svg"
+                : "/seapal/chevron-down.svg"
             }
             alt="dropdown"
           />
