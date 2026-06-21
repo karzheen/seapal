@@ -4,12 +4,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import pics from "../data/picData"; 
 import Truck from "../img/truck.svg";
 import Return from "../img/return.svg";
-import Suggestion from "./suggetion.jsx"; // Fixed spelling matching your file image path track
+import Suggestion from "./suggetion.jsx"; 
 import LeftArrow from "../img/CaretLeft.svg";
 import RightArrow  from "../img/CaretRight.svg";
-import ChevronUp from "../img/Chevron-up.svg";
-import ChevronDown from "../img/Chevron-down.svg";
-import buyCard from "./BuyCard";
+import ChevronUp from "../img/chevron-up.svg";
+import ChevronDown from "../img/chevron-down.svg";
+import BuyCard from "./buyCard";
 export default function DetailCard({ artwork: propsArtwork }) {
   const { id } = useParams();
   const navigate = useNavigate();
