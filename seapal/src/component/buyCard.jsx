@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "./buyCard.css";
-import Clock from "../img/Clock.svg";
-import QRCodeIcon from "../img/QrCode.svg";
 import QRCode from "react-qr-code";
 
 export default function BuyCard({ artwork, onClose }) {
@@ -77,8 +75,9 @@ export default function BuyCard({ artwork, onClose }) {
           </p>
 
           <p className="cta-response-time">
+            {/* Fixed: Absolute public path string for Clock icon */}
             <img
-              src={Clock}
+              src="/img/Clock.svg"
               alt="Clock icon"
               className="clock-icon-svg"
               style={{ width: "14px" }}
@@ -118,8 +117,9 @@ export default function BuyCard({ artwork, onClose }) {
           >
             <div className="qr-header-title-wrapper">
               <span className="qr-quad-icon">
+                {/* Fixed: Absolute public path string for QR Code icon */}
                 <img
-                  src={QRCodeIcon}
+                  src="/img/QrCode.svg"
                   alt="QR Code icon"
                   className="qr-code-icon-svg"
                   style={{ width: "14px" }}
