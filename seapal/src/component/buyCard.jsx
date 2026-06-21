@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./buyCard.css";
 import Clock from "../img/Clock.svg";
-import QRCodeIcon from "../img/QRCode.svg";
+import QRCodeIcon from "../img/QrCode.svg";
 import QRCode from "react-qr-code";
 
 export default function BuyCard({ artwork, onClose }) {
