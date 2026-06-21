@@ -32,12 +32,12 @@ export default function Footer() {
             <p>Commissions open . 2025</p>
             <div className="social-icons">
               {/* Fixed: References social svgs directly from public/img */}
-              <a href="https://instagram.com" target="_blank" rel="noreferrer">
-                <img src="/seapal/instagram.svg" alt="Instagram" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer">
-                <img src="/seapal/facebook.svg" alt="Facebook" />
-              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
+          <img src="/seapal/instagram.svg" alt="instagram icon" />  
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
+          <img src="/seapal/facebook.svg" alt="facebook icon" />
+        </a>
             </div>
           </div>
         </div>
