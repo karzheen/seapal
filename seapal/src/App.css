@@ -17,9 +17,13 @@ body {
   max-width: 100%;           
   margin: 0;                 
   box-sizing: border-box;
-  
-  /* FIX: Explicitly remove any left padding so elements hit the screen edge */
   padding-left: 0 !important; 
+  
+  /* FIXED: The tiling vertical edge pattern now applies cleanly directly to the page wrapper */
+  background-image: url("/seapal/siderec.svg");
+  background-repeat: repeat-y;
+  background-position: top left;
+  background-size: 20px auto;
 }
 
 .innerlayout {
@@ -43,26 +47,6 @@ footer img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-/* ==========================================================================
-   VERTICAL SIDE BRANDING LINE (FIXED EDGE SNAPPING)
-   ========================================================================== */
-.side-rec-line {
-  position: absolute;          
-  top: 0;                      /* Anchored to the exact top window boundary */
-  left: 0;                     /* Snaps directly to the leftmost pixel of the viewport */
-  width: 20px;                 
-  height: 100%;                /* Tracks the total scroll height of the document layout */
-  
-  /* Background repeat tiles the image flawlessly down the page */
-  background-image: url("/seapal/siderec.svg");
-  background-repeat: repeat-y;
-  background-position: top left;
-  background-size: 20px auto;
-  
-  z-index: 9999;               /* Sits on top of the navbar and content items */
-  pointer-events: none;        
 }
 
 @media (max-width: 768px) {
