@@ -17,9 +17,9 @@ function Layout({ children }) {
 
   return (
     <div className="layout">
-      {/* Fixed: References siderec.svg directly from the public root using Vite BASE_URL */}
+      {/* Fixed: Renders a clean empty layout container to host your CSS background-image tile */}
       {isHomePage && (
-        <img src="/seapal/siderec.svg" alt="Decorative side line" className="side-rec-line" />
+        <div className="side-rec-line"></div>
       )}
 
       <Navbar />

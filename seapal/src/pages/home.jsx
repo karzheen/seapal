@@ -65,7 +65,7 @@ export default function Home() {
       </div>
       <img src="/seapal/yellow.svg" alt="yellow sweep stroke asset"  />
     </section>
-    <img src="/seapal/horse.svg" alt="horse illustration"  />
+    <img src="/seapal/Horse.svg" alt="horse illustration"  />
   </div>
 </div>
 
