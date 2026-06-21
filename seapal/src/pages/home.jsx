@@ -49,7 +49,7 @@ export default function Home() {
       {/* 3. THE ANATOMY OF THE STROKE SECTION BLOCK */}
 <div className="anatomy">
   <section className="anatomytitle">
-    <img src="/src/img/The Anatomy of The Stroke.svg" alt="The Anatomy of The Stroke Title" />
+    <img src="/seapal/The Anatomy of The Stroke.svg" alt="The Anatomy of The Stroke Title" />
   </section>
   
   <div className="anatomycontent">
@@ -63,9 +63,9 @@ export default function Home() {
         flower into the language of the human face.
       </div>
       </div>
-      <img src="/src/img/yellow.svg" alt="yellow sweep stroke asset"  />
+      <img src="/seapal/yellow.svg" alt="yellow sweep stroke asset"  />
     </section>
-    <img src="/src/img/horse.svg" alt="horse illustration"  />
+    <img src="/seapal/horse.svg" alt="horse illustration"  />
   </div>
 </div>
 
@@ -73,7 +73,7 @@ export default function Home() {
       {/* 4. BEHIND THE CANVAS FOOTER CARDS BANNER */}
       <section className="behind-canvas-section">
         <span className="anatomytitle">        
-          <img src="src/img/behind.svg" alt="Behind the canvas illustration board overview asset" />
+          <img src="/seapal/behind.svg" alt="Behind the canvas illustration board overview asset" />
 </span>
 <div className="behind-canvas-content">
   <span>
@@ -81,13 +81,13 @@ export default function Home() {
       <p>I am a painter based in Erbil. My practice is centered on the intersection of the maritime environment, botanical studies, and the self-portrait. I work primarily in heavy oils on raw linen, documenting the physical transitions of the sea and the garden. This site serves as a live inventory of my current collection and studio archive.</p>
   
   </span>
-  <img src="src/img/seapalbehind.svg"  />
+  <img src="/seapal/seapalbehind.svg"  />
 </div>
       </section>
      {/* 5. GALLERY SECTION */}
 <section className="gallery-section">
   <span className="gallerytitle">        
-    <img src="src/img/Gallery.svg" alt="Behind the canvas illustration board overview asset" />
+    <img src="/seapal/Gallery.svg" alt="Behind the canvas illustration board overview asset" />
   </span>
 
   <div className="gallery-grid">
