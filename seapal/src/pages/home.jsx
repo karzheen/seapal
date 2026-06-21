@@ -2,7 +2,13 @@ import "./home.css";
 import pics from "../data/picData";
 import Picture from "../component/pictures";
 import Artwork from "../component/artwork";
+// 1. Import the routing hook at the very top of your file
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  // 2. Initialize the navigation hook inside your component body
+  const navigate = useNavigate();
+
   const picsarr = pics.map((pic) => (
     <Picture
       key={pic.id}
@@ -26,7 +32,8 @@ export default function Home() {
           <div className="the">THE</div>
           <div className="year">SAND</div>
           <div className="collection">COLLECTION</div>
-          <button className="see-all-btn" onClick={() => window.location.href='/gallery'}>
+          {/* Fixed: Bypasses window.location reload to preserve subfolder context */}
+          <button className="see-all-btn" onClick={() => navigate('/gallery')}>
             See all
           </button>
         </section>
@@ -47,61 +54,57 @@ export default function Home() {
       </div>
 
       {/* 3. THE ANATOMY OF THE STROKE SECTION BLOCK */}
-<div className="anatomy">
-  <section className="anatomytitle">
-    <img src="/seapal/The Anatomy of The Stroke.svg" alt="The Anatomy of The Stroke Title" />
-  </section>
-  
-  <div className="anatomycontent">
-    <section className="anatomy-upperpart">
-      <div>
-        <div className="anatomy-main-heading">BONE</div>
-      <div className="anatomy-main-heading">TIDES</div>
-      <div className="anatomy-main-heading">COLOR</div>
-      <div className="poetic-text">
-        I translate the weight of the ocean and the fragility of the
-        flower into the language of the human face.
+      <div className="anatomy">
+        <section className="anatomytitle">
+          <img src="/seapal/The Anatomy of The Stroke.svg" alt="The Anatomy of The Stroke Title" />
+        </section>
+        
+        <div className="anatomycontent">
+          <section className="anatomy-upperpart">
+            <div>
+              <div className="anatomy-main-heading">BONE</div>
+              <div className="anatomy-main-heading">TIDES</div>
+              <div className="anatomy-main-heading">COLOR</div>
+              <div className="poetic-text">
+                I translate the weight of the ocean and the fragility of the
+                flower into the language of the human face.
+              </div>
+            </div>
+            <img src="/seapal/yellow.svg" alt="yellow sweep stroke asset"  />
+          </section>
+          <img src="/seapal/Horse.svg" alt="horse illustration"  />
+        </div>
       </div>
-      </div>
-      <img src="/seapal/yellow.svg" alt="yellow sweep stroke asset"  />
-    </section>
-    <img src="/seapal/Horse.svg" alt="horse illustration"  />
-  </div>
-</div>
-
 
       {/* 4. BEHIND THE CANVAS FOOTER CARDS BANNER */}
       <section className="behind-canvas-section">
         <span className="anatomytitle">        
           <img src="/seapal/behind.svg" alt="Behind the canvas illustration board overview asset" />
-</span>
-<div className="behind-canvas-content">
-  <span>
-    <div>Seapal Nadhim  </div>
-      <p>I am a painter based in Erbil. My practice is centered on the intersection of the maritime environment, botanical studies, and the self-portrait. I work primarily in heavy oils on raw linen, documenting the physical transitions of the sea and the garden. This site serves as a live inventory of my current collection and studio archive.</p>
-  
-  </span>
-  <img src="/seapal/seapalbehindcanvas.svg"  />
-</div>
+        </span>
+        <div className="behind-canvas-content">
+          <span>
+            <div>Seapal Nadhim  </div>
+            <p>I am a painter based in Erbil. My practice is centered on the intersection of the maritime environment, botanical studies, and the self-portrait. I work primarily in heavy oils on raw linen, documenting the physical transitions of the sea and the garden. This site serves as a live inventory of my current collection and studio archive.</p>
+          </span>
+          <img src="/seapal/seapalbehindcanvas.svg" alt="Behind Canvas Illustration" />
+        </div>
       </section>
-     {/* 5. GALLERY SECTION */}
-<section className="gallery-section">
-  <span className="gallerytitle">        
-    <img src="/seapal/Gallery.svg" alt="Behind the canvas illustration board overview asset" />
-  </span>
 
-  <div className="gallery-grid">
-    {/* .slice(0, 4) ensures only the first 4 elements are rendered */}
-    {pics.slice(0, 4).map((pic) => <Artwork key={pic.id} {...pic} />)}
-  </div>
-  <button className="gallery-see-more-btn" onClick={() => window.location.href='/gallery'}>
-            See More
-          </button>
-</section>
+      {/* 5. GALLERY SECTION */}
+      <section className="gallery-section">
+        <span className="gallerytitle">        
+          <img src="/seapal/Gallery.svg" alt="Behind the canvas illustration board overview asset" />
+        </span>
 
-
+        <div className="gallery-grid">
+          {/* .slice(0, 4) ensures only the first 4 elements are rendered */}
+          {pics.slice(0, 4).map((pic) => <Artwork key={pic.id} {...pic} />)}
+        </div>
+        {/* Fixed: Bypasses window.location reload to preserve subfolder context */}
+        <button className="gallery-see-more-btn" onClick={() => navigate('/gallery')}>
+          See More
+        </button>
+      </section>
     </div>
-
-    
   );
 }
