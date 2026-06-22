@@ -23,7 +23,7 @@ body {
 
 /* FIXED: The tiling pattern ONLY activates when the home page route wrapper is loaded */
 .home-layout-active {
-  padding-left: 25px !important; /* Offsets home layout content slightly so it clears the line */
+
   background-image: url("/seapal/siderec.svg");
   background-repeat: repeat-y;
   background-position: top left;
