@@ -9,7 +9,6 @@
   font-family: playfair;
   flex-wrap: wrap;
   padding: 24px 40px; /* Slight padding increase to balance out larger fonts */
-
 }
 
 .logo {
@@ -29,6 +28,12 @@
   display: flex;
   align-items: center;
   gap: 36px; /* Increased the gap slightly so bold items don't feel crowded */
+}
+
+.social-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 36px;
 }
 
 .Link {
@@ -69,9 +74,35 @@
   display: block;
 }
 
+/* Hidden by default on desktop viewports */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  z-index: 1001;
+}
+
+.hamburger .bar {
+  height: 3px;
+  width: 100%;
+  background-color: #1d1d1d;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
 /* Tablet Layout Constraints */
 @media (max-width: 768px) {
   .links {
+    gap: 24px;
+  }
+  .social-wrapper {
     gap: 24px;
   }
   .Link {
@@ -82,9 +113,56 @@
   }
 }
 
-/* Mobile View Constraints */
+/* Mobile View Constraints (Hamburger menu transforms here) */
 @media (max-width: 600px) {
+  .navbar {
+    padding: 16px 20px;
+  }
+
+  .logo {
+    width: auto;
+  }
+
   .logo img {
     height: 32px;
+  }
+
+  .hamburger {
+    display: flex; /* Show menu icon on small screens */
+  }
+
+  /* Animating hamburger lines into an 'X' close pattern when active */
+  .hamburger.open .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .hamburger.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Transform links container into vertical mobile drawer panel */
+  .links {
+    display: none; /* Hide container by default */
+    flex-direction: column;
+    width: 100%;
+    background-color: #ebe7e1;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 20px 0;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Reveal menu panel instantly when toggled */
+  .links.active {
+    display: flex;
+  }
+
+  .social-wrapper {
+    margin-top: 10px;
+    gap: 20px;
   }
 }

@@ -15,3 +15,10 @@
   /* Optional: Enhances the shadow when lifted */
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3), 0 14px 28px 0 rgba(0, 0, 0, 0.25); 
 }
+@media (max-width: 768px) {
+  .picture {
+    /* On mobile, we want to ensure the image fits well */
+    width: 100% !important; /* Override any inline width for mobile */
+    height: auto !important; /* Maintain aspect ratio */
+  }
+}

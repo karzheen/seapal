@@ -21,6 +21,7 @@
   /* Retain balanced inner padding */
   padding: 40px; 
   box-sizing: border-box;
+  grid-auto-flow: dense;
 }
 
 /* --- EXACT GRID PLACEMENT POSITION COORDINATES --- */
@@ -87,7 +88,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-right: 50%;
+  padding-right: 50%;
 }
 
 .pic6 {
@@ -199,6 +200,78 @@
 .see-all-btn:hover {
   background-color: #004433; 
 }
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+/* Tablets (Stacked 2-Column Grid) */
+@media (max-width: 1500px) {
+  .home {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .pic1, .pic2, .collectionsec, .pic3, .pic5, .pic4, .pic7, .pic6, .qoute {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  
+  }
+}
+@media (max-width: 1700px) {
+  .home-page-wrapper-main {
+  /* KEPT AT 90% AS REQUESTED */
+  width: 90%; 
+  
+  /* CRITICAL CENTER CONFIGURATION: Splits the leftover 10% evenly on left and right */
+  margin: 0 auto;
+  
+  position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+  .home {
+    grid-template-columns: repeat(3, 1fr);
+   
+  }
+  
+  .pic1, .pic2, .collectionsec, .pic3, .pic5, .pic4, .pic6, .qoute {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  
+  }
+  .pic7 {
+  grid-column: 3;
+  grid-row: 3 / span 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right:30%;
+}
+.pic4 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: -120px; /* Pulls the item up into the gap/row above */
+}
+}
+/* Mobile Phones (Single Column Flow) */
+@media (max-width: 600px) {
+  .home {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 10px;
+  }
+  
+  .year {
+    font-size: 48px;
+  }
+  
+  .collection {
+    font-size: 32px;
+  }
+}
 /* --- THE ANATOMY SECTION BLOCK BREAKERS --- */
 .anatomy {
   display: flex;
@@ -229,6 +302,7 @@
   width: auto;
   position: relative;
   z-index: 2;
+  max-width: 100%; /* Fixes container overflow issues on small phone frames */
 }
 
 .anatomytitle::before {
@@ -322,13 +396,58 @@
 
 /* --- CLEAN TABLET/MOBILE RESPONSIVE HANDLERS --- */
 @media (max-width: 768px) {
+  .anatomy {
+    padding: 60px 20px; /* Reduces overall outer frame crowding */
+  }
+
+  .anatomytitle {
+    margin-bottom: 40px;
+  }
+  
+  .anatomytitle::before {
+    width: 100%; /* Expands background asset relative scale on screens */
+    height: 180%;
+  }
+
   .anatomy-upperpart {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr; /* Shifts from 50/50 horizontal into vertical stacking flow */
     gap: 30px;
     margin-bottom: 30px;
   }
+
+  .anatomy-upperpart > div {
+    align-items: center; /* Centers alignment for mobile balances */
+  }
+
+  .anatomy-main-heading {
+    text-align: center;
+  }
+
+  .poetic-text {
+    text-align: center;
+    margin-top: 20px;
+  }
 }
 
+@media (max-width: 480px) {
+  .anatomy {
+    padding: 40px 15px;
+  }
+
+  .anatomytitle img {
+    height: 32px; /* Scales down title image asset proportionally on tiny phones */
+  }
+  
+  .anatomytitle {
+    margin-bottom: 40px;
+  }
+  
+  .anatomytitle::before {
+    width: 100%; /* Expands background asset relative scale on screens */
+    height: 180%;
+  }
+
+}
 /* --- THE MASTER FOOTER SECTION WRAPPER --- */
 .behind-canvas-section {
   display: flex;
@@ -356,8 +475,6 @@
   padding: 0;           
 }
 
-
-
 /* --- TEXT BLOCK SIDE WRAPPER --- */
 .behind-canvas-content span {
   display: flex;
@@ -366,6 +483,7 @@
   justify-content: center;
   width: 100%;
 }
+
 /* --- HEADER TITLE TYPOGRAPHY --- */
 .behind-canvas-content div {
   font-size: clamp(35px, 5vw, 50px); /* Responsive title scaling */         
@@ -395,10 +513,10 @@
   justify-self: end; /* Keeps it perfectly locked to the right layout margin */
 }
 
-/* --- CLEAN TABLET/MOBILE RESPONSIVE OVERRIDES --- */
+/* --- CLEAN RESPONSIVE OVERRIDES --- */
 @media (max-width: 900px) {
   .behind-canvas-section {
-    padding: 60px 20px;
+    padding: 60px 20px; /* Balanced inner borders for tablet windows */
   }
   
   .behind-canvas-content {
@@ -406,12 +524,35 @@
     gap: 40px;
   }
   
+  .behind-canvas-content span {
+    align-items: center; /* Aligns text components to center on smaller devices */
+  }
+
+  .behind-canvas-content div,
+  .behind-canvas-content p {
+    text-align: center; /* Center typography layout rules for balanced mobile viewports */
+  }
+  
   .behind-canvas-content img {
     width: 280px;
+    max-width: 100%; /* Prevents the image asset from expanding past small mobile views */
     justify-self: center; /* Centers the portrait on mobile viewports */
   }
 }
 
+@media (max-width: 480px) {
+  .behind-canvas-section {
+    padding: 40px 15px; /* Tiny phone browser edge optimizations */
+  }
+
+  .behind-canvas-content {
+    gap: 30px;
+  }
+
+  .behind-canvas-content img {
+    width: 240px; /* Scales down image frame for small phone breakpoints */
+  }
+}
 /* --- THE GALLERY SECTION BLOCK BREAKERS --- */
 .gallerytitle {
   position: relative;
@@ -429,6 +570,7 @@
   width: auto;
   position: relative;
   z-index: 2;
+  max-width: 100%; /* Protects header asset from bounding over small screen walls */
 }
 
 .gallerytitle::before {
@@ -504,91 +646,49 @@
   background-color: #333333;              
 }
 
-/* --- RESPONSIVE MEDIA BREAKPOINTS ENGINE --- */
-@media (max-width: 1100px) {
-  .home {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    gap: 40px;
-  }
-  .pic1, .pic2, .pic3, .pic4, .pic5, .pic6, .pic7, .collectionsec, .qoute {
-    grid-column: auto !important;
-    grid-row: auto !important;
-    justify-content: center !important;
-    align-items: center !important;
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-  .collectionsec {
-    grid-row: 1;
-    grid-column: 1 / span 2;
-    margin-bottom: 20px;
-    align-items: center;
-  }
-  .qoute::before {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  /* Drop splitting components rows down into neat singular stacked column streams */
-  .anatomycontent {
-    flex-direction: column-reverse;
-    align-items: center;
-    text-align: center;     /* UPDATED: Forces global text center flow on tablets */
-    gap: 40px;
-    padding: 0 20px;
-  }
-  .anatomy-upperpart {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .behind-canvas-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 30px;
-  }
-  .behind-canvas-content span {
-    text-align: center;     /* UPDATED: Centers copy blocks text on mobile drop downs */
-  }
+/* --- RESPONSIVE STAGE STEP DOWN OVERRIDES --- */
+
+/* 1. Step Down From 4 Columns to 3 Columns */
+@media (max-width: 1200px) {
   .gallery-grid {
-    flex-direction: column; /* Flattens gallery row into stacked streams on mobile viewports */
-    align-items: center;
-  }
-  .anatomycontent > img {
-    width: 100%;
-    max-width: 500px;        /* Added boundary safeguard limits for scaling mobile views */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    gap: 25px;
   }
 }
 
-@media (max-width: 600px) {
-  .home-page-wrapper-main {
-    padding-left: 0px;       /* UPDATED: Clears unilateral side offsets on mobile view */
+/* 2. Step Down From 3 Columns to 2 Columns */
+@media (max-width: 900px) {
+  .gallerytitle {
+    margin-bottom: 40px;
   }
-  .home {
-    grid-template-columns: 1fr;
-    padding-left: 20px;
-    padding-right: 20px;
+
+  .gallerytitle::before {
+    width: 60%; /* Broadens background element area slightly on medium widths */
   }
-  .collectionsec {
-    grid-column: 1;
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 24px;
+    gap: 20px;
   }
-  .year {
-    font-size: 54px;
+}
+
+/* 3. Fluid Scaling Shrink State (Artworks scale down naturally for small mobiles) */
+@media (max-width: 500px) {
+  .gallerytitle img {
+    height: 36px; /* Scales header typography down cleanly */
   }
-  .collection {
-    font-size: 26px;
+
+  .gallery-grid {
+    padding: 0 16px;
+    gap: 16px;
   }
-  .anatomy-text-block .collection {
-    font-size: 56px;
-  }
-  .poetic-text {
-    width: 100%;            /* Lets the poetic textbox breathe fully across mobile screens */
-    max-width: 340px;
-    text-align: center;     /* UPDATED: Polishes center line flow for phone screen typography */
+
+  /* Ensures Artwork components container and internal elements stay 100% fluid */
+  .gallery-grid > * {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="footer-container">
-      {/* Fixed: References Frame.svg directly from the public/img subfolder */}
+      {/* Background image tracks container space */}
       <img src="/seapal/Frame.svg" alt="Footer Background" className="footer-bg" />
 
       {/* Overlay Content */}
@@ -31,13 +31,12 @@ export default function Footer() {
             <p><a href="mailto:Seapal.nadhim@gmail.com">Seapal.nadhim@gmail.com</a></p>
             <p>Commissions open . 2025</p>
             <div className="social-icons">
-              {/* Fixed: References social svgs directly from public/img */}
               <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="/seapal/instagram.svg" alt="instagram icon" />  
-        </a>
-        <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
-          <img src="/seapal/facebook.svg" alt="facebook icon" />
-        </a>
+                <img src="/seapal/instagram.svg" alt="instagram icon" />  
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon-link">
+                <img src="/seapal/facebook.svg" alt="facebook icon" />
+              </a>
             </div>
           </div>
         </div>
