@@ -1,3 +1,15 @@
 body {
   font-family: playfair;
 }
+.artwork-card {
+  display: inline-block; /* Forces items to stack inside columns nicely */
+  width: 100% !important; /* Forces cards to expand to the full track size */
+  margin-bottom: 50px; /* Clean vertical spacing between elements */
+  break-inside: avoid; /* Prevents card modules from splitting between columns */
+  box-sizing: border-box;
+}
+.artwork-card img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}

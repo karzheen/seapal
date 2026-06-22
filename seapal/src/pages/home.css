@@ -30,7 +30,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 40px;
+  padding-bottom: 150px;
 }
 
 .pic2 {
@@ -67,6 +67,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-right: 20%;
 }
 
 .pic4 {
@@ -76,7 +77,9 @@
   justify-content: flex-start;
   align-items: flex-start;
   margin-left: 20%; 
+  margin-top: -120px; /* Pulls the item up into the gap/row above */
 }
+
 
 .pic7 {
   grid-column: 3;
@@ -84,6 +87,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-right: 50%;
 }
 
 .pic6 {
@@ -93,6 +97,7 @@
   justify-content: center;
   align-items: flex-start;
   padding-top: 80px;
+  padding-right: 90px;
 }
 
 .qoute {
@@ -147,32 +152,34 @@
 }
 
 .the {
-  font-size: 20px;
+  font-size: 30px;
   font-family: kalnia,playfair, serif;
   letter-spacing: 2px;
   color: #1d1d1d;
   margin: 0;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .year {
   font-size: 68px;
-  font-weight: 400;
+  font-weight: 500;
   color: transparent;
-  -webkit-text-stroke: 1px #1d1d1d;
+  -webkit-text-stroke: 2px #1d1d1d;
   font-family: kalnia, playfair, serif;
   line-height: 1;
-  margin: 2px 0; 
+ 
   letter-spacing: 1px;
 }
 
 .collection {
-  font-size: 34px;
+  font-size: 45px;
   font-family: kalnia,playfair, serif;
   letter-spacing: 1px;
   color: #1d1d1d;
   margin: 0 0 16px 0; 
   text-transform: uppercase;
+   font-weight: 500;
 }
 
 .see-all-btn {
@@ -180,11 +187,13 @@
   color: #F7EBE1;
   border: none;
   font-family: playfair, serif;
-  font-size: 13px;
+  font-size: 20px;
   padding: 10px 24px;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.2s ease;
+  width: 160px;
+  height: 50px;
 }
 
 .see-all-btn:hover {
@@ -195,9 +204,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;    /* Keeps parent block centered */
-  padding: 100px 0;
+  align-items: center;    
   width: 100%;
+  max-width: 1440px; 
+  margin: 0 auto;    
+  padding: 100px 40px; 
+  box-sizing: border-box;
   font-family: playfair, serif;
 }
 
@@ -208,7 +220,7 @@
   justify-content: center;
   width: 100%;
   max-width: 750px; 
-  margin: 0 auto 60px auto; /* Centered layout box margins */
+  margin: 0 auto 60px auto; 
   box-sizing: border-box;
 }
 
@@ -238,109 +250,167 @@
 .anatomycontent {
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* UPDATED: Centers contents along main axis */
-  align-items: center;       /* UPDATED: Centers columns horizontally */
+  align-items: center;       
   width: 100%;
-  
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0 40px;           /* Balanced padding for safety boundaries */
+  padding: 0;           
 }
 
+/* --- UPDATED TO 50/50 HORIZONTAL SPLIT --- */
 .anatomy-upperpart {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;  /* Keeps inner rows locked to center line */
-  align-items: center;       /* UPDATED: Aligns headings vertically centered */
-  gap: 40px;                 /* Increased spacing clearance gap */
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 40px;                 
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+  align-items: center; 
 }
 
+/* --- EXPANDS TEXT CONTAINER TO FILL ITS HALF --- */
+.anatomy-upperpart > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: center;
+  width: 100%; 
+}
+
+/* --- RESPONSIVE & SLIGHTLY SMALLER HEADING --- */
 .anatomy-main-heading {
-  font-size: 100px;
+  font-size: clamp(55px, 7.5vw, 110px); 
   font-weight: 500; 
   font-family: kalnia, serif;
   letter-spacing: 1px;
   color: #1d1d1d;
   text-transform: uppercase;
-  line-height: 0.8; 
-  text-align: center;        /* UPDATED: Centers typography blocks */
+  line-height: 0.85; 
+  text-align: left; 
 }
 
+/* --- RESPONSIVE & SLIGHTLY LARGER PARAGRAPH --- */
 .poetic-text {
-  width: 422px;
-  -webkit-text-stroke: 1px #1d1d1d;
+  width: 100%; 
+  max-width: 580px; 
   font-family: Playfair, Georgia, serif;
-  font-size: 36px;
+  font-size: clamp(22px, 2.8vw, 44px); 
   font-weight: 300; 
-  line-height: 1.22; 
-  letter-spacing: 0%;
-  text-align: left;         /* Kept left for aesthetic paragraph formatting */
+  line-height: 1.35; 
+  text-align: left;         
   color: #83746c;
+  margin-top: clamp(20px, 3vw, 40px); 
 }
-.behind-canvas-content {
-  display: flex;
-  flex-direction: row;
-  
-  /* FIXED: Changed from space-between to center to pull elements close */
-  justify-content: center;   
-  align-items: center;       
-  font-family: spectral;
-  padding: 40px 0;              
+
+/* --- UPPER IMAGE STYLING (YELLOW.SVG) --- */
+.anatomy-upperpart > img {
   width: 100%;
-  
-  /* NEW ACTIONABLE GAP ELEMENT: Adjust this pixel value to change the spacing */
-  gap: 100px;                 /* Sets an explicit, tight space between text and image */
-  
-  margin: 0 auto;               
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- UPDATED: CORRECT MATCH FOR THE NEW HORSE JSX LOCATION --- */
+.anatomy > img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  margin-top: 20px; 
+}
+
+/* --- CLEAN TABLET/MOBILE RESPONSIVE HANDLERS --- */
+@media (max-width: 768px) {
+  .anatomy-upperpart {
+    grid-template-columns: 1fr; 
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+/* --- THE MASTER FOOTER SECTION WRAPPER --- */
+.behind-canvas-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;    
+  width: 100%;
+  max-width: 1440px; /* Aligns with home and anatomy master boundaries */
+  margin: 0 auto;    
+  padding: 100px 40px; /* Matches identical outer boundaries */
   box-sizing: border-box;
 }
 
-.behind-canvas-content span {
-  /* REMOVED flex: 1 to prevent text box from expanding endlessly */
+/* --- THE RE-ALIGNED ASYMMETRIC GRID CONTAINER --- */
+.behind-canvas-content {
+  display: grid;
+  grid-template-columns: 1fr auto; 
+  gap: 80px;                 
   width: 100%;
-  max-width: 700px;             
-  text-align: left;          
+  
+  /* UPDATED: Aligns the top of the text perfectly with the top of the image */
+  align-items: flex-start;       
+  
+  box-sizing: border-box;
+  padding: 0;           
 }
 
+
+
+/* --- TEXT BLOCK SIDE WRAPPER --- */
+.behind-canvas-content span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+/* --- HEADER TITLE TYPOGRAPHY --- */
 .behind-canvas-content div {
-  font-size: 50px;          
+  font-size: clamp(35px, 5vw, 50px); /* Responsive title scaling */         
   font-weight: 500;
   color: #1a1a1a;
   margin-bottom: 24px;  
-  font-family: kalnia, playfair;    
+  font-family: kalnia, playfair, serif;    
+  text-align: left;
 }
 
+/* --- SPECTRAL PARAGRAPH TYPOGRAPHY --- */
 .behind-canvas-content p {
-  font-size: 25px;          
+  font-family: "Spectral", serif; /* Clean fallback to standard serif engines */
+  font-size: clamp(18px, 2.2vw, 25px); /* Responsive paragraph scaling */         
   line-height: 1.5;         
   color: #333333;
-  font-family: spectral, kalnia, playfair;
+  text-align: left;
+  margin: 0;
 }
 
+/* --- FOOTER BANNER PORTRAIT IMAGE --- */
 .behind-canvas-content img {
-  width: 300px;             
+  width: 320px; /* Limits the width exactly like the screenshot layout */            
   height: auto;             
   object-fit: cover;
-  flex-shrink: 0;               
+  display: block;
+  justify-self: end; /* Keeps it perfectly locked to the right layout margin */
 }
 
-
-/* Tablet screen response overrides layout breaks */
+/* --- CLEAN TABLET/MOBILE RESPONSIVE OVERRIDES --- */
 @media (max-width: 900px) {
-  .behind-canvas-content {
-    flex-direction: column;    /* Flattens into a neat vertical row stream flow on tablets */
-    gap: 40px;
-    text-align: center;
-    padding: 40px 20px;
+  .behind-canvas-section {
+    padding: 60px 20px;
   }
   
-  .behind-canvas-content span {
-    text-align: center;
+  .behind-canvas-content {
+    grid-template-columns: 1fr; /* Stacks image below text on smaller screens */
+    gap: 40px;
+  }
+  
+  .behind-canvas-content img {
+    width: 280px;
+    justify-self: center; /* Centers the portrait on mobile viewports */
   }
 }
-
 
 /* --- THE GALLERY SECTION BLOCK BREAKERS --- */
 .gallerytitle {
@@ -385,12 +455,12 @@
   width: 100%;
 }
 
-/* Flex layout keeps cards aligned to the baseline of uneven image heights */
+/* Flex layout keeps cards aligned to the top baseline of uneven image heights */
 .gallery-grid {
   display: flex;
   flex-direction: row;
   justify-content: center;  /* Centers horizontal display cards track */
-  align-items: center;
+  align-items: flex-start;  /* FIXED: Changed from center to flex-start to align elements to the top */
   gap: 30px;
   width: 100%;
  
@@ -399,9 +469,22 @@
   box-sizing: border-box;
 }
 
+/* --- HOVER STATES FOR THE GALLERY PAINTINGS --- */
+.gallery-grid img {
+  cursor: pointer;
+  /* Smooth animation transition curve matching your main images */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05); /* Smoothly makes the painting 5% larger on hover */
+  /* Deepens shadow to create a lifting physical depth effect */
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3), 0 14px 28px 0 rgba(0, 0, 0, 0.25);
+}
+
 /* --- SEE MORE BUTTON STYLING --- */
 .gallery-see-more-btn {
-  display: flex;             /* UPDATED: Flex configuration helper centers inner texts accurately */
+  display: flex;             /* Flex configuration helper centers inner texts accurately */
   justify-content: center;
   align-items: center;
   margin: 50px auto 0 auto;

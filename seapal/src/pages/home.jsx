@@ -72,8 +72,9 @@ export default function Home() {
             </div>
             <img src="/seapal/yellow.svg" alt="yellow sweep stroke asset"  />
           </section>
-          <img src="/seapal/Horse.svg" alt="horse illustration"  />
+          
         </div>
+        <img src="/seapal/Horse.svg" alt="horse illustration"  />
       </div>
 
       {/* 4. BEHIND THE CANVAS FOOTER CARDS BANNER */}
