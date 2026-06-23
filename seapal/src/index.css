@@ -1,14 +1,5 @@
 /* index.css / App.css */
 
-/* 1. Ensure the layout container stretches with content */
-.layout {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  padding-left: 20px;
-  box-sizing: border-box;
-}
-
 /* 2. Style the line to repeat seamlessly over the entire page height */
 .side-rec-line {
   position: absolute;

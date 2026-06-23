@@ -604,7 +604,7 @@
   justify-content: center;  /* Centers horizontal display cards track */
   align-items: flex-start;  /* FIXED: Changed from center to flex-start to align elements to the top */
   gap: 30px;
-  width: 100%;
+  width:90%;
  
   margin: 0 auto;
   padding: 0 40px;           /* Added balanced side padding boundaries */
