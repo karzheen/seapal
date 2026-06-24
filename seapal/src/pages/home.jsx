@@ -39,10 +39,10 @@ export default function Home() {
         </section>
 
         <section className="pic3">{picsarr[2]}</section>
-        <section className="pic5">{picsarr[4]}</section>
-        <section className="pic4">{picsarr[3]}</section>
-        <section className="pic7">{picsarr[6]}</section>
+        <section className="pic4">{picsarr[4]}</section>
+        <section className="pic5">{picsarr[3]}</section>
         <section className="pic6">{picsarr[5]}</section>
+        <section className="pic7">{picsarr[6]}</section>
         
         {/* THE FREUD POETRY BANNER LAYER */}
         <section className="qoute">

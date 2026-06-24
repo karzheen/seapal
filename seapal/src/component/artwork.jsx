@@ -19,8 +19,9 @@ export default function Artwork(props) {
       />
       <div className="artwork-info">
         <h3>${props.price}</h3>
-        <h4>{props.alt}</h4>
-        <p>{props.subject} — {props.size}</p>
+        <div className = "artwork-description"><h4>{props.alt}</h4>
+        <p>{props.size} <span className = "artwork-size-unit">cm</span> </p></div>
+        
       </div>
     </div>
   );

@@ -7,9 +7,8 @@ export default function Picture(props) {
       src={props.src}
       alt={props.alt}
       style={{
-        padding:"8px" ,
-        height: props.height,
-        width: props.width,
+         
+       
       }}
     />
   );

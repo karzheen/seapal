@@ -1,5 +1,5 @@
 /* index.css / App.css */
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Spectral:wght@400;600&display=swap');
 /* 2. Style the line to repeat seamlessly over the entire page height */
 .side-rec-line {
   position: absolute;

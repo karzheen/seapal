@@ -44,15 +44,20 @@
   height: 44px;
   padding: 0 24px;
   box-sizing: border-box;
-  background-color: #d4ccbf;
+  background-color: #E3DDD5;
   color: #373737;
-  border: 1px solid #717171;
-  font-family: spectral, playfair, serif;
-  font-size: 13px;
+  border: 1px solid #C6BFB5;
+  font-family: "Spectral", serif;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
+  letter-spacing: -4%;
+}
+.filterbutton:hover {
+  background-color: #D4CCBF;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .filterbutton img {
@@ -72,6 +77,11 @@
   border: 1px solid #c4beb6;
   padding: 0 16px;
   box-sizing: border-box;
+}
+
+.search-bar-mock:focus-within {
+  border: 1.7px solid #414141;
+  transition: border 0.14s ease-in-out;
 }
 
 .search-icon {
@@ -138,7 +148,7 @@
 
 /* --- TARGET ENCAPSULATED CARDS INSIDE THE COLUMN TRACKS --- */
 .artwork-grid .artwork-card {
-  display: inline-block; /* Forces items to stack inside columns nicely */
+   /* Forces items to stack inside columns nicely */
   width: 100% !important; /* Forces cards to expand to the full track size */
   margin-bottom: 50px; /* Clean vertical spacing between elements */
   break-inside: avoid; /* Prevents card modules from splitting between columns */
@@ -210,8 +220,8 @@
   background-color: #d4ccbf; /* Muted background matching your filter button */
   border: 1px solid transparent;
   color: #373737;
-  font-family: spectral, playfair, serif;
-  font-size: 13px;
+  font-family: "Spectral", serif;
+  font-size: 16px;
   white-space: nowrap; /* Prevents text from breaking lines inside chip box nodes */
   flex-shrink: 0;
 }

@@ -1,15 +1,82 @@
-body {
-  font-family: playfair;
-}
+
+
+
 .artwork-card {
-  display: inline-block; /* Forces items to stack inside columns nicely */
-  width: 100% !important; /* Forces cards to expand to the full track size */
+  display: flex; /* Forces items to stack inside columns nicely */
+  width: 100% ; /* Forces cards to expand to the full track size */
   margin-bottom: 50px; /* Clean vertical spacing between elements */
-  break-inside: avoid; /* Prevents card modules from splitting between columns */
+   /* Prevents card modules from splitting between columns */
   box-sizing: border-box;
+   
+  gap: 10px !important; /* Adds a small gap between the image and text */
+  flex-direction: column;
+  
 }
 .artwork-card img {
   width: 100% !important;
   height: auto !important;
   display: block;
+ 
+}
+.artwork-card img:hover {
+  filter: brightness(0.8);
+  transition: filter 0.2s ease-in-out; /* Adds a smooth transition effect */
+
+}
+
+.artwork-info 
+{
+  
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.artwork-info *
+{
+  margin: 0;
+   
+  
+}
+.artwork-info h3 {
+  font-size: 16px;
+  font-family: 'Inter';
+  font-weight: 500;
+  line-height: 22px;
+}
+.artwork-info h3:hover {
+  cursor: text;
+}
+
+
+.artwork-info .artwork-description h4:hover{
+ text-decoration: underline;
+  cursor: pointer;
+  transition: text-decoration 0.4s ease-in-out; /* Adds a smooth transition effect */
+}
+
+
+.artwork-info .artwork-description h4 {
+  font-size: 18px;
+  font-family: 'Spectral';
+  font-weight: 500;
+  line-height: 22px;
+}
+.artwork-info .artwork-description p {
+  font-size: 13px;
+  font-family: 'Inter';
+  font-weight: 400;
+  line-height: 20px;
+  color:#898583;
+}
+
+.artwork-info .artwork-size-unit {
+  font-size: 16px;
+  font-family: 'Spectral';
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.artwork-info .artwork-description p:hover {
+ cursor:text;
 }

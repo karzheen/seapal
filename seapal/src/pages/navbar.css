@@ -28,6 +28,9 @@
   display: flex;
   align-items: center;
   gap: 36px; /* Increased the gap slightly so bold items don't feel crowded */
+  font-family: 'Spectral', serif;
+  font-size: 16px; /* Increased font size for better readability */
+  font-weight: 300; /* Added a clean bold structural weight */
 }
 
 .social-wrapper {
@@ -40,8 +43,8 @@
   text-decoration: none;
   color: #686868;
   transition: color 0.2s ease;
-  font-size: 18px; /* Increased font size from 15px to 18px */
-  font-weight: 600; /* Added clean bold structural weight */
+  font-size: 16px; /* Increased font size from 15px to 18px */
+  font-weight: 500; /* Added clean bold structural weight */
 }
 
 .Link:hover {

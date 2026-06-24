@@ -1,10 +1,12 @@
 .picture {
-  border: 8px solid black;
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
   /* Smoothly animate changes over 0.3 seconds */
   transition: transform 0.3s ease, box-shadow 0.3s ease; 
   cursor: pointer;
+  
+ width: 100%;
 }
 
 /* Hover state rules */
@@ -18,7 +20,7 @@
 @media (max-width: 768px) {
   .picture {
     /* On mobile, we want to ensure the image fits well */
-    width: 100% !important; /* Override any inline width for mobile */
-    height: auto !important; /* Maintain aspect ratio */
+   /* Override any inline width for mobile */
+    height: auto  /* Maintain aspect ratio */
   }
 }
