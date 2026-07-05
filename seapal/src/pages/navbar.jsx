@@ -12,6 +12,7 @@ export default function Navbar() {
   
   return (
     <nav className="navbar">
+      <div className="nav-background">
       <section className="logo">
         <img src="/seapal/logo.svg" alt="logo" />
         <img src="/seapal/name.svg" alt="brand name" />
@@ -26,15 +27,17 @@ export default function Navbar() {
 
       {/* Conditional mobile class applied via template literal */}
       <div className={`links ${isOpen ? "active" : ""}`}>
-        <NavLink to="/" className="Link" onClick={() => setIsOpen(false)}>
-          Home
-        </NavLink>
-        <NavLink to="/gallery" className="Link" onClick={() => setIsOpen(false)}>
-          Gallery
-        </NavLink>
-        <NavLink to="/about" className="Link" onClick={() => setIsOpen(false)}>
-          About
-        </NavLink>
+        <div className="nav-links-group">
+          <NavLink to="/" className="Link" onClick={() => setIsOpen(false)}>
+            Home
+          </NavLink>
+          <NavLink to="/gallery" className="Link" onClick={() => setIsOpen(false)}>
+            Gallery
+          </NavLink>
+          <NavLink to="/about" className="Link" onClick={() => setIsOpen(false)}>
+            About
+          </NavLink>
+        </div>
         
         <div className="social-wrapper">
           <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon-link">
@@ -44,6 +47,7 @@ export default function Navbar() {
             <img src="/seapal/facebook.svg" alt="facebook icon" />
           </a>
         </div>
+      </div>
       </div>
     </nav>
   );

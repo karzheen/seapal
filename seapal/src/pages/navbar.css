@@ -1,16 +1,30 @@
 .navbar {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #ebe7e1;
+  background-color: #F2EDE9;
   margin: 0px;
   font-family: playfair;
   flex-wrap: wrap;
-  padding: 24px 40px; /* Slight padding increase to balance out larger fonts */
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 0;
+  border-bottom: 1px solid #e3dcd0;
 }
 
+
+.nav-background
+{
+  position: relative;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+   
+}
 .logo {
   width: 30%;
   display: flex;
@@ -27,23 +41,29 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 36px; /* Increased the gap slightly so bold items don't feel crowded */
+  gap: 46px; /* Increased the gap slightly so bold items don't feel crowded */
   font-family: 'Spectral', serif;
   font-size: 16px; /* Increased font size for better readability */
   font-weight: 300; /* Added a clean bold structural weight */
 }
 
-.social-wrapper {
+.nav-links-group {
   display: flex;
   align-items: center;
   gap: 36px;
 }
 
+.social-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .Link {
   text-decoration: none;
-  color: #686868;
+  color: #878787;
   transition: color 0.2s ease;
-  font-size: 16px; /* Increased font size from 15px to 18px */
+  font-size: 18px; /* Increased font size from 15px to 18px */
   font-weight: 500; /* Added clean bold structural weight */
 }
 
@@ -117,7 +137,7 @@
 }
 
 /* Mobile View Constraints (Hamburger menu transforms here) */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .navbar {
     padding: 16px 20px;
   }
@@ -149,14 +169,17 @@
   .links {
     display: none; /* Hide container by default */
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    background-color: #ebe7e1;
+    background-color: #F2EDE9;
     position: absolute;
     top: 100%;
     left: 0;
     padding: 20px 0;
     gap: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    height: 100vh;
   }
 
   /* Reveal menu panel instantly when toggled */
@@ -164,8 +187,23 @@
     display: flex;
   }
 
+  .nav-links-group {
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .social-wrapper {
     margin-top: 10px;
     gap: 20px;
+  }
+  .Link {
+    font-size: 60px; /* Slightly larger for touch targets */
+  }
+  .social-icon-link > img{
+    height: 48px; /* Slightly larger for touch targets */
+  }
+
+  .social-wrapper{
+    gap: 48px;
   }
 }

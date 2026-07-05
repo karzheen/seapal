@@ -1,9 +1,11 @@
 /* Overall Page Padding Container wrapper */
+
+
 .gallery-page-wrapper {
   width: 90%;
   margin: 0 auto;
   padding: 60px 40px;
-  background-color: #ebe7e1;
+  background-color: #F2EDE9;
   font-family: playfair, serif;
 }
 
@@ -11,20 +13,27 @@
 .gallery-main-title {
   font-size: 32px;
   font-weight: normal;
-  margin: 0 0 16px 0;
-  color: #373737;
+  margin: 0 0 8px 0;
+  color: #1d1d1d;
+    font-family: 'Spectral', serif;
+    letter-spacing: -3%;
 }
 
 .gallery-description {
-  font-size: 16px;
-  margin: 0 0 4px 0;
-  color: #373737;
+  font-size: 24px;
+  margin: 0 0 0 0;
+  color: #3d3d3d;
+  font-family: 'Spectral', serif;
+  letter-spacing: -3%;
 }
 
 .gallery-sub-detail {
-  font-size: 14px;
+  font-size: 20px;
   color: #717171;
   margin: 0 0 40px 0;
+  font-weight: 200;
+    font-family: 'Spectral', serif;
+    letter-spacing: -3%;
 }
 
 /* --- HORIZONTAL TOOLBAR RIBBON (ON TOP OF THE GRID DISPLAY) --- */
@@ -48,7 +57,7 @@
   color: #373737;
   border: 1px solid #C6BFB5;
   font-family: "Spectral", serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -102,7 +111,7 @@
   background: transparent;
   outline: none;
   font-family: spectral, playfair, serif;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.5px;
   width: 100%;
   color: #373737;
@@ -199,7 +208,7 @@
   border: none;
   outline: none;
   font-family: spectral, playfair, serif;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: underline;
@@ -207,6 +216,7 @@
   cursor: pointer;
   padding: 0;
   margin-right: 8px;
+  margin-left: 80px;
   flex-shrink: 0;
 }
 

@@ -101,7 +101,7 @@ export default function Gallery() {
 
   return (
     <div className="gallery-page-wrapper">
-      <h1 className="gallery-main-title">Lorem ipsum</h1>
+      <h1 className="gallery-main-title">Explore the Gallery</h1>
       <p className="gallery-description">This site serves as a live inventory of my current collection and studio archive.</p>
       <p className="gallery-sub-detail">All paintings are oil on canvas</p>
 

@@ -29,14 +29,20 @@ export default function Home() {
         
         {/* THE SAND COLLECTION CONTENT MODULE CARD */}
         <section className="collectionsec">
-          <div className="the">THE</div>
-          <div className="year">SAND</div>
+          <div className="heading-row">
+            <div className="the">THE</div>
+            <div className="year">SAND</div>
+          </div>
           <div className="collection">COLLECTION</div>
           {/* Fixed: Bypasses window.location reload to preserve subfolder context */}
           <button className="see-all-btn" onClick={() => navigate('/gallery')}>
             See all
           </button>
         </section>
+
+        <button className="see-all-btn-mobile" onClick={() => navigate('/gallery')}>
+          See all
+        </button>
 
         <section className="pic3">{picsarr[2]}</section>
         <section className="pic4">{picsarr[4]}</section>
@@ -46,10 +52,15 @@ export default function Home() {
         
         {/* THE FREUD POETRY BANNER LAYER */}
         <section className="qoute">
-          <p className="qoutesub">
-            "The longer you look at an object, the more abstract it becomes, and, ironically, the more real."
-          </p>
-          <p className="name">— Lucian Freud</p> 
+          <div className="qoute-content">
+            <div className="qoute-text">
+              <p className="qoutesub">
+                "The longer you look at an object, the more abstract it becomes, and, ironically, the more real."
+              </p>
+              <p className="name">— Lucian Freud</p>
+            </div>
+            <img className="quote-flower-mobile" src="/seapal/flower.svg" alt="" />
+          </div>
         </section>
       </div>
 

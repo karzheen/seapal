@@ -18,3 +18,11 @@
   z-index: 9999;
   pointer-events: none;     /* Keeps links behind it clickable */
 }
+
+
+@media (max-width: 444px) {
+ .side-rec-line {
+    width: 8px;            /* Adjusts the width for smaller screens */
+    background-size: 8px auto; /* Adjusts the size of the SVG for smaller screens */
+  }
+}
