@@ -1,12 +1,13 @@
 import "./App.css";
 import Navbar from "./pages/navbar";
-import { Routes, Route, useLocation } from "react-router-dom"; 
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import Gallery from "./pages/gallery";
 import About from "./pages/about";
 import DetailCard from "./component/detailCard";
 import Footer from "./component/footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; 
+import Loader from "./component/Loader";      
 
 function Layout({ children }) {
   const location = useLocation();
@@ -14,28 +15,17 @@ function Layout({ children }) {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
-  
-  // FIXED: Explicitly excludes subfolder routes to guarantee the side line disables on sub-pages
-  const isHomePage = 
-    (location.pathname === "/" || 
-     location.pathname === "/seapal" || 
-     location.pathname === "/seapal/") &&
-    !location.pathname.includes("/detail") &&
-    !location.pathname.includes("/gallery");
+
+  const isHomePage = (location.pathname === "/" || location.pathname === "/seapal" || location.pathname === "/seapal/") && !location.pathname.includes("/detail") && !location.pathname.includes("/gallery");
 
   return (
-    /* Adds a custom class to the main layout wrapper only on Home, allowing your App.css to toggle the background tile cleanly */
     <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}>
-      {/* Conditionally displays the side recording container ONLY on the active home route */}
       {isHomePage && (
         <div className="side-rec-line"></div>
       )}
-
       <Navbar />
-
       {children}
-
-      <footer id="site-footer"> 
+      <footer id="site-footer">
         <Footer />
       </footer>
     </div>
@@ -43,13 +33,26 @@ function Layout({ children }) {
 }
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer); 
+  }, []);
+
   return (
     <Layout>
+      {/* Renders the top loading line over everything else if isLoading is true */}
+      {isLoading && <Loader />}
+      
+      {/* The website routes remain visible and render immediately */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/seapal" element={<Home />} />
         <Route path="/about" element={<About />} />
-        
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/detail/:id" element={<DetailCard />} />
       </Routes>
