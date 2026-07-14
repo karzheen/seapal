@@ -8,6 +8,7 @@ import DetailCard from "./component/detailCard";
 import Footer from "./component/footer";
 import { useEffect, useState } from "react"; 
 import Loader from "./component/Loader";      
+import AudioPlayer from "./component/AudioPlayer"; // 1. Imported the invisible player here
 
 function Layout({ children }) {
   const location = useLocation();
@@ -47,6 +48,9 @@ export default function App() {
     <Layout>
       {/* Renders the top loading line over everything else if isLoading is true */}
       {isLoading && <Loader />}
+      
+      {/* 2. Placed here: Plays audio invisibly across all pages without layout shifts */}
+      <AudioPlayer />
       
       {/* The website routes remain visible and render immediately */}
       <Routes>
