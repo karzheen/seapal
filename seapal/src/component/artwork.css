@@ -1,82 +1,89 @@
+.artwork-card { 
+  display: flex; 
+  width: 100%; 
+  margin-bottom: 50px; 
+  box-sizing: border-box; 
+  gap: 10px !important; 
+  flex-direction: column; 
+} 
 
+/* Targets your artwork images */
+.artwork-card .artwork-img { 
+  width: 100% !important; 
+  height: auto !important; 
+  display: block; 
+  transition: filter 0.2s ease-in-out, background-position 0s;
+} 
 
-
-.artwork-card {
-  display: flex; /* Forces items to stack inside columns nicely */
-  width: 100% ; /* Forces cards to expand to the full track size */
-  margin-bottom: 50px; /* Clean vertical spacing between elements */
-   /* Prevents card modules from splitting between columns */
-  box-sizing: border-box;
-   
-  gap: 10px !important; /* Adds a small gap between the image and text */
-  flex-direction: column;
-  
-}
-.artwork-card img {
-  width: 100% !important;
-  height: auto !important;
-  display: block;
- 
-}
-.artwork-card img:hover {
-  filter: brightness(0.8);
-  transition: filter 0.2s ease-in-out; /* Adds a smooth transition effect */
-
-}
-
-.artwork-info 
-{
-  
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+/* SKELETON PLACEHOLDER STATE: Applied natively during image download */
+.artwork-card .artwork-img.skeleton-loading {
+  aspect-ratio: 4 / 3; /* Gives the image track physical shape before file properties load */
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: artwork-shimmer 1.5s infinite linear;
+  object-position: -9999px -9999px; /* Safely hides broken/half-loaded image icons */
 }
 
-.artwork-info *
-{
-  margin: 0;
-   
-  
-}
-.artwork-info h3 {
-  font-size: 16px;
-  font-family: 'Inter';
-  font-weight: 500;
-  line-height: 22px;
-}
-.artwork-info h3:hover {
-  cursor: text;
+/* Hover state rules */
+.artwork-card .artwork-img:not(.skeleton-loading):hover { 
+  filter: brightness(0.8); 
+} 
+
+/* Shimmer animation timeline loop */
+@keyframes artwork-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
+.artwork-info { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 2px; 
+} 
 
-.artwork-info .artwork-description h4:hover{
- text-decoration: underline;
-  cursor: pointer;
-  transition: text-decoration 0.4s ease-in-out; /* Adds a smooth transition effect */
-}
+.artwork-info * { 
+  margin: 0; 
+} 
 
+.artwork-info h3 { 
+  font-size: 16px; 
+  font-family: 'Inter'; 
+  font-weight: 500; 
+  line-height: 22px; 
+} 
 
-.artwork-info .artwork-description h4 {
-  font-size: 18px;
-  font-family: 'Spectral';
-  font-weight: 500;
-  line-height: 22px;
-}
-.artwork-info .artwork-description p {
-  font-size: 13px;
-  font-family: 'Inter';
-  font-weight: 400;
-  line-height: 20px;
-  color:#898583;
-}
+.artwork-info h3:hover { 
+  cursor: text; 
+} 
 
-.artwork-info .artwork-size-unit {
-  font-size: 16px;
-  font-family: 'Spectral';
-  font-weight: 400;
-  line-height: 20px;
-}
+.artwork-info .artwork-description h4:hover { 
+  text-decoration: underline; 
+  cursor: pointer; 
+  transition: text-decoration 0.4s ease-in-out; 
+} 
 
-.artwork-info .artwork-description p:hover {
- cursor:text;
+.artwork-info .artwork-description h4 { 
+  font-size: 18px; 
+  font-family: 'Spectral'; 
+  font-weight: 500; 
+  line-height: 22px; 
+} 
+
+.artwork-info .artwork-description p { 
+  font-size: 13px; 
+  font-family: 'Inter'; 
+  font-weight: 400; 
+  line-height: 20px; 
+  color: #898583; 
+} 
+
+.artwork-info .artwork-size-unit { 
+  font-size: 16px; 
+  font-family: 'Spectral'; 
+  font-weight: 400; 
+  line-height: 20px; 
+} 
+
+.artwork-info .artwork-description p:hover { 
+  cursor: text; 
 }
