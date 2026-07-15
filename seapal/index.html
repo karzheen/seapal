@@ -10,13 +10,12 @@
     <!-- Start Single Page Apps for GitHub Pages Routing Script -->
     <script type="text/javascript">
       (function(l) {
-        // Corrected index match: Checks for the "?//" pattern that l.search generates
-        if (l.search.slice(0, 3) === '?//') {
+        if (l.search.slice(0, 3) === '?p=') {
           var decoded = l.search.slice(3).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&') 
           }).join('?');
           window.history.replaceState(null, null,
-              l.pathname + decoded + l.hash
+              l.pathname.slice(0, -1) + decoded + l.hash
           );
         }
       }(window.location));
