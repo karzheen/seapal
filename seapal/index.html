@@ -14,8 +14,10 @@
           var decoded = l.search.slice(3).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&') 
           }).join('?');
+          
+          // FIX: Added + '/' + right here to keep the route separated from your folder name
           window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
+              l.pathname.slice(0, -1) + '/' + decoded + l.hash
           );
         }
       }(window.location));
