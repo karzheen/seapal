@@ -18,7 +18,7 @@ function Layout({ children }) {
   }, [location.pathname]); 
 
 
-  const isHomePage = location.pathname === "/"; 
+ const isHomePage = location.pathname === "/" || location.pathname === "";
 
   return ( 
     <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}> 
