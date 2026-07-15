@@ -15,10 +15,11 @@
             return s.replace(/~and~/g, '&') 
           }).join('?');
           
-          // FIX: Added + '/' + right here to keep the route separated from your folder name
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + '/' + decoded + l.hash
-          );
+          // Bulletproof URL builder: ensures "/seapal/" and the page route combine correctly
+          var base = l.pathname.endsWith('/') ? l.pathname : l.pathname + '/';
+          var route = decoded.startsWith('/') ? decoded.slice(1) : decoded;
+          
+          window.history.replaceState(null, null, base + route + l.hash);
         }
       }(window.location));
     </script>
