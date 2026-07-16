@@ -2,7 +2,7 @@ const pics = [
   {
     id: 1,
     src: "/seapal/scenary.png",
-    images: ["/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
+    images: ["/seapal/churchcil.png", "/seapal/churchill2.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
     alt: "Blue Green Rhapsody",
     padding: "18.03px",
     
@@ -49,7 +49,7 @@ const pics = [
   {
     id: 3,
     src: "/seapal/churchcil.png",
-    images: ["/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
+    images: ["/seapal/churchcil.png","/seapal/churchill2.png" ,"/seapal/churchill2.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
     alt: "church",
     padding: "18.03px",
     subject: "Abstract",

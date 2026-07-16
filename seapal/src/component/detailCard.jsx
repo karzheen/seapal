@@ -12,6 +12,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
   const artwork = propsArtwork || pics.find((pic) => String(pic.id) === String(id));
 
   const [activeImage, setActiveImage] = useState(artwork?.src || "");
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   // --- INTERACTIVE ACCORDION STATE DRIVER ---
   const [accordionOpen, setAccordionOpen] = useState({
@@ -24,6 +25,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
   useEffect(() => {
     if (artwork) {
       setActiveImage(artwork.src);
+      setActiveImageIndex(0);
     }
   }, [artwork]);
 
@@ -41,15 +43,15 @@ export default function DetailCard({ artwork: propsArtwork }) {
     : [artwork.src];
 
   const handlePrevImage = () => {
-    const currentIndex = artworkImages.indexOf(activeImage);
-    const prevIndex = currentIndex <= 0 ? artworkImages.length - 1 : currentIndex - 1;
+    const prevIndex = activeImageIndex <= 0 ? artworkImages.length - 1 : activeImageIndex - 1;
     setActiveImage(artworkImages[prevIndex]);
+    setActiveImageIndex(prevIndex);
   };
 
   const handleNextImage = () => {
-    const currentIndex = artworkImages.indexOf(activeImage);
-    const nextIndex = currentIndex >= artworkImages.length - 1 ? 0 : currentIndex + 1;
+    const nextIndex = activeImageIndex >= artworkImages.length - 1 ? 0 : activeImageIndex + 1;
     setActiveImage(artworkImages[nextIndex]);
+    setActiveImageIndex(nextIndex);
   };
 
   // Toggle utility captures the native html summary action triggers
@@ -90,8 +92,11 @@ export default function DetailCard({ artwork: propsArtwork }) {
             {artworkImages.map((imgUrl, index) => (
               <div 
                 key={index} 
-                className={`thumb-item ${activeImage === imgUrl ? "active" : ""}`}
-                onClick={() => setActiveImage(imgUrl)}
+                className={`thumb-item ${activeImageIndex === index ? "active" : ""}`}
+                onClick={() => {
+                  setActiveImage(imgUrl);
+                  setActiveImageIndex(index);
+                }}
               >
                 <img src={imgUrl} alt={`${artwork.alt} view ${index + 1}`} />
               </div>

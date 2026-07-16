@@ -3,10 +3,13 @@
 
 .gallery-page-wrapper {
   width: 90%;
-  margin: 0 auto;
-  padding: 60px 40px;
+   
+  padding: 60px 0px;
   background-color: #F2EDE9;
   font-family: playfair, serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Typography styles matching screenshot design values */
@@ -148,12 +151,72 @@
   column-count: 4;
 }
 
-/* --- THE ROW-FREE MASONRY MATRIX CONTAINER --- */
+@media (max-width: 1254px) {
+  .gallery-split-layout.filters-shown {
+    grid-template-columns: 200px 1fr;
+  }
+  .gallery-split-layout.filters-shown .artwork-grid {
+    column-count: 2;
+  }
+  .gallery-split-layout.filters-hidden {
+    grid-template-columns: 1fr;
+  }
+  .gallery-split-layout.filters-hidden .artwork-grid {
+    column-count: 3;
+  }
+}
 .artwork-grid {
   display: block !important; /* Removes grid/flex layout rows completely */
   column-gap: 30px; /* Horizontal space between tracks */
   width: 100%;
 }
+.gallery-toolbar-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+@media (max-width: 950px) {
+  .gallery-split-layout.filters-shown {
+    grid-template-columns: 200px 1fr;
+  }
+  .gallery-split-layout.filters-shown .artwork-grid {
+    column-count: 2;
+  }
+  .gallery-split-layout.filters-hidden {
+    grid-template-columns: 1fr;
+  }
+  .gallery-split-layout.filters-hidden .artwork-grid {
+    column-count: 2;
+  }
+  .artwork-grid
+  {
+    column-gap: 16px; /* Adjusts horizontal spacing for smaller screens */
+  }
+  .gallery-toolbar-ribbon {
+    flex-direction: column;
+    gap: 6px; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+  }
+  .gallery-page-wrapper
+  {
+    padding: 20px 0px; 
+  }
+  .gallery-description {
+    font-size: 20px; 
+  }
+  .gallery-sub-detail {
+    font-size: 16px; 
+  }
+}
+
+
+/* --- THE ROW-FREE MASONRY MATRIX CONTAINER --- */
+
 
 /* --- TARGET ENCAPSULATED CARDS INSIDE THE COLUMN TRACKS --- */
 .artwork-grid .artwork-card {
@@ -178,14 +241,7 @@
   column-span: all; /* Spans full horizontal width if empty */
 }
 /* --- HORIZONTAL RIBBON INTERNAL FLEXBOX RESTRUCTURING --- */
-.gallery-toolbar-ribbon {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 30px;
-  gap: 20px;
-}
+
 
 /* Middle active chip track block */
 .active-chips-track-container {
