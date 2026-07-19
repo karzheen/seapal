@@ -20,6 +20,7 @@ body {
   box-sizing: border-box;
   padding-left: 0 !important; 
   justify-content: center;
+  align-items: center;
 }
 
 /* FIXED: The tiling pattern ONLY activates when the home page route wrapper is loaded */
