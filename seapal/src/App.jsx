@@ -8,7 +8,7 @@ import DetailCard from "./component/detailCard";
 import Footer from "./component/footer"; 
 import { useEffect, useState } from "react"; 
 import Loader from "./component/Loader"; 
-import AudioPlayer from "./component/AudioPlayer"; 
+
 
 function Layout({ children }) { 
   const location = useLocation(); 
@@ -35,17 +35,28 @@ function Layout({ children }) {
 export default function App() { 
   const [isLoading, setIsLoading] = useState(true); 
 
-  useEffect(() => { 
-    const timer = setTimeout(() => { 
-      setIsLoading(false); 
-    }, 2000); 
-    return () => clearTimeout(timer); 
+  useEffect(() => {
+    // Check if the page is already fully loaded
+    if (document.readyState === "complete") {
+      setIsLoading(false);
+    } else {
+      const handleLoad = () => setIsLoading(false);
+      
+      // Listen for the native window load event
+      window.addEventListener("load", handleLoad);
+      
+      // Clean up the event listener
+      return () => window.removeEventListener("load", handleLoad);
+    }
   }, []); 
+
+  // Hide the layout and content until loading is complete
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return ( 
     <Layout> 
-      {isLoading && <Loader />} 
-      <AudioPlayer /> 
       <Routes> 
         <Route path="/" element={<Home />} /> 
         <Route path="/about" element={<About />} /> 
@@ -54,4 +65,4 @@ export default function App() {
       </Routes> 
     </Layout> 
   ); 
-} 
+}
