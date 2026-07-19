@@ -6,26 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>seapal</title>
     <link href="https://googleapis.com" rel="stylesheet" />
+    
+    <!-- Inline styles to prevent layout/blank flashing before scripts run -->
+    <style>
+      #root {
+        display: none;
+      }
+      .pre-loading-screen {
+        position: fixed;
+        inset: 0;
+        background-color: #ffffff; /* Match your app background color */
+        z-index: 99999;
+      }
+    </style>
 
     <!-- Start Single Page Apps for GitHub Pages Routing Script -->
     <script type="text/javascript">
-      (function(l) {
-        if (l.search.slice(0, 3) === '?p=') {
-          var decoded = l.search.slice(3).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&') 
-          }).join('?');
-          
-          // Bulletproof URL builder: ensures "/seapal/" and the page route combine correctly
-          var base = l.pathname.endsWith('/') ? l.pathname : l.pathname + '/';
-          var route = decoded.startsWith('/') ? decoded.slice(1) : decoded;
-          
-          window.history.replaceState(null, null, base + route + l.hash);
-        }
+      (function(l) { 
+        if (l.search.slice(0, 3) === '?p=') { 
+          var decoded = l.search.slice(3).split('&').map(function(s) { return s.replace(/~and~/g, '&') }).join('?'); 
+          var base = l.pathname.endsWith('/') ? l.pathname : l.pathname + '/'; 
+          var route = decoded.startsWith('/') ? decoded.slice(1) : decoded; 
+          window.history.replaceState(null, null, base + route + l.hash); 
+        } 
       }(window.location));
     </script>
     <!-- End Single Page Apps for GitHub Pages Routing Script -->
   </head>
   <body>
+    <!-- Temporary background element matching the app surface -->
+    <div id="loading-screen-gate" class="pre-loading-screen"></div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

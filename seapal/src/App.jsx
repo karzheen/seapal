@@ -7,8 +7,6 @@ import About from "./pages/about";
 import DetailCard from "./component/detailCard"; 
 import Footer from "./component/footer"; 
 import { useEffect, useState } from "react"; 
-import Loader from "./component/Loader"; 
-
 
 function Layout({ children }) { 
   const location = useLocation(); 
@@ -17,8 +15,7 @@ function Layout({ children }) {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" }); 
   }, [location.pathname]); 
 
-
- const isHomePage = location.pathname === "/";
+  const isHomePage = location.pathname === "/";
 
   return ( 
     <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}> 
@@ -35,25 +32,30 @@ function Layout({ children }) {
 export default function App() { 
   const [isLoading, setIsLoading] = useState(true); 
 
-  useEffect(() => {
-    // Check if the page is already fully loaded
-    if (document.readyState === "complete") {
+  useEffect(() => { 
+    const handleReveal = () => {
+      // 1. Mark state ready to mount tree elements
       setIsLoading(false);
-    } else {
-      const handleLoad = () => setIsLoading(false);
       
-      // Listen for the native window load event
-      window.addEventListener("load", handleLoad);
+      // 2. Clear HTML blocking styles once lifecycle hooks settle
+      const root = document.getElementById("root");
+      const mask = document.getElementById("loading-screen-gate");
       
-      // Clean up the event listener
-      return () => window.removeEventListener("load", handleLoad);
-    }
+      if (root) root.style.display = "block";
+      if (mask) mask.remove();
+    };
+
+    if (document.readyState === "complete") { 
+      handleReveal(); 
+    } else { 
+      window.addEventListener("load", handleReveal); 
+      return () => window.removeEventListener("load", handleReveal); 
+    } 
   }, []); 
 
-  // Hide the layout and content until loading is complete
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) { 
+    return null; 
+  } 
 
   return ( 
     <Layout> 
