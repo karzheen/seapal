@@ -10,14 +10,14 @@
 /* Targets your artwork images */
 .artwork-card .artwork-img { 
   width: 100% !important; 
-  height: auto !important; 
+  aspect-ratio: 4 / 3; /* kept always, not just while loading, so there's no jump on load */
+  object-fit: cover;
   display: block; 
   transition: filter 0.2s ease-in-out, background-position 0s;
 } 
 
 /* SKELETON PLACEHOLDER STATE: Applied natively during image download */
 .artwork-card .artwork-img.skeleton-loading {
-  aspect-ratio: 4 / 3; /* Gives the image track physical shape before file properties load */
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: artwork-shimmer 1.5s infinite linear;

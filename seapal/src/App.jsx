@@ -7,6 +7,7 @@ import About from "./pages/about";
 import DetailCard from "./component/detailCard"; 
 import Footer from "./component/footer"; 
 import { useEffect, useState } from "react"; 
+import AdminDashboard from './pages/AdminDashboard';
 
 function Layout({ children }) { 
   const location = useLocation(); 
@@ -16,6 +17,12 @@ function Layout({ children }) {
   }, [location.pathname]); 
 
   const isHomePage = location.pathname === "/";
+  const isAdminPage = location.pathname.startsWith("/admin");
+
+  // Admin dashboard renders standalone — no site Navbar/Footer/wrapper.
+  if (isAdminPage) {
+    return <>{children}</>;
+  }
 
   return ( 
     <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}> 
@@ -34,15 +41,7 @@ export default function App() {
 
   useEffect(() => { 
     const handleReveal = () => {
-      // 1. Mark state ready to mount tree elements
       setIsLoading(false);
-      
-      // 2. Clear HTML blocking styles once lifecycle hooks settle
-      const root = document.getElementById("root");
-      const mask = document.getElementById("loading-screen-gate");
-      
-      if (root) root.style.display = "block";
-      if (mask) mask.remove();
     };
 
     if (document.readyState === "complete") { 
@@ -52,6 +51,18 @@ export default function App() {
       return () => window.removeEventListener("load", handleReveal); 
     } 
   }, []); 
+
+  // This runs AFTER React has actually committed the real page to the DOM
+  // (i.e. after isLoading flips to false and the route tree re-renders),
+  // not just after window "load" fires — so nothing is revealed until the
+  // real content is truly painted underneath.
+  useEffect(() => {
+    if (isLoading) return;
+    const root = document.getElementById("root");
+    const mask = document.getElementById("loading-screen-gate");
+    if (root) root.style.display = "block";
+    if (mask) mask.remove();
+  }, [isLoading]);
 
   if (isLoading) { 
     return null; 
@@ -64,6 +75,8 @@ export default function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/gallery" element={<Gallery />} /> 
         <Route path="/detail/:id" element={<DetailCard />} /> 
+        <Route path="/admin" element={<AdminDashboard />} />
+
       </Routes> 
     </Layout> 
   ); 
