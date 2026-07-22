@@ -6,27 +6,26 @@ import Gallery from "./pages/gallery";
 import About from "./pages/about"; 
 import DetailCard from "./component/detailCard"; 
 import Footer from "./component/footer"; 
-import { useEffect, useState } from "react"; 
-import AdminDashboard from './pages/AdminDashboard';
+import { useEffect, useState, useLayoutEffect } from "react"; 
+import AdminDashboard from './pages/AdminDashboard'; 
 
 function Layout({ children }) { 
   const location = useLocation(); 
-  
+
   useEffect(() => { 
     window.scrollTo({ top: 0, left: 0, behavior: "auto" }); 
   }, [location.pathname]); 
 
-  const isHomePage = location.pathname === "/";
-  const isAdminPage = location.pathname.startsWith("/admin");
+  const isHomePage = location.pathname === "/"; 
+  const isAdminPage = location.pathname.startsWith("/admin"); 
 
-  // Admin dashboard renders standalone — no site Navbar/Footer/wrapper.
-  if (isAdminPage) {
-    return <>{children}</>;
-  }
+  if (isAdminPage) { 
+    return <>{children}</>; 
+  } 
 
   return ( 
     <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}> 
-      {isHomePage && ( <div className="side-rec-line"></div> )} 
+      {isHomePage && <div className="side-rec-line"></div>} 
       <Navbar /> 
       {children} 
       <footer id="site-footer"> 
@@ -39,10 +38,11 @@ function Layout({ children }) {
 export default function App() { 
   const [isLoading, setIsLoading] = useState(true); 
 
+  // Step 1: Wait for all heavy static assets (window load event)
   useEffect(() => { 
-    const handleReveal = () => {
-      setIsLoading(false);
-    };
+    const handleReveal = () => { 
+      setIsLoading(false); 
+    }; 
 
     if (document.readyState === "complete") { 
       handleReveal(); 
@@ -52,22 +52,26 @@ export default function App() {
     } 
   }, []); 
 
-  // This runs AFTER React has actually committed the real page to the DOM
-  // (i.e. after isLoading flips to false and the route tree re-renders),
-  // not just after window "load" fires — so nothing is revealed until the
-  // real content is truly painted underneath.
-  useEffect(() => {
-    if (isLoading) return;
+  // Step 2: Unveil the DOM smoothly before the browser paints
+  useLayoutEffect(() => { 
+    if (isLoading) return; 
+
     const root = document.getElementById("root");
-    const mask = document.getElementById("loading-screen-gate");
-    if (root) root.style.display = "block";
-    if (mask) mask.remove();
-  }, [isLoading]);
+    const mask = document.getElementById("loading-screen-gate"); 
 
-  if (isLoading) { 
-    return null; 
-  } 
+    // Override the strict "display: none" from index.html
+    if (root) {
+      root.style.display = "block"; 
+    }
 
+    if (mask) {
+      mask.style.transition = "opacity 0.3s ease";
+      mask.style.opacity = "0"; 
+      setTimeout(() => mask.remove(), 300); // Clean up mask wrapper from DOM
+    } 
+  }, [isLoading]); 
+
+  // Keep the component rendering tree intact so React can build the initial DOM layout hidden from view
   return ( 
     <Layout> 
       <Routes> 
@@ -75,8 +79,7 @@ export default function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/gallery" element={<Gallery />} /> 
         <Route path="/detail/:id" element={<DetailCard />} /> 
-        <Route path="/admin" element={<AdminDashboard />} />
-
+        <Route path="/admin" element={<AdminDashboard />} /> 
       </Routes> 
     </Layout> 
   ); 
