@@ -38,40 +38,47 @@ function Layout({ children }) {
 export default function App() { 
   const [isLoading, setIsLoading] = useState(true); 
 
-  // Step 1: Wait for all heavy static assets (window load event)
   useEffect(() => { 
-    const handleReveal = () => { 
+    const checkEverythingLoaded = async () => {
+      // 1. Wait for images and standard DOM assets
+      if (document.readyState !== "complete") {
+        await new Promise((resolve) => window.addEventListener("load", resolve, { once: true }));
+      }
+      
+      // 2. Wait for Google Fonts / Custom Web Fonts to fully render
+      if (document.fonts) {
+        await document.fonts.ready;
+      }
+
       setIsLoading(false); 
     }; 
 
-    if (document.readyState === "complete") { 
-      handleReveal(); 
-    } else { 
-      window.addEventListener("load", handleReveal); 
-      return () => window.removeEventListener("load", handleReveal); 
-    } 
+    checkEverythingLoaded();
   }, []); 
 
-  // Step 2: Unveil the DOM smoothly before the browser paints
   useLayoutEffect(() => { 
     if (isLoading) return; 
 
     const root = document.getElementById("root");
     const mask = document.getElementById("loading-screen-gate"); 
 
-    // Override the strict "display: none" from index.html
     if (root) {
       root.style.display = "block"; 
     }
 
-    if (mask) {
-      mask.style.transition = "opacity 0.3s ease";
-      mask.style.opacity = "0"; 
-      setTimeout(() => mask.remove(), 300); // Clean up mask wrapper from DOM
-    } 
+    // 3. Double requestAnimationFrame guarantees the browser has executed 
+    // the layout and painted the hidden page before removing the mask.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (mask) {
+          mask.style.transition = "opacity 0.4s ease";
+          mask.style.opacity = "0"; 
+          setTimeout(() => mask.remove(), 400); 
+        } 
+      });
+    });
   }, [isLoading]); 
 
-  // Keep the component rendering tree intact so React can build the initial DOM layout hidden from view
   return ( 
     <Layout> 
       <Routes> 
