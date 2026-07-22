@@ -7,26 +7,26 @@ import About from "./pages/about";
 import DetailCard from "./component/detailCard"; 
 import Footer from "./component/footer"; 
 import { useEffect, useState } from "react"; 
-import AdminDashboard from './pages/AdminDashboard'; 
-import LoadingBar from './component/LoadingBar'; 
+import AdminDashboard from './pages/AdminDashboard';
 
 function Layout({ children }) { 
   const location = useLocation(); 
-
+  
   useEffect(() => { 
     window.scrollTo({ top: 0, left: 0, behavior: "auto" }); 
   }, [location.pathname]); 
 
-  const isHomePage = location.pathname === "/"; 
-  const isAdminPage = location.pathname.startsWith("/admin"); 
+  const isHomePage = location.pathname === "/";
+  const isAdminPage = location.pathname.startsWith("/admin");
 
-  if (isAdminPage) { 
-    return <>{children}</>; 
-  } 
+  // Admin dashboard renders standalone — no site Navbar/Footer/wrapper.
+  if (isAdminPage) {
+    return <>{children}</>;
+  }
 
   return ( 
     <div className={`layout ${isHomePage ? "home-layout-active" : "sub-page-layout-active"}`}> 
-      {isHomePage && <div className="side-rec-line"></div>} 
+      {isHomePage && ( <div className="side-rec-line"></div> )} 
       <Navbar /> 
       {children} 
       <footer id="site-footer"> 
@@ -38,12 +38,11 @@ function Layout({ children }) {
 
 export default function App() { 
   const [isLoading, setIsLoading] = useState(true); 
-  const [isAssetsLoaded, setIsAssetsLoaded] = useState(false);
 
   useEffect(() => { 
-    const handleReveal = () => { 
-      setIsAssetsLoaded(true); // Your assets are 100% loaded; let the progress bar hit 100
-    }; 
+    const handleReveal = () => {
+      setIsLoading(false);
+    };
 
     if (document.readyState === "complete") { 
       handleReveal(); 
@@ -53,42 +52,32 @@ export default function App() {
     } 
   }, []); 
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false); 
-    
-    // 1. Find the root element and override "display: none" from index.html
-    const root = document.getElementById("root"); 
-    if (root) { 
-      root.style.display = "block"; 
-    } 
+  // This runs AFTER React has actually committed the real page to the DOM
+  // (i.e. after isLoading flips to false and the route tree re-renders),
+  // not just after window "load" fires — so nothing is revealed until the
+  // real content is truly painted underneath.
+  useEffect(() => {
+    if (isLoading) return;
+    const root = document.getElementById("root");
+    const mask = document.getElementById("loading-screen-gate");
+    if (root) root.style.display = "block";
+    if (mask) mask.remove();
+  }, [isLoading]);
 
-    // 2. Remove the loading gate mask element completely from the DOM
-    const mask = document.getElementById("loading-screen-gate"); 
-    if (mask) { 
-      mask.remove(); 
-    }
-  };
+  if (isLoading) { 
+    return null; 
+  } 
 
   return ( 
-    <>
-      {/* 1. This displays your numerical count up smoothly until everything is safe */}
-      {isLoading && (
-        <LoadingBar 
-          isAssetsLoaded={isAssetsLoaded} 
-          onComplete={handleLoadingComplete} 
-        />
-      )}
+    <Layout> 
+      <Routes> 
+        <Route path="/" element={<Home />} /> 
+        <Route path="/about" element={<About />} /> 
+        <Route path="/gallery" element={<Gallery />} /> 
+        <Route path="/detail/:id" element={<DetailCard />} /> 
+        <Route path="/admin" element={<AdminDashboard />} />
 
-      {/* 2. Your native working layout tree continues loading 100% perfectly in the background */}
-      <Layout> 
-        <Routes> 
-          <Route path="/" element={<Home />} /> 
-          <Route path="/about" element={<About />} /> 
-          <Route path="/gallery" element={<Gallery />} /> 
-          <Route path="/detail/:id" element={<DetailCard />} /> 
-          <Route path="/admin" element={<AdminDashboard />} /> 
-        </Routes> 
-      </Layout> 
-    </>
+      </Routes> 
+    </Layout> 
   ); 
 }
