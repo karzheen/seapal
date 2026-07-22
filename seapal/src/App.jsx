@@ -68,26 +68,27 @@ export default function App() {
     }
   };
 
-  return ( 
+    return ( 
     <>
-      {/* 1. Show the numeric 0-100 loading bar while isLoading is true */}
-      {isLoading && (
+      {isLoading ? (
+        /* 1. ONLY show the loading bar at the start */
         <LoadingBar 
           isAssetsLoaded={isAssetsLoaded} 
           onComplete={handleLoadingComplete} 
         />
+      ) : (
+        /* 2. ONLY render your website after the bar finishes */
+        <Layout> 
+          <Routes> 
+            <Route path="/" element={<Home />} /> 
+            <Route path="/about" element={<About />} /> 
+            <Route path="/gallery" element={<Gallery />} /> 
+            <Route path="/detail/:id" element={<DetailCard />} /> 
+            <Route path="/admin" element={<AdminDashboard />} /> 
+          </Routes> 
+        </Layout>
       )}
-
-      {/* 2. Your actual website layout renders in the background */}
-      <Layout> 
-        <Routes> 
-          <Route path="/" element={<Home />} /> 
-          <Route path="/about" element={<About />} /> 
-          <Route path="/gallery" element={<Gallery />} /> 
-          <Route path="/detail/:id" element={<DetailCard />} /> 
-          <Route path="/admin" element={<AdminDashboard />} /> 
-        </Routes> 
-      </Layout> 
     </>
   ); 
+
 }
