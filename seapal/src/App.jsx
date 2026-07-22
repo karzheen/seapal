@@ -68,16 +68,19 @@ export default function App() {
     }
   };
 
-    return ( 
+  return ( 
     <>
-      {isLoading ? (
-        /* 1. ONLY show the loading bar at the start */
+      {/* 1. Show the numeric 0-100 loading bar overlay while loading */}
+      {isLoading && (
         <LoadingBar 
           isAssetsLoaded={isAssetsLoaded} 
           onComplete={handleLoadingComplete} 
         />
-      ) : (
-        /* 2. ONLY render your website after the bar finishes */
+      )}
+
+      {/* 2. Render layout instantly in the background so assets start downloading, 
+             but keep it completely hidden until the loading bar completes */}
+      <div style={{ display: isLoading ? 'none' : 'block' }}>
         <Layout> 
           <Routes> 
             <Route path="/" element={<Home />} /> 
@@ -87,8 +90,7 @@ export default function App() {
             <Route path="/admin" element={<AdminDashboard />} /> 
           </Routes> 
         </Layout>
-      )}
+      </div>
     </>
   ); 
-
 }
