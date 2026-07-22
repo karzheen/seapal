@@ -12,16 +12,16 @@ const LoadingBar = ({ isAssetsLoaded, onComplete }) => {
           return 100;
         }
 
-        // If assets are fully loaded by the browser, skip straight to 100%
+        // If your browser finished downloading your images, push it instantly to 100%
         if (isAssetsLoaded) {
           return 100;
         }
 
-        // Otherwise, smoothly fake progress between 1% and 3% increments
+        // Simulates realistic progressive loading
         const increment = Math.floor(Math.random() * 3) + 1;
-        return Math.min(oldProgress + increment, 99); // Hold at 99% until assets load
+        return Math.min(oldProgress + increment, 99); 
       });
-    }, 40); 
+    }, 30); 
 
     return () => clearInterval(timer);
   }, [isAssetsLoaded, onComplete]);
@@ -45,8 +45,8 @@ const styles = {
     left: 0,
     width: '100vw',
     height: '100vh',
-    backgroundColor: '#121212', 
-    zIndex: 99999, // Floating on top of your entire page layout
+    backgroundColor: '#f5f2eb', // Custom off-white background color matching your screenshot
+    zIndex: 999999, 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,22 +57,22 @@ const styles = {
     alignItems: 'center',
   },
   text: {
-    color: '#ffffff',
-    fontSize: '2rem',
+    color: '#1a1a1a',
+    fontSize: '2.5rem',
     marginBottom: '1rem',
     fontWeight: 'bold',
-    fontFamily: 'sans-serif',
+    fontFamily: 'serif', // Fits the clean aesthetic of your site layout
   },
   track: {
-    width: '300px',
-    height: '6px',
-    backgroundColor: '#333333',
-    borderRadius: '3px',
+    width: '250px',
+    height: '4px',
+    backgroundColor: '#e0dbd3',
+    borderRadius: '2px',
     overflow: 'hidden',
   },
   bar: {
     height: '100%',
-    backgroundColor: '#ffffff', // Clean white bar or choose your own primary brand color
+    backgroundColor: '#1a1a1a', 
     transition: 'width 0.1s ease-out',
   },
 };
