@@ -2,13 +2,14 @@ const pics = [
   {
     id: 1,
     src: "/seapal/scenary.png",
-    images: ["/seapal/churchcil.png", "/seapal/churchill2.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
+    images: ["/seapal/churchcil.png","/seapal/churchcil.png","/seapal/churchcil.png", "/seapal/churchill2.png", "/seapal/churchcil.png", "/seapal/churchcil.png", "/seapal/churchcil.png"],
     alt: "Blue Green Rhapsody",
     padding: "18.03px",
     
     subject: "Landscape",
     mediums: "Oil, Canvas",
-    size: "92 x 64",
+    width: 92,
+    height: 64,
     price: 450,
     date: "2026-05-15",
     // NEW ACCORDION FIELDS:
@@ -31,7 +32,8 @@ const pics = [
     padding: "18.03px",
     subject: "Animal",
     mediums: "Oil, Canvas",
-    size: "48 x 32",
+    width: 48,
+    height: 32,
     price: 650,
     date: "2026-06-01",
     // NEW ACCORDION FIELDS:
@@ -54,7 +56,8 @@ const pics = [
     padding: "18.03px",
     subject: "Abstract",
     mediums: "Oil, Canvas",
-    size: "45 x 60",
+    width: 45,
+    height: 60,
     price: 1200,
     date: "2026-04-20",
     // NEW ACCORDION FIELDS:
@@ -77,7 +80,8 @@ const pics = [
     padding: "18.03px",
     subject: "Landscape",
     mediums: "Oil, Canvas",
-    size: "150 x 110",
+    width: 150,
+    height: 110,
     price: 1600,
     date: "2026-06-10",
     // NEW ACCORDION FIELDS:
@@ -100,7 +104,8 @@ const pics = [
     padding: "18.03px",
     subject: "Nature",
     mediums: "Oil, Canvas",
-    size: "78 x 52",
+    width: 78,
+    height: 52,
     price: 350,
     date: "2026-03-11",
     // NEW ACCORDION FIELDS:
@@ -123,7 +128,8 @@ const pics = [
     padding: "18.03px",
     subject: "Landscape",
     mediums: "Oil, Canvas",
-    size: "96 x 68",
+    width: 96,
+    height: 68,
     price: 850,
     date: "2026-05-28",
     // NEW ACCORDION FIELDS:
@@ -146,7 +152,8 @@ const pics = [
     padding: "18.03px",
     subject: "Floral",
     mediums: "Oil, Canvas",
-    size: "112 x 84",
+    width: 112,
+    height: 84,
     price: 490,
     date: "2026-01-15",
     // NEW ACCORDION FIELDS:

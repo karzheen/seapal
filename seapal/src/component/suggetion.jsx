@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pics from "../data/picData";
 import "./suggestion.css";
+import { formatDimensions } from "../utils/artworkDimensions";
 
 export default function Suggestion({ currentArtwork }) {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ export default function Suggestion({ currentArtwork }) {
             <div className="rec-product-info">
               <p className="rec-product-price">${rec.price?.toLocaleString()}</p>
               <h4 className="rec-product-title">{rec.alt || "Untitled Artwork"}</h4>
-              <p className="rec-product-dims">{rec.width} × {rec.height} cm</p>
+              <p className="rec-product-dims">{formatDimensions(rec)}</p>
             </div>
           </div>
         ))}

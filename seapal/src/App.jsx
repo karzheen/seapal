@@ -1,6 +1,6 @@
 import "./App.css"; 
 import Navbar from "./pages/navbar"; 
-import { Routes, Route, useLocation } from "react-router-dom"; 
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./pages/home"; 
 import Gallery from "./pages/gallery"; 
 import About from "./pages/about"; 
@@ -8,7 +8,8 @@ import DetailCard from "./component/detailCard";
 import Footer from "./component/footer"; 
 import { useEffect, useState } from "react"; 
 import Loader from "./component/Loader"; 
-import AudioPlayer from "./component/AudioPlayer"; 
+
+ 
 
 function Layout({ children }) { 
   const location = useLocation(); 
@@ -45,12 +46,15 @@ export default function App() {
   return ( 
     <Layout> 
       {isLoading && <Loader />} 
-      <AudioPlayer /> 
+    
       <Routes> 
         <Route path="/" element={<Home />} /> 
         <Route path="/about" element={<About />} /> 
         <Route path="/gallery" element={<Gallery />} /> 
         <Route path="/detail/:id" element={<DetailCard />} /> 
+
+          <Route path="/seapal" element={<Home />} />
+          <Route path="/seapal/" element={<Home />} />
       </Routes> 
     </Layout> 
   ); 

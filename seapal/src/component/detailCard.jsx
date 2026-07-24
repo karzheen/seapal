@@ -1,33 +1,116 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect, useRef } from "react"; 
 import "./detailCard.css";
 import { useParams, useNavigate } from "react-router-dom";
 import pics from "../data/picData"; 
 import Suggestion from "./suggetion.jsx"; 
 import BuyCard from "./buyCard";
+import { formatDimensions } from "../utils/artworkDimensions";
 
 export default function DetailCard({ artwork: propsArtwork }) {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  
   const artwork = propsArtwork || pics.find((pic) => String(pic.id) === String(id));
+  const artworkImages = artwork.images && artwork.images.length > 0 
+    ? artwork.images 
+    : [artwork.src];
 
-  const [activeImage, setActiveImage] = useState(artwork?.src || "");
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [leavingIndex, setLeavingIndex] = useState(null);
+  const [slideDirection, setSlideDirection] = useState(1);
+  const animationTimeoutRef = useRef(null);
+  const [aboutExpanded, setAboutExpanded] = useState(false);
+ 
   // --- INTERACTIVE ACCORDION STATE DRIVER ---
   const [accordionOpen, setAccordionOpen] = useState({
-    about: true, // First accordion displays open by default
+    about: true, 
     details: false,
     shipping: false
   });
   const [showCheckout, setShowCheckout] = useState(false);
+  const thumbnailRefs = useRef([]);
+  const thumbnailStripRef = useRef(null);
+  const touchStartX = useRef(null);
+  const [showBottomFade, setShowBottomFade] = useState(false);
+  const [showTopFade, setShowTopFade] = useState(false);
+
   // Re-sync active view state instantly on route parameter updates
   useEffect(() => {
     if (artwork) {
-      setActiveImage(artwork.src);
       setActiveImageIndex(0);
+      setIsAnimating(false);
+      setLeavingIndex(null);
     }
   }, [artwork]);
+
+  useEffect(() => {
+    artworkImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [artworkImages]);
+
+  useEffect(() => {
+    return () => {
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const goToIndex = (newIndex, direction) => {
+    if (newIndex === activeImageIndex || isAnimating || artworkImages.length <= 1) return;
+
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+    }
+
+    setSlideDirection(direction);
+    setLeavingIndex(activeImageIndex);
+    setIsAnimating(true);
+    setActiveImageIndex(newIndex);
+
+    animationTimeoutRef.current = setTimeout(() => {
+      setIsAnimating(false);
+      setLeavingIndex(null);
+      animationTimeoutRef.current = null;
+    }, 480);
+  };
+
+  useEffect(() => {
+    thumbnailRefs.current[activeImageIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+  }, [activeImageIndex]);
+
+  useEffect(() => {
+    const strip = thumbnailStripRef.current;
+    if (!strip) return;
+
+    const checkFade = () => {
+      const hasScrollableThumbnails =
+        artworkImages.length > 6 && strip.scrollHeight > strip.clientHeight + 1;
+
+      if (!hasScrollableThumbnails) {
+        setShowTopFade(false);
+        setShowBottomFade(false);
+        return;
+      }
+
+      const atTop = strip.scrollTop <= 1;
+      const atBottom = strip.scrollTop + strip.clientHeight >= strip.scrollHeight - 1;
+      setShowTopFade(!atTop);
+      setShowBottomFade(!atBottom);
+    };
+
+    setTimeout(checkFade, 0);
+    strip.addEventListener("scroll", checkFade);
+    return () => {
+      strip.removeEventListener("scroll", checkFade);
+    };
+  }, [artworkImages.length]);
 
   if (!artwork) {
     return (
@@ -38,23 +121,34 @@ export default function DetailCard({ artwork: propsArtwork }) {
     );
   }
 
-  const artworkImages = artwork.images && artwork.images.length > 0 
-    ? artwork.images 
-    : [artwork.src];
-
   const handlePrevImage = () => {
     const prevIndex = activeImageIndex <= 0 ? artworkImages.length - 1 : activeImageIndex - 1;
-    setActiveImage(artworkImages[prevIndex]);
-    setActiveImageIndex(prevIndex);
+    goToIndex(prevIndex, -1);
   };
 
   const handleNextImage = () => {
     const nextIndex = activeImageIndex >= artworkImages.length - 1 ? 0 : activeImageIndex + 1;
-    setActiveImage(artworkImages[nextIndex]);
-    setActiveImageIndex(nextIndex);
+    goToIndex(nextIndex, 1);
   };
 
-  // Toggle utility captures the native html summary action triggers
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const difference = touchStartX.current - touchEndX;
+
+    if (difference > 50) {
+      handleNextImage();
+    }
+    if (difference < -50) {
+      handlePrevImage();
+    }
+    touchStartX.current = null;
+  };
+
   const toggleSection = (section) => (e) => {
     setAccordionOpen((prev) => ({
       ...prev,
@@ -67,40 +161,68 @@ export default function DetailCard({ artwork: propsArtwork }) {
     : artwork.price;
 
   return (
-    /* GLOBAL MASTER OVERVIEW WRAPPER CONTAINER */
     <div className="detail-page-master-wrapper">
-      
-      {/* TWO COLUMN CONTENT PANEL SPLIT */}
       <div className="detail-page-container">
+        
         {/* LEFT SIDE: Media Presentation Window */}
         <div className="detail-media-column">
-          <div className="main-image-viewport">
-            {/* CAROUSEL CONTROLS */}
+          <div className="main-image-viewport" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+            
             <button className="nav-arrow left-arrow" onClick={handlePrevImage}>
               <img src="/seapal/CaretLeft.svg" alt="Previous Image" />
             </button>
-            <img 
-              src={activeImage || artwork.src} 
-              alt={artwork.alt || "Artwork Display"} 
-            />
+            
+            <div className="carousel-stage">
+              {isAnimating && leavingIndex !== null ? (
+                <>
+                  <img
+                    key={`leave-${leavingIndex}`}
+                    src={artworkImages[leavingIndex]}
+                    className={`carousel-image is-leaving ${slideDirection > 0 ? "dir-next" : "dir-prev"}`}
+                    alt=""
+                    aria-hidden="true"
+                    draggable={false}
+                  />
+                  <img
+                    key={`enter-${activeImageIndex}`}
+                    src={artworkImages[activeImageIndex]}
+                    className={`carousel-image is-entering ${slideDirection > 0 ? "dir-next" : "dir-prev"}`}
+                    alt={artwork.alt || "Artwork Display"}
+                    draggable={false}
+                  />
+                </>
+              ) : (
+                <img
+                  key={`current-${activeImageIndex}`}
+                  src={artworkImages[activeImageIndex]}
+                  className="carousel-image is-current"
+                  alt={artwork.alt || "Artwork Display"}
+                  draggable={false}
+                />
+              )}
+            </div>
+            
             <button className="nav-arrow right-arrow" onClick={handleNextImage}>
               <img src="/seapal/CaretRight.svg" alt="Next Image" />
             </button>
           </div>
 
-          <div className="thumbnail-preview-strip">
-            {artworkImages.map((imgUrl, index) => (
-              <div 
-                key={index} 
-                className={`thumb-item ${activeImageIndex === index ? "active" : ""}`}
-                onClick={() => {
-                  setActiveImage(imgUrl);
-                  setActiveImageIndex(index);
-                }}
-              >
-                <img src={imgUrl} alt={`${artwork.alt} view ${index + 1}`} />
-              </div>
-            ))}
+          <div className={`thumbnail-strip-wrapper ${showBottomFade ? "has-bottom-fade" : ""} ${showTopFade ? "has-top-fade" : ""}`}>
+            <div ref={thumbnailStripRef} className="thumbnail-preview-strip">
+              {artworkImages.map((imgUrl, index) => (
+                <div 
+                  key={index} 
+                  ref={(el) => (thumbnailRefs.current[index] = el)}
+                  className={`thumb-item ${activeImageIndex === index ? "active" : ""}`}
+                  onClick={() => {
+                    if (index === activeImageIndex) return;
+                    goToIndex(index, index > activeImageIndex ? 1 : -1);
+                  }}
+                >
+                  <img src={imgUrl} alt={`${artwork.alt} view ${index + 1}`} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -113,19 +235,18 @@ export default function DetailCard({ artwork: propsArtwork }) {
 
           <div className="primary-specs">
             <p>{artwork.mediums || "Oil on Canvas"}</p>
-            <p>{artwork.width} W x {artwork.height} H cm</p>
+            <p>{formatDimensions(artwork)}</p>
             <p className="ready-to-hang">Ready to Hang ⓘ</p>
           </div>
 
           <div className="purchase-section">
             <p className="artwork-price">{formattedPrice}</p>
-             
-      <button className="buy-button" onClick={() => setShowCheckout(true)}>
-        Buy this artwork
-      </button>
-       {showCheckout && (
-        <BuyCard artwork={artwork} onClose={() => setShowCheckout(false)} />
-      )}
+            <button className="buy-button" onClick={() => setShowCheckout(true)}>
+              Buy this artwork
+            </button>
+            {showCheckout && (
+              <BuyCard artwork={artwork} onClose={() => setShowCheckout(false)} />
+            )}
           </div>
 
           <div className="trust-badges">
@@ -139,53 +260,49 @@ export default function DetailCard({ artwork: propsArtwork }) {
             </p>
           </div>
 
-          {/* Accordion 1: About the artwork */}
-          <details 
-            className="accordion-section" 
-            open={accordionOpen.about} 
-            onToggle={toggleSection("about")}
-          >
+          <details className="accordion-section" open={accordionOpen.about} onToggle={toggleSection("about")}>
             <summary>
               About the artwork
-              <img 
-                src={accordionOpen.about ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} 
-                alt="Toggle indicator arrow" 
-                className="accordion-chevron-icon" 
-              />
+              <img src={accordionOpen.about ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} alt="Toggle indicator" className="accordion-chevron-icon" />
             </summary>
             <div className="accordion-content">
-              <p>This beautiful piece combines expressive textures... <span className="read-more">READ MORE</span></p>
+             <p>
+    {aboutExpanded
+      ? (artwork.description ||
+         "This beautiful piece combines expressive textures with a deep emotional resonance, capturing fleeting moments between memory and observation. Each brushstroke reflects the artist's ongoing exploration of the maritime environment and the quiet intimacy of botanical studies, rendered in heavy oils on raw linen.")
+      : (artwork.description
+          ? `${artwork.description.slice(0, 80)}...`
+          : "This beautiful piece combines expressive textures...")}
+    {" "}
+    <span
+      className="read-more"
+      onClick={() => setAboutExpanded((prev) => !prev)}
+    >
+      {aboutExpanded ? "READ LESS" : "READ MORE"}
+    </span>
+  </p>
               <div className="meta-grid">
                 <div className="meta-label">Year created:</div>
                 <div className="meta-value">{artwork.date ? artwork.date.substring(0, 4) : artwork.year || "2024"}</div>
                 <div className="meta-label">Subject:</div>
-                <div className="meta-value underline-link">{artwork.subject}</div>
+                <div className="meta-value underline-link" onClick={() => navigate(`/gallery?category=${artwork.subject}`)}>{artwork.subject}</div>
                 <div className="meta-label">Mediums:</div>
-                <div className="meta-value underline-link">{artwork.mediums}</div>
+                <div className="meta-value">{artwork.mediums}</div>
               </div>
             </div>
           </details>
 
-          {/* Accordion 2: Details & Dimensions */}
-          <details 
-            className="accordion-section" 
-            open={accordionOpen.details} 
-            onToggle={toggleSection("details")}
-          >
+          <details className="accordion-section" open={accordionOpen.details} onToggle={toggleSection("details")}>
             <summary>
               Details & Dimensions
-              <img 
-                src={accordionOpen.details ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} 
-                alt="Toggle indicator arrow" 
-                className="accordion-chevron-icon" 
-              />
+              <img src={accordionOpen.details ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} alt="Toggle indicator" className="accordion-chevron-icon" />
             </summary>
             <div className="accordion-content">
               <div className="meta-grid">
                 <div className="meta-label">Rarity:</div>
                 <div className="meta-value">{artwork.rarity || "One-of-a-kind Artwork"}</div>
                 <div className="meta-label">Size:</div>
-                <div className="meta-value">{artwork.width} W x {artwork.height} H cm</div>
+                <div className="meta-value">{formatDimensions(artwork)}</div>
                 <div className="meta-label">Ready to Hang:</div>
                 <div className="meta-value">{artwork.readyToHang || "Yes"}</div>
                 <div className="meta-label">Framed:</div>
@@ -198,19 +315,10 @@ export default function DetailCard({ artwork: propsArtwork }) {
             </div>
           </details>
 
-          {/* Accordion 3: Shipping & Returns */}
-          <details 
-            className="accordion-section" 
-            open={accordionOpen.shipping} 
-            onToggle={toggleSection("shipping")}
-          >
+          <details className="accordion-section" open={accordionOpen.shipping} onToggle={toggleSection("shipping")}>
             <summary>
               Shipping & Returns
-              <img 
-                src={accordionOpen.shipping ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} 
-                alt="Toggle indicator arrow" 
-                className="accordion-chevron-icon" 
-              />
+              <img src={accordionOpen.shipping ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} alt="Toggle indicator" className="accordion-chevron-icon" />
             </summary>
             <div className="accordion-content">
               <div className="meta-grid">
@@ -228,11 +336,9 @@ export default function DetailCard({ artwork: propsArtwork }) {
             </div>
           </details>
         </div>
-      </div>
 
-      {/* PLACED FULL WIDTH DIRECTLY UNDERNEATH BOTH COLUMNS */}
+      </div>
       <Suggestion currentArtwork={artwork} />
-    
     </div>
   );
 }

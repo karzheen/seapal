@@ -4,7 +4,7 @@
 .gallery-page-wrapper {
   width: 90%;
    
-  padding: 60px 0px;
+  padding: 60px 0px 160px 0;
   background-color: #F2EDE9;
   font-family: playfair, serif;
   display: flex;
@@ -135,40 +135,70 @@
   align-items: flex-start;
 }
 
-/* State A: Filters are visible -> Force exactly 3 Column Masonry */
+/* State A: Filters are visible */
 .gallery-split-layout.filters-shown {
   grid-template-columns: 250px 1fr;
 }
-.gallery-split-layout.filters-shown .artwork-grid {
-  column-count: 3;
-}
 
-/* State B: Filters are hidden -> Force exactly 4 Column Masonry */
+/* State B: Filters are hidden */
 .gallery-split-layout.filters-hidden {
   grid-template-columns: 1fr;
 }
-.gallery-split-layout.filters-hidden .artwork-grid {
-  column-count: 4;
+
+  .gallery-split-layout.filters-hidden  > .sidebar-track
+{
+  display: none;
 }
 
+.filter-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
 @media (max-width: 1254px) {
   .gallery-split-layout.filters-shown {
-    grid-template-columns: 200px 1fr;
-  }
-  .gallery-split-layout.filters-shown .artwork-grid {
-    column-count: 2;
+    grid-template-columns: 1fr;
+    align-items: start;
+    justify-content: start;
   }
   .gallery-split-layout.filters-hidden {
     grid-template-columns: 1fr;
   }
-  .gallery-split-layout.filters-hidden .artwork-grid {
-    column-count: 3;
-  }
+  .filter-overlay {
+    display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
+  .gallery-split-layout  > .sidebar-track
+{
+  position: fixed;
+  z-index: 1000;
+}
+  .gallery-split-layout.filters-hidden  > .sidebar-track
+{
+  display: grid;
+}
+
+
+
 }
 .artwork-grid {
-  display: block !important; /* Removes grid/flex layout rows completely */
-  column-gap: 30px; /* Horizontal space between tracks */
+  display: flex;
+  gap: 30px;
   width: 100%;
+  align-items: flex-start;
+}
+
+.artwork-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 .gallery-toolbar-ribbon {
   display: flex;
@@ -180,20 +210,13 @@
 }
 @media (max-width: 950px) {
   .gallery-split-layout.filters-shown {
-    grid-template-columns: 200px 1fr;
-  }
-  .gallery-split-layout.filters-shown .artwork-grid {
-    column-count: 2;
+    grid-template-columns: 1fr;
   }
   .gallery-split-layout.filters-hidden {
     grid-template-columns: 1fr;
   }
-  .gallery-split-layout.filters-hidden .artwork-grid {
-    column-count: 2;
-  }
-  .artwork-grid
-  {
-    column-gap: 16px; /* Adjusts horizontal spacing for smaller screens */
+  .artwork-grid {
+    gap: 16px;
   }
   .gallery-toolbar-ribbon {
     flex-direction: column;
@@ -205,6 +228,7 @@
   .gallery-page-wrapper
   {
     padding: 20px 0px; 
+    width:95%;
   }
   .gallery-description {
     font-size: 20px; 
@@ -212,18 +236,13 @@
   .gallery-sub-detail {
     font-size: 16px; 
   }
+  
 }
 
 
-/* --- THE ROW-FREE MASONRY MATRIX CONTAINER --- */
-
-
-/* --- TARGET ENCAPSULATED CARDS INSIDE THE COLUMN TRACKS --- */
+/* --- ARTWORK CARDS INSIDE MASONRY COLUMNS --- */
 .artwork-grid .artwork-card {
-   /* Forces items to stack inside columns nicely */
-  width: 100% !important; /* Forces cards to expand to the full track size */
-  margin-bottom: 50px; /* Clean vertical spacing between elements */
-  break-inside: avoid; /* Prevents card modules from splitting between columns */
+  width: 100% !important;
   box-sizing: border-box;
 }
 
@@ -234,11 +253,41 @@
   display: block;
 }
 
+.gallery-artwork-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 32px;
+  background-color: #E3DDD5;
+  color: #373737;
+  border: 1px solid #C6BFB5;
+  font-family: "Spectral", serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.load-more-btn:hover {
+  background-color: #D4CCBF;
+}
+
 .no-results {
   text-align: center;
   color: #717171;
   padding: 40px 0;
-  column-span: all; /* Spans full horizontal width if empty */
+  width: 100%;
 }
 /* --- HORIZONTAL RIBBON INTERNAL FLEXBOX RESTRUCTURING --- */
 
@@ -265,14 +314,14 @@
   outline: none;
   font-family: spectral, playfair, serif;
   font-size: 12px;
-  letter-spacing: 1px;
+  letter-spacing: -5%;
   text-transform: uppercase;
   text-decoration: underline;
   color: #373737;
   cursor: pointer;
   padding: 0;
   margin-right: 8px;
-  margin-left: 80px;
+  margin-left: 10px;
   flex-shrink: 0;
 }
 
@@ -294,7 +343,7 @@
 
 /* Close interaction target element indicator element node */
 .close-chip-x {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 300;
   cursor: pointer;
   line-height: 1;

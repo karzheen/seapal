@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./filtersidebar.css";
 
-export default function Filter({ activeFilters, setActiveFilters }) {
+export default function Filter({handleClearAll,resultCount, activeFilters, setActiveFilters, setshowfilters, showfilters }) {
   const [openSection, setOpenSection] = useState(null);
   const [showmore, setshowmore] = useState(false);
-
+  console.log("showfilters:", showfilters);
   // Independent open/close toggles for custom fields
   const [customSizeOpen, setCustomSizeOpen] = useState(false);
   const [customPriceOpen, setCustomPriceOpen] = useState(false);
@@ -47,9 +47,17 @@ const [localMaxPrice, setLocalMaxPrice] = useState(activeFilters.maxPrice || "")
   };
 
   return (
-    <div className="filtersidebar">
+     <div className={`filtersidebar ${showfilters ? "open" : "close"}`}>
+      <div className="filter-scroll-content">
+       <button className="X-button-filter"  onClick={() => {
+    console.log("setter:", setshowfilters);
+    console.log("value:", showfilters);
+    setshowfilters(prev => !prev);
+  }}><img src="/seapal/X.svg"/></button>
+  <p className="side-bar-filter-txt" >FILTERS</p>
       {/* MAIN ITEM 1 - SORT */}
       <div className="line-topbuttom">
+       
         <button onClick={() => toggleSection("sort")} className="listcolumn">
           SORT
           <img
@@ -482,20 +490,43 @@ const [localMaxPrice, setLocalMaxPrice] = useState(activeFilters.maxPrice || "")
         {openSection === "orientation" && (
           <div className="dropdown">
             <label>
-              <input type="checkbox" name="orientation" />
+              <input
+                type="checkbox"
+                checked={activeFilters.orientations.includes("Horizontal")}
+                onChange={() => handleCheckboxChange("orientations", "Horizontal")}
+              />
               Horizontal
             </label>
             <label>
-              <input type="checkbox" name="orientation" />
+              <input
+                type="checkbox"
+                checked={activeFilters.orientations.includes("Vertical")}
+                onChange={() => handleCheckboxChange("orientations", "Vertical")}
+              />
               Vertical
             </label>
             <label>
-              <input type="checkbox" name="orientation" />
+              <input
+                type="checkbox"
+                checked={activeFilters.orientations.includes("Square")}
+                onChange={() => handleCheckboxChange("orientations", "Square")}
+              />
               Square
             </label>
           </div>
         )}
+        
       </div>
+      </div>
+      <div className="fixed-sidebar-buttons">
+        <button className="clear-filter-btn" onClick={handleClearAll}>CLEAR</button>
+      <button
+  className="done-filter-btn"
+  onClick={() => setshowfilters(false)}
+>
+  SHOW {resultCount} ARTWORKS
+</button>
+</div>
     </div>
   );
 }

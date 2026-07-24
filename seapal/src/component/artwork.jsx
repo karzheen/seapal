@@ -1,6 +1,7 @@
 import "./artwork.css"; 
 import { useNavigate } from "react-router-dom"; 
-import { useState } from "react"; // 1. Added state tracker
+import { useState } from "react";
+import { formatDimensions } from "../utils/artworkDimensions";
 
 export default function Artwork(props) { 
   const navigate = useNavigate(); 
@@ -24,7 +25,7 @@ export default function Artwork(props) {
         <h3>${props.price}</h3> 
         <div className="artwork-description">
           <h4>{props.alt}</h4> 
-          <p>{props.size} <span className="artwork-size-unit">cm</span></p>
+          <p>{formatDimensions(props)}</p>
         </div> 
       </div> 
     </div> 

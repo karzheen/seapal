@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./buyCard.css";
 import QRCode from "react-qr-code";
+import { formatDimensionsShort } from "../utils/artworkDimensions";
 
 export default function BuyCard({ artwork, onClose }) {
   const [showQR, setShowQR] = useState(false);
+  const [numberCopied, setNumberCopied] = useState(false);
 
   const title = artwork?.alt || "Blue green rhapsody";
 
-  const dimensions =
-    artwork?.width && artwork?.height
-      ? `${artwork.width} × ${artwork.height} cm`
-      : "100 × 200 cm";
+  const dimensions = formatDimensionsShort(artwork)
+    ? `${formatDimensionsShort(artwork)} cm`
+    : "";
 
   const image = artwork?.src || artwork?.image || "";
 
@@ -20,6 +21,38 @@ export default function BuyCard({ artwork, onClose }) {
 
   // WhatsApp number (international format without +, spaces, or dashes)
   const whatsappNumber = "9647500000000";
+  const displayPhoneNumber = "0750 123 4567";
+
+
+useEffect(() => {
+  const scrollY = window.scrollY;
+
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = "100%";
+
+  return () => {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, scrollY); // restore exact scroll position on close
+  };
+}, []);
+
+
+  const copyPhoneNumber = async () => {
+    try {
+      await navigator.clipboard.writeText(displayPhoneNumber);
+      setNumberCopied(true);
+      window.setTimeout(() => setNumberCopied(false), 2000);
+    } catch {
+      // Clipboard access can be unavailable in non-secure browser contexts.
+    }
+  };
 
   // Auto-filled message
   const messageText = encodeURIComponent(
@@ -35,16 +68,26 @@ export default function BuyCard({ artwork, onClose }) {
         className="whatsapp-checkout-card"
         onClick={(e) => e.stopPropagation()}
       >
+        <div className="checkout-close-row">
         {/* Close Button */}
         <button className="close-checkout-btn" onClick={onClose}>
           ×
         </button>
 
+        </div>
+
+        <div className="checkout-main-content">
         {/* Artwork Summary */}
         <div className="checkout-product-summary">
+          <div className="thumb-box-meta">
           <div className="checkout-thumb-box">
             <img src={image} alt={title} />
           </div>
+          <div className="checkout-product-meta mobile">
+              <h3 className="checkout-artwork-title">{title}</h3>
+              <p className="checkout-artwork-dims">{dimensions}</p>
+            </div>
+            </div>
 
           <div className="checkout-product-info">
             <div className="checkout-product-meta">
@@ -107,6 +150,8 @@ export default function BuyCard({ artwork, onClose }) {
           Open WhatsApp
         </a>
 
+        </div>
+
         {/* QR Code Section */}
         <div className="whatsapp-qr-accordion">
           <button
@@ -128,18 +173,29 @@ export default function BuyCard({ artwork, onClose }) {
               QR code
             </div>
 
-            <span className="qr-arrow-indicator">⌵</span>
+            <span className="qr-arrow-indicator"><img src="/seapal/CaretBottom.svg" alt="" /></span>
           </button>
 
           {showQR && (
             <div className="qr-dropdown-content-drawer">
               <div className="qr-code-vector-placeholder">
                 <QRCode value={whatsappUrl} size={140} />
+                <p className="scan-label">Scan with WhatsApp</p>
+              </div>
+              <div className="phone-num">
+                <div className="phone-number-details">
+                  <img src="/seapal/Phone.svg" alt="" />
+                  <p>{displayPhoneNumber}</p>
+                </div>
+                <button className="copy-phone-button" type="button" onClick={copyPhoneNumber} aria-label="Copy phone number">
+                  {numberCopied ? <img className="copied-check" src="/seapal/check.svg" alt="" /> : <img src="/seapal/CopySimple.svg" alt="" />}
+                </button>
               </div>
             </div>
           )}
         </div>
       </div>
+      {numberCopied && <div className="copy-toast" role="status">Number copied</div>}
     </div>
   );
 }

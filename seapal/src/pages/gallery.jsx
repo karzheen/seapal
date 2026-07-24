@@ -1,13 +1,18 @@
 import Filter from "../component/filter";
 import "./gallery.css";
 import pics from "../data/picData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Artwork from "../component/artwork";
+import { getDimensions, getSizeBucket, formatDimensionsShort, getOrientation } from "../utils/artworkDimensions";
+import { distributeIntoColumns, useGalleryColumnCount } from "../utils/galleryLayout";
+
+const GALLERY_PAGE_SIZE = 12;
 
 export default function Gallery() {
   const [showfilters, setshowfilters] = useState(false);
   const [searchTerm, setSearchTerm] = useState(""); 
-
+console.log("showfilters:", showfilters);
   const [activeFilters, setActiveFilters] = useState({
     sort: "newest",
     subjects: [],
@@ -21,6 +26,34 @@ export default function Gallery() {
     minPrice: "", 
     maxPrice: ""  
   });
+  const [searchParams] = useSearchParams();
+  const [visibleCount, setVisibleCount] = useState(GALLERY_PAGE_SIZE);
+
+
+  const [renderSidebar, setRenderSidebar] = useState(false);
+
+useEffect(() => {
+  if (showfilters) {
+    setRenderSidebar(true);
+  } else {
+    const timer = setTimeout(() => {
+      setRenderSidebar(false); // <-- delayed unmount
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }
+}, [showfilters]);
+
+useEffect(() => {
+  const category = searchParams.get("category");
+
+  if (category) {
+    setActiveFilters((prev) => ({
+      ...prev,
+      subjects: [category]
+    }));
+  }
+}, [searchParams]);
 
   // --- DYNAMIC COUNTER CALCULATION ENGINE ---
   // Calculates the number next to HIDE FILTERS (e.g., "(2)")
@@ -68,12 +101,13 @@ export default function Gallery() {
         const query = searchTerm.toLowerCase();
         const matchesTitle = pic.alt?.toLowerCase().includes(query);
         const matchesSubject = pic.subject?.toLowerCase().includes(query);
-        const matchesSize = pic.size?.toLowerCase().includes(query);
+        const dimText = formatDimensionsShort(pic).toLowerCase();
+        const matchesSize = dimText.includes(query);
         if (!matchesTitle && !matchesSubject && !matchesSize) return false;
       }
       if (activeFilters.subjects.length > 0 && !activeFilters.subjects.includes(pic.subject)) return false;
-      if (activeFilters.sizes.length > 0 && !activeFilters.sizes.includes(pic.size)) return false;
-      if (activeFilters.orientations.length > 0 && !activeFilters.orientations.includes(pic.orientation)) return false;
+      if (activeFilters.sizes.length > 0 && !activeFilters.sizes.includes(getSizeBucket(pic))) return false;
+      if (activeFilters.orientations.length > 0 && !activeFilters.orientations.includes(getOrientation(pic))) return false;
       if (activeFilters.priceRange) {
         const price = pic.price;
         if (activeFilters.priceRange === "under500" && price >= 500) return false;
@@ -84,8 +118,7 @@ export default function Gallery() {
       }
       if (activeFilters.minPrice && pic.price < parseFloat(activeFilters.minPrice)) return false;
       if (activeFilters.maxPrice && pic.price > parseFloat(activeFilters.maxPrice)) return false;
-      const itemW = typeof pic.width === "string" ? parseFloat(pic.width) : pic.width;
-      const itemH = typeof pic.height === "string" ? parseFloat(pic.height) : pic.height;
+      const { width: itemW, height: itemH } = getDimensions(pic);
       if (activeFilters.minWidth && itemW < parseFloat(activeFilters.minWidth)) return false;
       if (activeFilters.maxWidth && itemW > parseFloat(activeFilters.maxWidth)) return false;
       if (activeFilters.minHeight && itemH < parseFloat(activeFilters.minHeight)) return false;
@@ -99,6 +132,42 @@ export default function Gallery() {
       return 0;
     });
 
+  useEffect(() => {
+    setVisibleCount(GALLERY_PAGE_SIZE);
+  }, [searchTerm, activeFilters]);
+
+  const visiblePics = filteredPics.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPics.length;
+  const remainingCount = filteredPics.length - visibleCount;
+
+  const columnCount = useGalleryColumnCount(showfilters);
+  const artworkColumns = distributeIntoColumns(visiblePics, columnCount);
+
+  const loadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + GALLERY_PAGE_SIZE, filteredPics.length));
+  };
+
+useEffect(() => {
+  const mediaQuery = window.matchMedia("(max-width: 1254px)");
+
+  const updateScrollLock = () => {
+    if (showfilters && mediaQuery.matches) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  };
+
+  updateScrollLock();
+
+  // re-check if the viewport crosses the breakpoint while open (e.g. resize/rotate)
+  mediaQuery.addEventListener("change", updateScrollLock);
+
+  return () => {
+    mediaQuery.removeEventListener("change", updateScrollLock);
+    document.body.style.overflow = "";
+  };
+}, [showfilters]);
   return (
     <div className="gallery-page-wrapper">
       <h1 className="gallery-main-title">Explore the Gallery</h1>
@@ -150,6 +219,12 @@ export default function Gallery() {
               Custom Width <span className="close-chip-x" onClick={() => setActiveFilters(prev => ({ ...prev, minWidth: "", maxWidth: "" }))}>×</span>
             </div>
           )}
+
+          {(activeFilters.minHeight || activeFilters.maxHeight) && (
+            <div className="filter-chip">
+              Custom Height <span className="close-chip-x" onClick={() => setActiveFilters(prev => ({ ...prev, minHeight: "", maxHeight: "" }))}>×</span>
+            </div>
+          )}
         </div>
 
         <div className="search-bar-mock">
@@ -163,17 +238,36 @@ export default function Gallery() {
           />
         </div>
       </div>
+      {showfilters && <div className="filter-overlay"></div>}
 
       <div className={`gallery-split-layout ${showfilters ? "filters-shown" : "filters-hidden"}`}>
-        {showfilters && (
+        {renderSidebar && (
           <div className="sidebar-track">
-            <Filter activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
+            <Filter resultCount={filteredPics.length} handleClearAll = {handleClearAll}
+            showfilters={showfilters} setshowfilters={setshowfilters} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
           </div>
         )}
 
-        <div className="artwork-grid">
-          {filteredPics.map((pic) => <Artwork key={pic.id} {...pic} />)}
-          {filteredPics.length === 0 && <p className="no-results">No matching artworks found.</p>}
+        <div className="gallery-artwork-section">
+          <div className="artwork-grid">
+            {filteredPics.length === 0 ? (
+              <p className="no-results">No matching artworks found.</p>
+            ) : (
+              artworkColumns.map((column, colIndex) => (
+                <div key={colIndex} className="artwork-column">
+                  {column.map((pic) => (
+                    <Artwork key={pic.id} {...pic} />
+                  ))}
+                </div>
+              ))
+            )}
+          </div>
+
+          {hasMore && (
+            <button type="button" className="load-more-btn" onClick={loadMore}>
+              Load more ({remainingCount} remaining)
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -1,10 +1,11 @@
 // Import NavLink instead of Link
-import { NavLink } from "react-router-dom"; 
+import { NavLink, useNavigate } from "react-router-dom"; 
 import "./navbar.css";
 import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,11 +14,12 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-background">
-      <section className="logo">
-        <img src="/seapal/logo.svg" alt="logo" />
-        <img src="/seapal/name.svg" alt="brand name" />
+      <section className="logo" onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+        <img src="/seapal/Logo.png" alt="logo" />
+        <img src="/seapal/Logo-text.png" alt="brand name" />
       </section>
 
+     
       {/* Hamburger Toggle Button */}
       <button className={`hamburger ${isOpen ? "open" : ""}`} onClick={toggleMenu} aria-label="Toggle navigation">
         <span className="bar"></span>
@@ -47,6 +49,15 @@ export default function Navbar() {
             <img src="/seapal/facebook.svg" alt="facebook icon" />
           </a>
         </div>
+         <div className="mobile-nav-images">
+    <div className="mobile-image-box">
+      <img src="/seapal/seapal-photo.webp" alt="" />
+    </div>
+
+    <div className="mobile-image-box">
+      <img src="/seapal/Seapal-painting.webp" alt="" />
+    </div>
+  </div>
       </div>
       </div>
     </nav>

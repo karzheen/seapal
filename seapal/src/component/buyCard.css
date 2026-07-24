@@ -1,24 +1,31 @@
 /* 1. FIXED BACKDROP OVERLAY*/
+
+*
+{
+  font-family: "Spectral";
+}
 .whatsapp-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 110vh;
   background-color: rgba(0, 0, 0, 0.45); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;   
   font-family: 'Spectral', Georgia, Cambria, serif; 
+    
+   
 }
 
 /*  2. MAIN MODAL CONTAINER POPUP*/
 .whatsapp-checkout-card {
   background-color: #f5f3ef;             
-  width: 100%;
-  max-width: 480px;                      
-  padding: 32px;
+  width: 95%;
+  max-width: 650px;                      
+  
   position: relative;
   box-sizing: border-box;
   font-family: 'Spectral', Georgia, Cambria, serif; 
@@ -26,14 +33,24 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
 }
 
+.checkout-product-meta.mobile
+{
+  display: none;
+}
+
+.checkout-close-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 8px;
+}
+
 /* Close Top Right X anchor */
 .close-checkout-btn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1;
   color: #666666;
   cursor: pointer;
@@ -45,29 +62,36 @@
   color: #111111;
 }
 
+.checkout-main-content {
+  max-width: 100%;
+  padding: 0 24px 0 24px;
+}
+
 /* 3. ARTWORK DISPLAY INFRASTRUCTURE ROW */
 .checkout-product-summary {
   display: flex;
   gap: 20px;
   align-items: center;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #dcd9d2;      
+  padding-bottom: 12px;
+        
 }
 
 .checkout-thumb-box {
-  width: 100px;
-  height: 150px;
+  aspect-ratio: 1/1;
+  max-width: 260px;
   background-color: #e2dfd8;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: auto;
+  object-fit: contain;
 }
 
 .checkout-thumb-box img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .checkout-product-meta {
@@ -95,7 +119,7 @@
 /*4. PRICE CALCULATOR FIELDS LEDGER */
 .checkout-price-ledger {
   padding: 20px 0;
-  border-bottom: 1px solid #dcd9d2;
+   
 }
 
 /* MODIFIED: Generic ledger value labels set to Inter font-family */
@@ -103,25 +127,35 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 2px;
   color: #555555;
   font-family: 'Inter', sans-serif;
+  border-bottom: 1px solid #C1C1C1;
 }
 
 /* MODIFIED: Total price text values explicitly set to Inter font-family */
 .total-row {
-  margin-top: 14px;
+  margin-top: 4px;
   margin-bottom: 0;
-  font-size: 1.15rem;
+  font-size: 1.10rem;
   font-weight: 700;
   color: #111111;
   font-family: 'Inter', sans-serif;
+  border: none;
+  display: flex;
+  align-items: flex-end;
+}
+.ledger-value
+{
+  font-family: "Inter";
+  font-weight: 500;
 }
 
 /* 5. TEXT CTA INSTRUCTIONS CONTENT */
 .whatsapp-cta-instructions {
   text-align: left;
-  padding: 24px 0 16px 0;
+  padding: 16px 0 16px 0;
   font-family: 'Spectral', Georgia, serif;
 }
 
@@ -129,7 +163,7 @@
   font-size: 1.15rem;
   font-weight: 600;
   margin: 0 0 6px 0;
-  color: #111111;
+  
 }
 
 .cta-sub-detail {
@@ -153,12 +187,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
+  line-height: 33px;
   background-color: #3ca24b;              /* Official rich WhatsApp green color token */
   color: #ffffff;
   text-decoration: none;
-  padding: 14px 0;
+  padding: 11px 0;
   font-size: 1.05rem;
   font-weight: 500;
   border-radius: 2px;
@@ -204,22 +239,31 @@
   font-family: inherit;
   outline: none;
   position: relative;
+  border-top: 1px solid #C1C1C1;
 }
 
 .qr-header-title-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
 }
 
 .qr-quad-icon {
   font-size: 14px;
   display: inline-block;
+  margin-top: 3.5px;
 }
 
 .qr-arrow-indicator {
-  font-size: 10px;
+  max-width: 16px;
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qr-arrow-indicator > img{
+  max-width: 100%;
 }
 
 /* Rotate carets dynamically upon active header open states */
@@ -229,16 +273,121 @@
 
 .qr-dropdown-content-drawer {
   padding-top: 12px;
+  padding-bottom: 24px;
   display: flex;
+  gap: 24px;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   animation: expandDrawer 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .qr-code-vector-placeholder {
   background-color: #ffffff;
-  padding: 12px;
+  max-width: none;
+  padding: 24px 32px 12px 32px;
   border: 1px solid #e0ded9;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.qr-code-vector-placeholder > *:not(.scan-label)
+{
+  max-width: 124px;
+}
+
+.scan-label
+{
+  font-size: 14px;
+  color: #353535;
+  margin: 0;
+ 
+}
+.phone-num p {
+  white-space: nowrap;
+  font-family: "Spectral";
+  font-weight: 500;
+}
+.phone-num
+{
+  display: flex;
+  background-color: #e9e4df;
+  width: max-content;
+  align-items: center;
+  gap: 32px;
+  padding: 10px 16px;
+}
+
+.phone-num p {
+  margin: 0;
+  
+}
+
+.phone-number-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.phone-number-details > p
+{
+  margin: 0;
+  padding: 0;
+}
+.phone-number-details > img
+{
+  max-width: 20px;
+}
+
+.phone-link,
+.copy-phone-button {
+  display: grid;
+  place-items: center;
+   
+   
+}
+
+.phone-link {
+  text-decoration: none;
+}
+
+.phone-icon {
+  font-size: 18px;
+}
+
+.copy-phone-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.copy-phone-button img {
+  max-width: 18px;
+}
+
+.copied-check {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0)  ;
+}
+
+.copy-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 2100;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 4px;
+  background: #222222;
+  color: #ffffff;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Mock grid asset mirroring structural block parameters from image view window */
@@ -262,13 +411,18 @@
 .checkout-product-summary {
   display: flex;
   gap: 20px;
-  align-items: flex-start; /* Keeps image aligned up top */
-  padding-bottom: 24px;
+  align-items: normal;
+   
 }
+
 
 /* New inner wrapper containing meta details and price calculation side-by-side with thumbnail */
 .checkout-product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex-grow: 1;
+  min-width: 230px;
 }
 
 /* Removes top padding from ledger block since it sits inside the flex content flow now */
@@ -284,3 +438,61 @@
   margin: 0 0 16px 0; /* Creates breathing space above calculation data spreadsheet fields */
   font-family: 'Inter', sans-serif;
 }
+
+
+
+
+
+
+
+@media (max-width: 500px) {
+  .checkout-product-summary {
+  flex-direction: column;
+   
+}
+.checkout-thumb-box
+{
+  max-width: 100px;
+}
+.qr-dropdown-content-drawer
+{
+  display: none;
+}
+.whatsapp-qr-accordion
+{
+  display: none;
+}
+.checkout-main-content {
+   
+  padding:20px;
+  padding-top: 4px;
+}
+.checkout-product-meta
+{
+  display: none;
+}
+
+.checkout-product-meta.mobile
+{
+  display: block;
+}
+.thumb-box-meta
+{
+  display: flex;
+  gap: 12px;
+}
+  }
+
+
+
+@media (max-width: 330px) {
+
+
+  .checkout-main-content {
+   
+  padding:12px;
+  padding-top: 0;
+}
+
+
+  }

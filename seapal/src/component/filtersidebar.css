@@ -22,12 +22,12 @@
 }
 
 .line-under {
-  border-bottom: 1px solid #B0B0B0;
+  border-bottom: 0.5px solid #D3D3D3;
 }
 
 .line-topbuttom {
-  border-top: 1px solid #B0B0B0;
-  border-bottom: 1px solid #B0B0B0;
+  border-top: 0.5px solid #D3D3D3;
+  border-bottom: 0.5px solid #D3D3D3;
 }
 
 .listcolumn {
@@ -41,6 +41,7 @@
   font-size: 16px;
   padding: 14px 0;
   font-family: "Spectral", serif;
+  letter-spacing: -5%;
 }
 
 /* Stack labels cleanly inside the dropdown */
@@ -74,7 +75,7 @@
   gap: 12px;
   font-family: spectral, playfair, serif;
   color: #373737;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   padding: 4px 0;
   width: 100%;
@@ -85,13 +86,12 @@
 .dropdown input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
-  background-color: transparent;
+  background-color: #DAD5D2;
   margin: 0;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #d3d3d3;
-  display: grid;
-  place-content: center;
+  width: 12px;
+  height: 12px;
+  border: 0.5px solid #C1B9B5;
+  display:block;
   cursor: pointer;
   transition:
     background-color 0.15s ease,
@@ -99,37 +99,50 @@
 }
 /*the input type checkbox CHANGEEEEE ITTTT*/
 /* --- RADIO BUTTONS (Double-ring layout) --- */
+/* --- RADIO BUTTONS --- */
 .dropdown input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color:#DAD5D2;
+  width: 13px;
+  height: 13px;
+  border: 0.5px solid #C1B9B5;
   border-radius: 50%;
-}
-
-.dropdown input[type="radio"]:checked {
-  border-color: #000000;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .dropdown input[type="radio"]::before {
   content: "";
   width: 8px;
   height: 8px;
+  background: #000;
   border-radius: 50%;
   transform: scale(0);
-  transition: transform 0.1s ease-in-out;
-  background-color: #000000;
+  transition: transform 0.1s ease;
 }
 
 .dropdown input[type="radio"]:checked::before {
   transform: scale(1);
+}
+.dropdown input[type="radio"]:checked {
+  border: 1px solid #1D1D1D;
 }
 
 /* --- CHECKBOXES (Solid block with white classic checkmark) --- */
 .dropdown input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
-  background-color: transparent;
+  background-color: #DAD5D2;
   margin: 0;
-  width: 18px; /* Slightly larger to fit the checkmark perfectly */
-  height: 18px;
-  border: 1px solid #d3d3d3;
+  width: 12px; /* Slightly larger to fit the checkmark perfectly */
+  height: 12px;
+  border: 0.5px solid #C1B9B5;
   display: grid;
   place-content: center;
   cursor: pointer;
@@ -137,29 +150,34 @@
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease;
+  position:relative;
 }
+
 
 .dropdown input[type="checkbox"]:checked {
   border-color: #000000;
   background-color: #000000; /* Solid black fill */
 }
 
+.dropdown input[type="checkbox"] {
+  position: relative;
+}
+
 .dropdown input[type="checkbox"]::before {
   content: "";
-  width: 12px;
-  height: 12px;
+  position: absolute;
+  inset: 0;
+
+  background: url("/seapal/check.svg") center center / 8px 6px no-repeat;
+
   transform: scale(0);
-  transition: transform 0.1s ease-in-out;
-  /* Percent-encoded SVG data URI to ensure cross-browser rendering */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  transition: transform 0.1s ease;
 }
 
 .dropdown input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
+
 
 /* --- SHOW MORE / LESS LINK BUTTON --- */
 .show-more-btn {
@@ -260,4 +278,150 @@
 
 .ok-btn:hover {
   background-color: #000000;
+}
+
+.X-button-filter
+  {
+   display: none;
+    
+  }
+  .side-bar-filter-txt
+  {
+    display: none;
+  }
+
+  .fixed-sidebar-buttons
+  {
+    display: none;
+  }
+   .filtersidebar
+  {
+     
+     animation: none;
+  transition: none;
+    
+  }
+  .filtersidebar.close {
+  opacity: 0;
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+ 
+
+@media (max-width: 1254px) 
+{
+  .filtersidebar
+  {
+    position: fixed;
+    z-index:1000;
+    background-color: #F2EDE9;
+    border: 1px solid #D3D3D3;
+    left: 0;
+    top: 0;
+    width: 430px;
+    height: 100dvh;
+    
+    animation: slideIn 0.3s ease;
+    transition: opacity .3s ease, transform .4s ease;
+     
+  }
+  .filter-scroll-content {
+  flex: 1;
+  padding:0 10px 0 10px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+   
+
+.filtersidebar.open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.filtersidebar.close {
+  
+  transform: translateX(-100%);
+}
+
+  .X-button-filter
+  {
+    display: block;
+    margin-left: auto;
+     margin-top: 20px;
+    margin-right:0; 
+    background-color:transparent;
+    border:none; 
+    
+  }
+  .side-bar-filter-txt
+  {
+    display: block;
+    font-weight: 600;
+  }
+
+  .fixed-sidebar-buttons
+  {
+    display: flex; 
+    max-width: 100%;
+    gap: 8px;
+    font-family: "Spectral";
+    border-top:1px solid #D3D3D3;
+     padding:10px 10px;
+    margin-top: auto; 
+  }
+  .clear-filter-btn
+  {
+    flex-grow: 1; 
+     font-family: "Spectral";
+        flex-grow: 2;
+     font-family: "Spectral";
+     background-color: #E3DDD5;
+     color: #373737;
+     border: 1px solid #C6BFB5;
+     padding: 12px 0;
+     font-size: 16px;
+  }
+  .done-filter-btn
+  {
+    flex-grow: 2;
+     font-family: "Spectral";
+     background-color: #1D1D1D;
+     color: #F7EBE1;
+     border: none;
+     padding: 12px 0;
+     font-size: 16px;
+  }
+  
+
+}
+
+
+@media (max-width: 600px) 
+{
+  .filtersidebar
+  {
+    
+    width: 85%;
+     
+    
+  }
+}
+
+@media (max-width: 360px) 
+{
+  .filtersidebar
+  {
+    
+    width: 94%;
+     
+    
+  }
 }

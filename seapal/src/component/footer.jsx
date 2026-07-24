@@ -5,24 +5,26 @@ export default function Footer() {
   return (
     <footer className="footer-container">
       {/* Background image tracks container space */}
-      <img src="/seapal/Frame.svg" alt="Footer Background" className="footer-bg" />
+      <img src="/seapal/Frame77.svg" alt="Footer Background" className="footer-bg" />
 
       {/* Overlay Content */}
       <div className="footer-overlay">
         
         {/* Top Navigation Row */}
-        <div className="footer-top">
-          <div className="footer-column">
+        <div className="footer-top"> 
+          <div className="brand footer-column">
             <h3>Brand Statement</h3>
+            <h4>Creating timeless paintings that celebrate movement, light, and the quiet beauty of the natural world.</h4>
           </div>
           
+          <div className="contact-navigate">
           <div className="footer-column">
             <h3>Navigate</h3>
             <ul>
               <li><NavLink to="/">Home</NavLink></li>
               <li><NavLink to="/gallery">Gallery</NavLink></li>
               <li><NavLink to="/about">About</NavLink></li>
-              <li><NavLink to="/contact">Contact</NavLink></li>
+              
             </ul>
           </div>
           
@@ -39,6 +41,8 @@ export default function Footer() {
               </a>
             </div>
           </div>
+          </div>
+          
         </div>
 
         {/* Bottom Logo & Copyright Row */}
@@ -47,6 +51,7 @@ export default function Footer() {
         </div>
 
       </div>
+       
     </footer>
   );
 }
