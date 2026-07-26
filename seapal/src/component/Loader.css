@@ -1,35 +1,12 @@
-.top-loading-bar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  
-  /* RESPONSIVE THICKNESS: */
-  /* Min 3px on mobile, scales with viewport width, max 6px on large desktops */
-  height: clamp(3px, 0.3vw, 6px); 
-  
-  background-color: transparent;
-  z-index: 9999;
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 120px;
+  height: 20px;
+  background:
+   linear-gradient(#000 0 0) 0/0% no-repeat
+   #ddd;
+  animation: l1 2s infinite linear;
 }
-
-.top-loading-bar-progress {
-  height: 100%;
-  background-color: #0B786D;
-  width: 0%;
-  animation: load-grow 2s cubic-bezier(0.1, 0.6, 0.2, 1) forwards;
-}
-
-@keyframes load-grow {
-  0% {
-    width: 0%;
-  }
-  30% {
-    width: 40%;
-  }
-  70% {
-    width: 75%;
-  }
-  100% {
-    width: 100%;
-  }
+@keyframes l1 {
+    100% {background-size:100%}
 }

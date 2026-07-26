@@ -39,23 +39,33 @@ function Layout({ children }) {
 export default function App() { 
   const [isLoading, setIsLoading] = useState(true); 
 
-  useEffect(() => { 
-    const checkEverythingLoaded = async () => {
-      // 1. Wait for images and standard DOM assets
-      if (document.readyState !== "complete") {
-        await new Promise((resolve) => window.addEventListener("load", resolve, { once: true }));
-      }
-      
-      // 2. Wait for Google Fonts / Custom Web Fonts to fully render
-      if (document.fonts) {
-        await document.fonts.ready;
-      }
+ useEffect(() => {
+  const checkEverythingLoaded = async () => {
+    const start = Date.now();
 
-      setIsLoading(false); 
-    }; 
+    if (document.readyState !== "complete") {
+      await new Promise((resolve) =>
+        window.addEventListener("load", resolve, { once: true })
+      );
+    }
 
-    checkEverythingLoaded();
-  }, []); 
+    if (document.fonts) {
+      await document.fonts.ready;
+    }
+
+    // force loader to stay visible at least 1.5 seconds
+    const elapsed = Date.now() - start;
+    const remaining = 3500 - elapsed;
+
+    if (remaining > 0) {
+      await new Promise(resolve => setTimeout(resolve, remaining));
+    }
+
+    setIsLoading(false);
+  };
+
+  checkEverythingLoaded();
+}, []);
 
   useLayoutEffect(() => { 
     if (isLoading) return; 

@@ -7,7 +7,8 @@
 .footer-container {
   position: relative;
   width: 100%;
-  display: inline-block;
+  display: block;
+  overflow-x: hidden;
 }
 
 /* Background image stretches to fill the container */
@@ -38,8 +39,11 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
   gap: 80px;
   margin-left: 20px;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .footer-top > .footer-column > h4
@@ -129,7 +133,7 @@ padding: 0;
 }
 
 /* --- FIXED RESPONSIVE OVERRIDES (HORIZONTAL COMPACT FLOW) --- */
-@media (max-width: 768px) {
+@media (max-width: 958px) {
   .footer-container {
     display: flex;
     flex-direction: column;
@@ -156,8 +160,14 @@ padding: 0;
     align-items: flex-start;
     gap: 16px;
     width: 100%;
+    max-width: 100%;
+    margin-left: 0;
     text-align: left;
-   
+  }
+
+  .contact-navigate {
+    gap: 24px;
+    flex-wrap: wrap;
   }
 
   /* Shrinks the headings and text size on tablet/mobile */

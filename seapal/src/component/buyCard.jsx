@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./buyCard.css";
 import QRCode from "react-qr-code";
 import { formatDimensionsShort } from "../utils/artworkDimensions";
@@ -22,7 +22,8 @@ export default function BuyCard({ artwork, onClose }) {
   // WhatsApp number (international format without +, spaces, or dashes)
   const whatsappNumber = "9647500000000";
   const displayPhoneNumber = "0750 123 4567";
-
+  const checkoutRef = useRef(null);
+  const qrDrawerRef = useRef(null);
 
 useEffect(() => {
   const scrollY = window.scrollY;
@@ -42,6 +43,19 @@ useEffect(() => {
     window.scrollTo(0, scrollY); // restore exact scroll position on close
   };
 }, []);
+
+useEffect(() => {
+  if (showQR && qrDrawerRef.current) {
+    // wait a tick so the drawer has actually rendered/expanded before measuring
+    const timer = setTimeout(() => {
+      qrDrawerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    }, 50);
+    return () => clearTimeout(timer);
+  }
+}, [showQR]);
 
 
   const copyPhoneNumber = async () => {
@@ -66,6 +80,7 @@ useEffect(() => {
     <div className="whatsapp-modal-overlay" onClick={onClose}>
       <div
         className="whatsapp-checkout-card"
+        ref={checkoutRef}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="checkout-close-row">
@@ -158,7 +173,7 @@ useEffect(() => {
             className={`qr-toggle-header ${
               showQR ? "expanded" : ""
             }`}
-            onClick={() => setShowQR(!showQR)}
+            onClick={() => setShowQR((prev) => !prev)}
           >
             <div className="qr-header-title-wrapper">
               <span className="qr-quad-icon">
@@ -177,7 +192,7 @@ useEffect(() => {
           </button>
 
           {showQR && (
-            <div className="qr-dropdown-content-drawer">
+            <div className="qr-dropdown-content-drawer" ref={qrDrawerRef}>
               <div className="qr-code-vector-placeholder">
                 <QRCode value={whatsappUrl} size={140} />
                 <p className="scan-label">Scan with WhatsApp</p>
