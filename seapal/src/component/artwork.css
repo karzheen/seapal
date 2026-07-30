@@ -86,24 +86,3 @@
 .artwork-info .artwork-description p:hover { 
   cursor: text; 
 }
-/* Container to relative-position the absolute sold tag */
-.artwork-img-container {
-  position: relative;
-  width: 100%;
-}
-
-/* Styling for the SOLD banner badge */
-.artwork-img-container .sold-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #5bb381; /* Green color from your image */
-  color: #000000;            /* Black text */
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  padding: 4px 10px;
-  z-index: 10;               /* Forces it to sit on top of the image */
-  text-transform: uppercase;
-}
