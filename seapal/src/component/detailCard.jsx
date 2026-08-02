@@ -167,7 +167,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
         {/* LEFT SIDE: Media Presentation Window */}
         <div className="detail-media-column">
           <div className="main-image-viewport" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-            
+ 
             <button className="nav-arrow left-arrow" onClick={handlePrevImage}>
               <img src="/seapal/CaretLeft.svg" alt="Previous Image" />
             </button>

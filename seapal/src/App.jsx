@@ -102,6 +102,7 @@ export default function App() {
 
           <Route path="/seapal" element={<Home />} />
           <Route path="/seapal/" element={<Home />} />
+          <Route path="/admin" element={<AdminDashboard />} />
       </Routes> 
     </Layout> 
   ); 

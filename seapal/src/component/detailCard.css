@@ -46,7 +46,10 @@
    
  
 }
-
+.main-image-viewport {
+  /* ...existing rules... */
+  overflow: hidden;
+}
 
 
 /* Centralized viewport containing image + floating outside buttons */
