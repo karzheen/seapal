@@ -13,13 +13,16 @@ export default function Artwork(props) {
       onClick={() => navigate(`/detail/${props.id}`)} 
       style={{ cursor: "pointer" }} 
     > 
-      <img 
-        /* 3. Applies the skeleton-loading class until native onLoad triggers */
-        className={`artwork-img ${!isLoaded ? "skeleton-loading" : ""}`}
-        src={props.src} 
-        alt={props.alt} 
-        onLoad={() => setIsLoaded(true)} 
-      /> 
+      <div className="artwork-img-wrapper">
+        {props.sold && <span className="sold-badge">Sold</span>}
+        <img 
+          /* 3. Applies the skeleton-loading class until native onLoad triggers */
+          className={`artwork-img ${!isLoaded ? "skeleton-loading" : ""}`}
+          src={props.src} 
+          alt={props.alt} 
+          onLoad={() => setIsLoaded(true)} 
+        /> 
+      </div>
       
       <div className="artwork-info"> 
         <h3>${props.price}</h3> 
