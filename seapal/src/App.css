@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  background-color: #F2EDE9;
+  background-color: #f2ede9;
   font-family: playfair, serif;
   margin: 0;
   min-height: 100vh;
@@ -14,18 +14,17 @@ body {
   width: 100%;
 }
 
-
 /* Neutral baseline for all site sub-pages */
 .layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  width: 100%;               
-  max-width: 100%;           
-  margin: 0;                 
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   box-sizing: border-box;
-  padding-left: 0 !important; 
+  padding-left: 0 !important;
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
@@ -33,7 +32,6 @@ body {
 
 /* FIXED: The tiling pattern ONLY activates when the home page route wrapper is loaded */
 .home-layout-active {
-
   background-image: url("/seapal/side-rec.svg");
   background-repeat: repeat-y;
   background-position: top left;
@@ -41,19 +39,18 @@ body {
 }
 
 @media (max-width: 444px) {
- .home-layout-active {
-              /* Adjusts the width for smaller screens */
+  .home-layout-active {
+    /* Adjusts the width for smaller screens */
     background-size: 8px auto; /* Adjusts the size of the SVG for smaller screens */
   }
 }
 
 @media (max-width: 444px) {
- .home-layout-active {
-              /* Adjusts the width for smaller screens */
+  .home-layout-active {
+    /* Adjusts the width for smaller screens */
     background-size: 8px auto; /* Adjusts the size of the SVG for smaller screens */
   }
 }
-
 
 /* Keeps sub-pages sitting completely flush against the viewport screen boundaries */
 .sub-page-layout-active {
@@ -66,10 +63,10 @@ body {
   flex: 1;
   width: 100%;
   box-sizing: border-box;
-  max-width: 1440px;         
-  margin: 0 auto;            
-  padding-left: 50px;        
-  padding-right: 50px;       
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 footer {
@@ -87,7 +84,7 @@ footer img {
 
 @media (max-width: 768px) {
   .innerlayout {
-    padding-left: 20px;       
+    padding-left: 20px;
     padding-right: 20px;
   }
 }
