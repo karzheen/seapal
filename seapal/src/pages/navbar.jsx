@@ -11,13 +11,42 @@ export default function Navbar() {
     setIsOpen(!isOpen);
   };
 
-  // Locks background scroll while the mobile menu is open.
-  // The actual scroll-lock rule (overflow:hidden) only fires inside the
-  // @media (max-width: 800px) block in navbar.css, so this class is a
-  // no-op on desktop/tablet even though it's toggled unconditionally here.
+  // Locks background scroll while the mobile menu is open — phone widths only.
+  // Plain `overflow: hidden` on body doesn't reliably stop touch-scroll/
+  // rubber-banding on iOS Safari, so we pin the body with position: fixed
+  // instead and restore the exact scroll position on close.
   useEffect(() => {
-    document.body.classList.toggle("menu-open", isOpen);
-    return () => document.body.classList.remove("menu-open");
+    const isPhoneWidth = window.matchMedia("(max-width: 800px)").matches;
+
+    if (isOpen && isPhoneWidth) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      document.body.classList.add("menu-open");
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.classList.remove("menu-open");
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+      }
+    }
+
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.classList.remove("menu-open");
+    };
   }, [isOpen]);
 
   return (
