@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>SPA Redirect</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>seapal</title>
+    <link href="https://googleapis.com" rel="stylesheet" />
+    
+    <style>
+      #root { display: none; }
+      .pre-loading-screen { position: fixed; inset: 0; background-color: #ffffff; z-index: 99999; }
+    </style>
+
+    <!-- SPA Routing Redirect Script -->
     <script type="text/javascript">
       var pathSegmentsToKeep = 1; // Kept at 1 for the /seapal/ subdirectory
-
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
@@ -16,5 +25,10 @@
       );
     </script>
   </head>
-  <body></body>
+  <body>
+    <div id="loading-screen-gate" class="pre-loading-screen"></div>
+    <div id="root"></div>
+    <!-- Vite bundle injection script -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
