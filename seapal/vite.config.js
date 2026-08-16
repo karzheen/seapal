@@ -42,8 +42,11 @@ function picDataApiPlugin() {
   }
 }
 
-// Dev-only endpoint that saves an uploaded image into public/
-// and returns the path to use in picData.json. Dev-only, same as above.
+// Dev-only endpoint that saves an uploaded image into public/seapal/
+// and returns the /seapal/-prefixed path to use in picData.json.
+// Saves into the SAME folder that every existing artwork image already
+// lives in, so new uploads resolve exactly the way old images do —
+// no separate path convention to keep track of.
 function imageUploadApiPlugin() {
   return {
     name: 'image-upload-api',
@@ -65,9 +68,11 @@ function imageUploadApiPlugin() {
 
             const buffer = Buffer.from(match[2], 'base64')
             const safeName = path.basename(filename).replace(/[^a-zA-Z0-9._-]/g, '-')
-            
-            // Fixed: Save directly to public root so the paths resolve identically in local dev and GitHub production
-            const destDir = path.resolve(__dirname, 'public')
+
+            // Save into public/seapal/ — matches where every existing
+            // artwork image already lives, and what picData.json's
+            // "/seapal/filename.png" paths already assume.
+            const destDir = path.resolve(__dirname, 'public/seapal')
             fs.mkdirSync(destDir, { recursive: true })
 
             let finalName = safeName
@@ -83,8 +88,9 @@ function imageUploadApiPlugin() {
 
             res.statusCode = 200
             res.setHeader('Content-Type', 'application/json')
-            // Fixed path string to reference the file relative to base root
-            res.end(JSON.stringify({ ok: true, path: `/${finalName}` })) 
+            // Matches the /seapal/filename.png convention used everywhere
+            // else in picData.json.
+            res.end(JSON.stringify({ ok: true, path: `/seapal/${finalName}` }))
           } catch (err) {
             res.statusCode = 500
             res.setHeader('Content-Type', 'application/json')
@@ -99,5 +105,5 @@ function imageUploadApiPlugin() {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), picDataApiPlugin(), imageUploadApiPlugin()],
-  base: '/seapal/', // 👈 Critical Fix: Added trailing slash so assets load correctly on GitHub Pages
+  base: '/seapal/', // Added trailing slash so assets load correctly on GitHub Pages
 })

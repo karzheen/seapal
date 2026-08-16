@@ -6,6 +6,11 @@ import Suggestion from "./suggetion.jsx";
 import BuyCard from "./buyCard";
 import { formatDimensions } from "../utils/artworkDimensions";
 
+const DEFAULT_DESCRIPTION =
+  "This beautiful piece combines expressive textures with a deep emotional resonance, capturing fleeting moments between memory and observation. Each brushstroke reflects the artist's ongoing exploration of the maritime environment and the quiet intimacy of botanical studies, rendered in heavy oils on raw linen.";
+
+const DESCRIPTION_PREVIEW_LENGTH = 80;
+
 export default function DetailCard({ artwork: propsArtwork }) {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -41,6 +46,7 @@ export default function DetailCard({ artwork: propsArtwork }) {
       setActiveImageIndex(0);
       setIsAnimating(false);
       setLeavingIndex(null);
+      setAboutExpanded(false);
     }
   }, [artwork]);
 
@@ -160,6 +166,14 @@ export default function DetailCard({ artwork: propsArtwork }) {
     ? `$${artwork.price.toLocaleString()}` 
     : artwork.price;
 
+  // --- DYNAMIC DESCRIPTION ---
+  const fullDescription = (artwork.description && artwork.description.trim()) || DEFAULT_DESCRIPTION;
+  const needsTruncation = fullDescription.length > DESCRIPTION_PREVIEW_LENGTH;
+  const previewDescription = needsTruncation
+    ? `${fullDescription.slice(0, DESCRIPTION_PREVIEW_LENGTH).trimEnd()}...`
+    : fullDescription;
+  const displayedDescription = aboutExpanded ? fullDescription : previewDescription;
+
   return (
     <div className="detail-page-master-wrapper">
       <div className="detail-page-container">
@@ -266,21 +280,20 @@ export default function DetailCard({ artwork: propsArtwork }) {
               <img src={accordionOpen.about ? "/seapal/chevron-up.svg" : "/seapal/chevron-down.svg"} alt="Toggle indicator" className="accordion-chevron-icon" />
             </summary>
             <div className="accordion-content">
-             <p>
-    {aboutExpanded
-      ? (artwork.description ||
-         "This beautiful piece combines expressive textures with a deep emotional resonance, capturing fleeting moments between memory and observation. Each brushstroke reflects the artist's ongoing exploration of the maritime environment and the quiet intimacy of botanical studies, rendered in heavy oils on raw linen.")
-      : (artwork.description
-          ? `${artwork.description.slice(0, 80)}...`
-          : "This beautiful piece combines expressive textures...")}
-    {" "}
-    <span
-      className="read-more"
-      onClick={() => setAboutExpanded((prev) => !prev)}
-    >
-      {aboutExpanded ? "READ LESS" : "READ MORE"}
-    </span>
-  </p>
+              <p>
+                {displayedDescription}
+                {needsTruncation && (
+                  <>
+                    {" "}
+                    <span
+                      className="read-more"
+                      onClick={() => setAboutExpanded((prev) => !prev)}
+                    >
+                      {aboutExpanded ? "READ LESS" : "READ MORE"}
+                    </span>
+                  </>
+                )}
+              </p>
               <div className="meta-grid">
                 <div className="meta-label">Year created:</div>
                 <div className="meta-value">{artwork.date ? artwork.date.substring(0, 4) : artwork.year || "2024"}</div>

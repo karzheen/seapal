@@ -22,6 +22,7 @@ function emptyForm() {
     price: "",
     date: new Date().toISOString().slice(0, 10),
     images: [""],
+    description: "",
     sold: false,
   };
 }
@@ -42,6 +43,7 @@ export default function ArtworkFormPanel({ open, work, onClose, onSave }) {
         price: work.price || "",
         date: work.date || new Date().toISOString().slice(0, 10),
         images: work.images && work.images.length ? work.images : [work.src || ""],
+        description: work.description || "",
         sold: !!work.sold,
       });
     } else {
@@ -111,6 +113,7 @@ export default function ArtworkFormPanel({ open, work, onClose, onSave }) {
       date: form.date,
       src: cleanedImages[0] || "",
       images: cleanedImages.length ? cleanedImages : [""],
+      description: form.description.trim(),
       sold: form.sold,
     };
     onSave(patch);
@@ -211,6 +214,16 @@ export default function ArtworkFormPanel({ open, work, onClose, onSave }) {
               <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} style={inputStyle} />
             </Field>
           </div>
+
+          <Field label="Description">
+            <textarea
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              placeholder="A short description of the piece — shown in the About accordion on the artwork page."
+              rows={4}
+              style={{ ...inputStyle, resize: "vertical", fontFamily: "'Inter'" }}
+            />
+          </Field>
         </div>
 
         <div style={{ padding: "18px 26px", borderTop: `1px solid ${c.line}`, display: "flex", gap: 10 }}>
